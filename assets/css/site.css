@@ -228,7 +228,7 @@ table.matrix td:first-child { color: var(--t100); white-space: nowrap; }
   --v-s1: #181614; --v-s2: #23201d;          /* 表面两档：深 / 浅（暖调黑，取 Flowtica 暖棕黑的色相，压在 #0c0c0c 底上） */
   --v-r: 24px; --v-sm: 14px; --v-lg: 36px;   /* 卡片圆角 24（手机 15，同 Flowtica）；间距只用 14 / 36 两档 */
   --v-ease: cubic-bezier(.22,1,.36,1);
-  --v-serif: "Marcellus", "Songti SC", "STSong", "Noto Serif SC", "Noto Serif CJK SC", "Source Han Serif SC", serif;
+  --v-serif: "Marcellus", "PingFang SC", "Helvetica Neue", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;  /* 西文与数字 Marcellus；中文 = 正文 --font 从 PingFang SC 起的同一套回退 */
   gap: var(--v-sm);
 }
 @media (max-width: 767px) { .theme-verso { --v-r: 15px; } }
@@ -250,7 +250,7 @@ table.matrix td:first-child { color: var(--t100); white-space: nowrap; }
 .theme-verso .csec__eyebrow, .theme-verso .csec h2, .theme-verso .csec h3 { margin-bottom: 0; }
 .theme-verso .csec > * + * { margin-top: var(--v-lg); }
 .theme-verso .csec > .csec__eyebrow + h2, .theme-verso .csec > h2 + p, .theme-verso .csec > p + p, .theme-verso .csec > h3 + * { margin-top: var(--v-sm); }
-/* C 衬线标题：Marcellus 单字重 400（自托管，不请求 Google）；中文字符落到系统宋体 */
+/* C 标题：西文与数字用 Marcellus 单字重 400（自托管，不请求 Google；unicode-range 只含拉丁字符）；中文字符落到苹方（与正文同一套无衬线） */
 .theme-verso .csec h2, .theme-verso .csec h3 { font-family: var(--v-serif); font-weight: 400; font-synthesis: none; letter-spacing: -.01em; line-height: 1.25; }
 .theme-verso .csec h3 { font-size: clamp(18px, 1.6667vw, 24px); }
 /* A 入场：进入视口淡入 + 位移 28px（左栏从左、右栏从右、其余自下），760ms，同批 75ms 递进；无 JS / 减少动效 / 打印时不隐藏 */
