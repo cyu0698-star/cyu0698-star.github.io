@@ -1,0 +1,110 @@
+<!-- title: Verso-Visitenkarte · iOS-Flows (Flowtica, E-Ink-NFC-Karte) — Portfolio Yuqian Cheng -->
+<!-- desc: Der iOS-Konfigurationsflow für eine E-Ink-NFC-Visitenkarte: PRD-Aufschlüsselung, Interaktionsgalerie, Wettbewerbsgalerie, Übergabeversion mit 47 Frames; ein Redesign von Seitenhierarchie und UI-Ästhetik ist in Arbeit. -->
+<!-- nav: work -->
+<div class="case-top">
+  <div class="case-hero case-hero--contain"><img src="{{ROOT}}assets/img/verso/cover.webp" alt="iOS-Screens der Verso-Visitenkarte" fetchpriority="high"></div>
+</div>
+<section class="case-body"><div class="container">
+  <div class="crumb"><a href="{{HOME}}#works">Arbeiten</a><span>/</span><span>Verso-Visitenkarte</span></div>
+  <h1 class="case-title">Verso-Visitenkarte · iOS-Flows<br><span class="muted" style="font-size:var(--fs-h3);font-weight:400">Flowtica · iOS · 2026.09 – 2026.10</span></h1>
+  <p class="case-sub">Verso ist eine NFC-Visitenkarte mit E-Ink-Display: Nutzende richten ihre Karte in der iOS-App ein, und ihr Gegenüber tippt sie an oder scannt einen Code, um eine Webseite zu sehen, einen Link zu öffnen oder den Kontakt zu speichern. Ich habe alle Design-Ergebnisse verantwortet, vom PRD bis zur Übergabeversion der iOS-Flows.</p>
+  <div class="meta">
+    <div><span>Rolle</span><span>UI-Designerin (Umsetzung) · PRD-Aufschlüsselung · Interaktions- und Wettbewerbsgalerien · Übergabeversion der Flows</span></div>
+    <div><span>Team</span><span>PM legt die Anforderungen fest (PRD V2.0 zur elektronischen Visitenkarte, PRD zur Kartenerstellung aus Fotos, PRD zu Logo und Vorlagen) · iOS-Entwicklung</span></div>
+    <div><span>Ergebnisse</span><span>Interaktionsgalerie Visitenkarte (09-23) · Wettbewerbsgalerie (09-26) · Erklärgrafik zu Kontaktaustausch und Lead-Erfassung (09-27) · Übergabeversion mit 47 Frames (10-10)</span></div>
+    <div><span>Status</span><span>Übergabeversion an die Entwicklung übergeben; der Redesign-Teil dieser Seite ist in Arbeit</span></div>
+  </div>
+
+  <div class="case-layout">
+    <nav class="toc" aria-label="Inhalt"><p>Inhalt</p>
+      <a href="#v0">00 Überblick</a><a href="#v1">01 Was das Produkt ist</a><a href="#v2">02 Was ich gemacht habe</a><a href="#v3">03 Flows und Zustände</a><a href="#v4">04 Hardware-Grenzen und offene Fragen</a><a href="#v5">05 Nächster Schritt: Redesign</a>
+    </nav>
+    <div class="case-content">
+
+      <section class="csec csec--first" id="v0">
+        <div class="overview">
+          <p class="label">Überblick in 30 Sekunden</p>
+          <p class="big">Ein Software-Flow unter Hardware-Bedingungen: Das E-Ink-Display kennt nur Graustufen und aktualisiert langsam – deshalb muss die App „bearbeiten → auf dem Gerät veröffentlichen → Daten vom Gegenüber zurückbekommen“ klar vermitteln.</p>
+          <p>Mein Vorgehen: zuerst das PRD in eine Flow-Liste auf Frame-Ebene zerlegen, dann zwei Galerien aus echten Aufnahmen erstellen (Karteninteraktion, Wettbewerb), um die Entscheidungspunkte offenzulegen, und schließlich 47 Frames iOS-Flows liefern: Einstieg (A1–A4), Kartenstartseite und Update-Flow (B0–B13, inklusive automatisch gespeichertem Entwurf, Pflichtfeldprüfung, Linkprüfung, Offline-Zustand, Aktualisierung läuft / erfolgreich / fehlgeschlagen) sowie Wallpaper-Vorschau (W9).</p>
+          <div class="tag-line"><span class="tag tag--fact">Geliefert</span><span class="tag">iOS</span><span class="tag">Hardware + Software</span><span class="tag tag--personal">Redesign in Arbeit</span></div>
+        </div>
+      </section>
+
+      <section class="csec" id="v1">
+        <p class="csec__eyebrow">01 Was das Produkt ist</p>
+        <h2>Ein E-Ink-Display, das die Visitenkarte zeigt – und die App dahinter</h2>
+        <p>Auf dem Gerät: Das E-Ink-Display zeigt die Kartenansicht; per NFC-Antippen oder QR-Scan gelangt das Gegenüber zu einer Web-Visitenkarte, einem eigenen Link oder zu „Als Kontakt speichern“. In der App (PRD V2.0): Geräteeinstellungen → Contact Card; dort werden Name, Titel, Kontaktdaten, Opens (was sich nach dem Antippen öffnet) und die Bio-Seite eingestellt. Spätere PRDs ergänzten eine Graustufen-Kartenansicht aus einem Foto der Visitenkarte, den Logo-Upload und drei Vorlagen.</p>
+        <p>Wettbewerb als Referenz: Digitale Visitenkarten wie Blinq, HiHello, Popl, Mobilo und Linq funktionieren per Handy-an-Handy oder QR-Code und haben kein eigenes Display. Der Unterschied bei Verso: „Die Karte selbst ist der Bildschirm“ – deshalb werden das Aussehen der Kartenansicht, der Zeitpunkt der Aktualisierung und das Verhalten offline zu Designfragen.</p>
+      </section>
+
+      <section class="csec" id="v2">
+        <p class="csec__eyebrow">02 Was ich gemacht habe</p>
+        <h2>Vom PRD zur Übergabeversion mit 47 Frames</h2>
+        <div class="steps"><span>09-22 PRD zerlegt</span><i>→</i><span>09-23 Interaktionsgalerie Visitenkarte</span><i>→</i><span>09-26 Wettbewerbsgalerie</span><i>→</i><span>09-27 Erklärgrafik Kontaktaustausch und Lead-Erfassung</span><i>→</i><span>10-10 Übergabeversion der iOS-Flows</span></div>
+        <ul>
+          <li><strong>Flow-Liste auf Frame-Ebene</strong>: Jeder Frame nennt Inhalt, zugehörige PRD-Ziffer und Hinweise für die Entwicklung; was das PRD nicht abdeckt, habe ich nicht eigenmächtig gezeichnet, sondern als offene Fragen für das Produktmanagement gesammelt.</li>
+          <li><strong>Zwei Galerien aus echten Aufnahmen</strong> (fortlaufende HTML-Seiten): Die Interaktionsgalerie zeigt 11 Lösungen für „was passiert, nachdem das Gegenüber die Karte antippt“; die Wettbewerbsgalerie zeigt anhand von 42 Screenshots aus 11 Produkten, wie Bearbeitungsseite, Opens-Menü, Validierung und Fehlerfälle gelöst sind.</li>
+          <li><strong>Erklärgrafik zu Kontaktaustausch und Lead-Erfassung</strong>: wie das Gegenüber seine Daten an mich zurückschickt (Formulare zur Lead-Erfassung und Benachrichtigungen bei Blinq / HiHello / Popl / Mobilo).</li>
+          <li><strong>Übergabeversion mit 47 Frames</strong> (402×874): Einstieg A1–A4, Kartenstartseite B0–B13, Wallpaper-Vorschau W9; das Label jedes Frames nennt Zustand und Auslöser.</li>
+        </ul>
+      </section>
+
+      <section class="csec" id="v3">
+        <p class="csec__eyebrow">03 Flows und Zustände</p>
+        <h2>Kartenstartseite und Update-Flow</h2>
+        <p>Die Startseite ist eine bearbeitbare Visitenkarte + ein Update-Button unten: Jede Änderung speichert automatisch einen Entwurf und aktiviert Update; Update überträgt die Karte auf das Gerät, dazwischen gibt es drei Zustände – Aktualisierung läuft, erfolgreich, fehlgeschlagen; offline lässt sich bearbeiten, aber nicht aktualisieren.</p>
+        <div class="phones">
+          <figure><img src="{{ROOT}}assets/img/verso/A2-verso-connected.webp" alt="A2 Verso Connected" loading="lazy"><figcaption>A2 · Einstieg · Gerät verbunden</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/B1-business-card-default.webp" alt="B1 Standard" loading="lazy"><figcaption>B1 · Kartenstartseite · Standard (keine unveröffentlichten Änderungen)</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/B2-edited-draft-saved.webp" alt="B2 In Bearbeitung" loading="lazy"><figcaption>B2 · In Bearbeitung · Entwurf automatisch gespeichert, Update aktiv</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/B3-name-empty.webp" alt="B3 Name leer" loading="lazy"><figcaption>B3 · Name leer · Pflichtfeldprüfung</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/B5-opens-menu.webp" alt="B5 Opens-Menü" loading="lazy"><figcaption>B5 · Opens-Menü geöffnet (Webseite / eigener Link / Kontakt speichern)</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/B11-updating.webp" alt="B11 Aktualisierung läuft" loading="lazy"><figcaption>B11 · Updating… · Button ausgegraut</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/B13-update-failed.webp" alt="B13 Update fehlgeschlagen" loading="lazy"><figcaption>B13 · Fehlgeschlagen · Toast + erneut versuchen</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/W9-wallpaper-preview.webp" alt="W9 Wallpaper-Vorschau" loading="lazy"><figcaption>W9 · Tippen auf die Gerätevorschau → Wallpaper-Vorschau im Vollbild</figcaption></figure>
+        </div>
+        <h3>Contact Card und Customize</h3>
+        <div class="phones">
+          <figure><img src="{{ROOT}}assets/img/verso/A1-contact-card-bio.webp" alt="A1 Contact Card" loading="lazy"><figcaption>A1 · Contact Card · Opens = Bio Page</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/A2-customize.webp" alt="A2 Customize" loading="lazy"><figcaption>A2 · Customize · Display und Add More</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/B0-full-page.webp" alt="B0 Ganze Seite" loading="lazy"><figcaption>B0 · Kartenstartseite als ganze Seite (Referenz für die Scrolllänge)</figcaption></figure>
+        </div>
+        <h3>Zustandstabelle (abgedeckt in der Übergabeversion)</h3>
+        <div class="table-wrap"><table class="matrix">
+          <tr><th>Schritt</th><th>Standard</th><th>Zustände und Ausnahmen</th></tr>
+          <tr><td>Einstieg</td><td>Verso verbunden</td><td>Gekoppelt, aber offline (Not Connected) · nicht gekoppelt (Geräteinfo zeigt —)</td></tr>
+          <tr><td>Bearbeiten</td><td>Kartenstartseite</td><td>Entwurf wird beim Bearbeiten automatisch gespeichert · Pflichtfeldprüfung bei leerem Namen · HTTPS-Präfixprüfung für den eigenen Link, sobald das Feld den Fokus verliert · Hinweis auf leere URL direkt nach Auswahl von „eigener Link“</td></tr>
+          <tr><td>Opens</td><td>Web-Visitenkarte</td><td>Eigener Link (gültig / ungültig) · Kontakt speichern · Update nicht verfügbar, solange LinkedIn leer ist</td></tr>
+          <tr><td>Update</td><td>Verfügbar / nicht verfügbar</td><td>Während der Aktualisierung ausgegraut · Erfolgs-Toast („nothing to update“, wenn nichts geändert wurde) · Fehler-Toast + erneut versuchen · offline kein Update</td></tr>
+          <tr><td>Vorschau</td><td>Miniaturvorschau des Geräts</td><td>Antippen öffnet die Wallpaper-Vorschau im Vollbild, × schließt sie</td></tr>
+        </table></div>
+      </section>
+
+      <section class="csec" id="v4">
+        <p class="csec__eyebrow">04 Hardware-Grenzen und offene Fragen</p>
+        <h2>Ein E-Ink-Display ist kein Smartphone-Display</h2>
+        <ul>
+          <li><strong>Graustufen und Auflösung</strong>: Die Kartenansicht kennt nur Graustufen, Fotos und Logos müssen vor der Anzeige in Graustufen umgewandelt werden; die genaue Auflösung und die Zahl der Graustufen waren meine erste offene Frage an das Produktmanagement.</li>
+          <li><strong>Aktualisierung</strong>: E-Ink aktualisiert langsam und hinterlässt Geisterbilder; Update braucht deshalb ein klares Feedback „Aktualisierung läuft / erfolgreich / fehlgeschlagen“ statt der sofortigen Übernahme, die man von Smartphone-Apps kennt.</li>
+          <li><strong>Inhaltslänge</strong>: Die Zeichenzahl der Bio, welche von mehreren Kontaktangaben auf das Display kommt, und die finalen Texte regelt das PRD nicht; die Übergabeversion arbeitet mit Platzhaltern + markierten offenen Fragen.</li>
+        </ul>
+        <div class="notice"><strong>Offene Fragen (an das Produktmanagement)</strong>: Display-Auflösung und Graustufen · maximale Zeichenzahl der Bio · Regel, welche von mehreren Kontaktangaben verwendet wird · finale Texte · wie darauf hingewiesen wird, wenn offline Entwurf und Inhalt auf dem Gerät nicht übereinstimmen.</div>
+      </section>
+
+      <section class="csec" id="v5">
+        <p class="csec__eyebrow">05 Nächster Schritt · Redesign (in Arbeit)</p>
+        <h2>Seitenhierarchie und UI-Ästhetik</h2>
+        <p>Ziel der Übergabeversion war: „alle Zustände gemäß PRD vollständig zeichnen, damit die Entwicklung sie bauen kann“. Als persönliche Retrospektive überarbeite ich jetzt zwei Dinge: ① Seitenhierarchie – Einstieg, Kartenstartseite, Contact Card, Customize und Geräteeinstellungen neu gliedern, damit weniger hin- und hergesprungen werden muss; ② UI-Ästhetik – Kartenvorschau und Kartenstartseite visuell vereinheitlichen, orientiert am Stil der Verso-Seite auf der offiziellen Flowtica-Website. Die Demo nutzt Inhalte aus zwei PRDs: Kartenerstellung aus Fotos und Logo-Vorlagen.</p>
+        <div class="tag-line"><span class="tag tag--personal">Persönliche Retrospektive, nicht damals geliefert</span><span class="tag">In Arbeit</span></div>
+      </section>
+
+    </div>
+  </div>
+</div></section>
+<section class="more-works"><div class="container">
+  <div class="section-head"><h2>Weitere Arbeiten</h2></div>
+  <div class="cards cards--2">
+    <a class="card" href="{{HOME}}work/helpyou/"><img src="{{ROOT}}assets/img/helpyou/cover.webp" alt="Help-You-Organize" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>Help-You-Organize · KI-Ordnungsfunktion</h3></div><span class="card__cta">Projekt ansehen</span></div></a>
+    <a class="card" href="{{HOME}}work/deepchat-bi/"><img src="{{ROOT}}assets/img/deepchat/hero.webp" alt="DeepChat BI" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>DeepChat BI · Agent-SaaS</h3></div><span class="card__cta">Projekt ansehen</span></div></a>
+  </div>
+</div></section>

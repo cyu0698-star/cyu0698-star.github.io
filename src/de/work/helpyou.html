@@ -1,0 +1,198 @@
+<!-- title: Help-You-Organize · KI-Ordnungsfunktion (Flowtica, Web / Mac) — Portfolio Yuqian Cheng -->
+<!-- desc: Ein Eingang für Text, Bilder und Sprache, die KI ordnet alles zu Memos oder To-dos. Hauptfluss und alle Randfälle gestaltet, Abnahme auf beiden Plattformen, Redesign als persönliche Retrospektive. -->
+<!-- nav: work -->
+<div class="case-top">
+  <div class="case-hero"><img src="{{ROOT}}assets/img/helpyou/cover.webp" alt="Help-You-Organize: Quick-Input-Entwurf" fetchpriority="high"></div>
+</div>
+<section class="case-body"><div class="container">
+  <div class="crumb"><a href="{{HOME}}#works">Arbeiten</a><span>/</span><span>Help-You-Organize</span></div>
+  <h1 class="case-title">Help-You-Organize · KI-Ordnungsfunktion<br><span class="muted" style="font-size:var(--fs-h3);font-weight:400">Flowtica · Web / Mac · 2026.08 – 2026.11</span></h1>
+  <p class="case-sub">Was einem gerade einfällt – Text, Bilder, Sprache – landet in einem einzigen Eingang, ohne dass man vorher entscheiden muss, ob es ein Memo oder ein To-do ist. Die KI ordnet es, und es ist auf allen Geräten verfügbar. Ich habe den Hauptfluss und sämtliche Randfälle gestaltet und nach dem Launch die Abnahme auf beiden Plattformen durchgeführt.</p>
+  <div class="meta">
+    <div><span>Rolle</span><span>UI-Designerin (Umsetzung) · alle Frames für Hauptfluss + Randfälle (85) · Abnahme auf beiden Plattformen</span></div>
+    <div><span>Team</span><span>PM legt Anforderungen und Umfang fest · Review-Meeting · Web- / Mac-Entwicklung</span></div>
+    <div><span>Zeitraum</span><span>Design 2026.08.09 – 09.05 (28 Tage) · Abnahme 10.15 / 10.19 · Kanalmenü und Audio-Zweig live seit 11.03</span></div>
+    <div><span>Ergebnisse</span><span>85 Frames im Figma-Übergabebereich · Abnahmeberichte für Web und Mac · Redesign „Persönliche Retrospektive“ am Ende dieser Seite</span></div>
+    <div><span>Status</span><span>Live auf Web und Mac</span></div>
+  </div>
+
+  <div class="case-layout">
+    <nav class="toc" aria-label="Inhalt"><p>Inhalt</p>
+      <a href="#s0">00 Überblick</a><a href="#s1">01 Was Nutzende wollen</a><a href="#s2">02 Problem und Ausgangslage</a><a href="#s3">03 Rollen und Grenzen</a><a href="#s4">04 Drei Entscheidungen</a><a href="#s5">05 Flow und Zustände</a><a href="#s6">06 Detailprüfung</a><a href="#s7">07 Ergebnisse und Grenzen</a><a href="#s8">08 Persönliche Retrospektive</a><a href="#s9">09 Noch einmal</a>
+    </nav>
+    <div class="case-content">
+
+      <section class="csec csec--first" id="s0">
+        <div class="overview">
+          <p class="label">Überblick in 30 Sekunden</p>
+          <p class="big">Ein Eingang für viele Eingabearten; alle Zustände und Ausnahmen durchdekliniert; Web und Mac nach denselben Entwürfen umgesetzt und konsistent gehalten.</p>
+          <p>Drei Entscheidungen: Für den Einstieg habe ich mich für ein <strong>einheitliches Eingabefeld</strong> eingesetzt, statt zuerst einen Kanal wählen zu lassen; im Bildbereich habe ich das Raster verworfen, das vier Reviewer empfohlen hatten, und <strong>Variante E gewählt – eine horizontale Scrollleiste, die den Dialog nicht vergrößert</strong>; so ist sie auch live umgesetzt; im Review-Meeting habe ich die Animation und drei visuelle Extras selbst gestrichen. Abnahme auf beiden Plattformen nach dem Launch: Web 27 UI-Abweichungen + 15 UX-Auffälligkeiten, Mac 32 + 15; 5 Auffälligkeiten mit wörtlichem PRD-Zitat – die Entwicklung hat sie behoben.</p>
+          <div class="tag-line"><span class="tag tag--fact">Gelauncht</span><span class="tag">Web / Mac</span><span class="tag">KI-Ordnung · Agent-Zustandsdesign</span><span class="tag">PRD ↔ Entwurf ↔ Live-Audit</span></div>
+        </div>
+      </section>
+
+      <section class="csec" id="s1">
+        <p class="csec__eyebrow">01 Was Nutzende wollen</p>
+        <h2>Reinwerfen und fertig geordnet – ohne vorher zu sortieren</h2>
+        <p>Das Produkt ist „Help-You-Organize“ von Flowtica auf Web und Mac (mobil gibt es eine eigene Version mit drei Kanälen). Text / Bilder rein → die KI ordnet sie automatisch zu einem Memo oder To-do; Audio → erweiterte Transkription und Zusammenfassung, daraus entsteht ein Meeting.</p>
+        <p>Fünf Ziele für dieses Release: Neben dem Eingang öffnet sich ein Kanalmenü (Quick Input / Upload audio); in Quick Input können Text und Bilder gleichzeitig stehen, Bilder lassen sich mehrfach auswählen; „Mit Flowtica öffnen“ im Finder führt direkt in den passenden Dialog und überspringt das Kanalmenü; Text und Bilder ordnet die KI, Audio geht direkt in Transkription und Zusammenfassung; beim Schließen, bei Fehlern, bei fehlendem Kontingent und während der asynchronen Generierung erzeugt dieselbe Eingabe nie doppelte Aufgaben, und Nutzende finden ihr Ergebnis immer wieder.</p>
+        <p>Organize as bietet Auto / To-do / Memo, Standard ist Auto: Die KI entscheidet zwischen Memo und To-do; aus einer Eingabe können ein Memo, ein oder mehrere To-dos oder beides entstehen.</p>
+        <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/04-organize-as-dropdown.webp" alt="Quick Input: die drei Optionen unter Organize as" loading="lazy"><figcaption>Quick Input · drei Optionen unter Organize as (Auto als Standard). Entwurf.</figcaption></figure>
+        <p>Unter vergleichbaren Produkten setzen mymind, Mem und Notion alle auf „alles in einen Eingang“; Gemini Notebook hat einen einheitlichen Eingang, fragt aber zuerst nach der Art der Quelle; Plaud, iFlytek, Limitless und DingTalk Tingji sind reine Aufnahme-Tools. Keines dieser 8 Produkte hält mitten im Ordnen an, um nachzufragen.</p>
+      </section>
+
+      <section class="csec" id="s2">
+        <p class="csec__eyebrow">02 Problem und Ausgangslage</p>
+        <h2>Drei Dinge, die vor dem Launch gelöst sein mussten</h2>
+        <p>Die Mac-App hatte bereits einen Einstieg zum „Verarbeiten lassen“, aber keine einheitliche Ordnungs-Warteschlange für Text, Bilder, Audio und Desktop-Dateien; mobil gibt es drei Kanäle (nur Text / Fotos hinzufügen / Audio hochladen), auf dem Mac wurden daraus zwei.</p>
+        <ol>
+          <li><strong>Ein Eingang für viele Eingabearten</strong>: Text und Bilder im selben Feld, Audio separat.</li>
+          <li><strong>Alle Zustände und Ausnahmen durchdeklinieren</strong>: Entwurf, Drag-and-drop, fehlendes Kontingent, Fehler, kein Netz, Verarbeitung, mehrere Bilder.</li>
+          <li><strong>Web und Mac nach denselben Entwürfen umsetzen und konsistent halten.</strong></li>
+        </ol>
+        <h3>Harte Regeln im PRD (das Design muss jede einzelne auffangen)</h3>
+        <ul>
+          <li>Obergrenze 5000 Zeichen; der Zähler erscheint ab 4000; ist das Limit erreicht, ist das Mikrofon deaktiviert.</li>
+          <li>Maximal 10 Bilder; beim Überschreiten ein Hinweis, aber nichts wird gelöscht; erfolgreiches Senden leert den Entwurf, bei einem Fehler bleiben Originaltext und Kategorieauswahl erhalten.</li>
+          <li>Aufgabenleiste (Farbleiste) + Stapeln mehrerer Aufgaben + Retry im Fehlerzustand; „+1“-Hinweis an der Kategorie; Entwürfe werden automatisch gespeichert.</li>
+          <li>Werden Dateien auf das Hauptfenster oder das Dock-Symbol gezogen, erscheint ein dunkler Hover-Zustand über das ganze Fenster: „Release to organize with Flowtica“; wird Audio in Quick Input gezogen, fragt die App zuerst, ob der Kanal gewechselt werden soll.</li>
+          <li>Beim Öffnen aus dem Finder erscheint bei einem Entwurfskonflikt ein Dialog (Discard / Save draft); eine abgebrochene Spracheingabe lässt sich innerhalb von 10 Sekunden rückgängig machen; reagiert die Transkription 20 Sekunden lang nicht, gilt sie als fehlgeschlagen, Wiederholungen sind unbegrenzt möglich; Sprach-Credits und KI-Interaktionen sind zwei getrennte Kontingente.</li>
+        </ul>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/06-counter-three-states.webp" alt="Zähler in drei Zuständen" loading="lazy"><figcaption>Die drei Zustände des Zählers: erscheint ab 4000, kurz vor dem Limit, Limit erreicht.</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/07-over-limit-toast.webp" alt="Toast bei Überschreitung und langer Text" loading="lazy"><figcaption>Zu langen Text eingefügt: Toast bei Überschreitung + gekürzter Langtext.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="csec" id="s3">
+        <p class="csec__eyebrow">03 Rollen und Grenzen der Zusammenarbeit</p>
+        <h2>Wer hat was entschieden</h2>
+        <div class="table-wrap"><table class="matrix">
+          <tr><th>Wer</th><th>Was entschieden wurde</th></tr>
+          <tr><td>PM</td><td>Anforderungen und Umfang: PRD 08-13 → v6 08-20 (Kanalauswahl + Architektur mit zwei Dialogen); dazu die Originalentwürfe der Teamleitung (mehrere Bilder mit Text / Zustand mit einer Audiodatei / Loading / fehlendes Kontingent).</td></tr>
+          <tr><td>Ich</td><td>Alle Frames für Hauptfluss + Randfälle (85 Frames à 1512×982); 08-11 Recherche und Vorschlag des „einheitlichen Eingabefelds“ als Hauptvariante; 08-12 Einstiegsdialog; 08-23 Aufgabenleiste Variante A → meine eigene Kapsel-Komponente; 08-23 Mehrbild-Raster B; 08-24 drei große, ausgearbeitete Showcase-Bilder (das Finder-Kontextmenü mit offiziellen Apple-Komponenten) und die Master-Komponente der Todo-Galerie; 08-24/25 zwei Frames für den Drag-Hover; 09-04 Variante E für den Bildbereich in Quick Input plus 5 Korrekturen; feste Regeln für Zahlenwerte und eine standardisierte Übergabe (ganze Zahlen, gerade Werte bevorzugt, keine Codenamen in Frame-Notizen).</td></tr>
+          <tr><td>Review-Meeting 8/19</td><td>Bild-Download und -Bearbeitung in Quick Input gestrichen; Titel / Uhrzeit in den Memo-Details gefordert; die Anordnung mehrerer Bilder als offenen Punkt an mich übergeben.</td></tr>
+          <tr><td>Entwicklung</td><td>Vereinfachungen bei der Umsetzung: Die Aufgabenleiste wurde zur kleinen Kapsel, mehrere Bilder stehen in voller Breite untereinander (gemäß PRD-Wortlaut „füllt die Breite des Inhaltsbereichs“), das Badge verschwindet nach Ablauf einer Zeit.</td></tr>
+        </table></div>
+        <p>Das Mehrbild-Raster B habe ich selbst im Entwurf geändert – nicht PM oder Entwicklung. Deshalb geht es in diesem Case nicht um „die gekippte Variante“, sondern darum, was ich vorgeschlagen und abgewogen habe und was davon live gegangen ist.</p>
+        <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/00-section-overview.webp" alt="Übersicht der 85 Frames im Übergabebereich von Help-You-Organize" loading="lazy"><figcaption>Übersicht des Übergabebereichs: Hauptfluss, Audio-Zweig, ergänzende und Randzustände von Quick Input, Aufgabenleiste, Ergebnisdetails, Direkteinstieg über Finder und Dock, Showcase-Bilder. Nach dem Naming-Audit 122 Frames.</figcaption></figure>
+      </section>
+
+      <section class="csec" id="s4">
+        <p class="csec__eyebrow">04 Drei Entscheidungen</p>
+        <h2>Warum diese Lösung, warum keine andere – und was sie kostet</h2>
+        <div class="cgrid cgrid--3">
+          <article class="ccard"><p class="k">01 Einstieg</p><h4>Ein einheitliches Eingabefeld statt Kanalwahl vorab</h4><p>Nutzende wollen „reinwerfen“, nicht „erst sortieren“; mymind / Mem / Notion fragen gar nicht erst. Dass das PRD in diesem Release nach Kanälen trennt, hat technische Gründe: Audio läuft durch die Transkriptions-Pipeline und braucht schnellen Upload und schnelle Strukturierung.</p><p><strong>Umsetzung</strong> (Einschätzung aus Designsicht): im Frontend eine Drop-Zone + Erkennung nach Dateityp; im Backend eine Routing-Schicht, die Dateien an die vorhandenen Pipelines je Typ verteilt (Audio-Transkription, Bilderkennung, Textextraktion) – kein Neubau der Pipelines. Das eigentliche Risiko liegt bei Upload-Fortschritt und Timeouts großer Video- / PPT-Dateien; das hängt nicht davon ab, ob der Eingang einheitlich ist, und braucht ein eigenes Design für Fortschritt und Fehlerbehebung.</p><p><strong>Preis</strong>: Wird der Typ falsch erkannt, braucht es einen Ausweg „Kanal wechseln“; auch Audio im einheitlichen Feld muss Datenschutzhinweis und Kontingentprüfung durchlaufen.</p><div class="foot"><span class="tag tag--personal">Vorschlag aus der Retrospektive</span><span class="tag">Live: Kanalmenü + Audio-Zweig</span></div></article>
+          <article class="ccard ccard--blue"><p class="k">02 Bildbereich</p><h4>Variante E – gegen Raster A, das vier KI-Reviewer einstimmig empfahlen</h4><p>E = eine horizontal scrollende Zeile + Ausblendung + Pfeile; die Miniaturleiste vergrößert den Dialog nicht (Dialoghöhe 380 → 304), und das Eingabefeld bleibt sichtbar. Das Raster von A schiebt den Textbereich nach unten.</p><p><strong>Preis</strong>: Ab 6 Bildern wechseln die Miniaturen auf das Maß 72 / 8; 5 Details – etwa die Position des × und Pfeile ohne Hintergrundfläche – habe ich in einer eigenen Runde korrigiert.</p><p><strong>Ergebnis</strong>: Die Miniaturleiste ist live auf beiden Plattformen so umgesetzt wie in E.</p><div class="foot"><span class="tag tag--fact">Live umgesetzt</span></div></article>
+          <article class="ccard ccard--orange"><p class="k">03 Weglassen</p><h4>Keine Animation, keine drei „visuellen Aufwertungen“</h4><p>Die Pop-up-Animation beim Hover über Bilder habe ich im Review-Meeting selbst gestrichen; alle drei „visuellen Aufwertungen“ wurden abgelehnt; nachdem das Review Download / Bearbeiten in Quick Input gestrichen hatte, habe ich beides nicht wieder eingeführt.</p><p><strong>Warum</strong>: Der Wert dieses Releases liegt in „reinwerfen und fertig geordnet“, nicht in Dekoration; jede zusätzliche Animation muss auf beiden Plattformen erneut abgeglichen werden.</p><p><strong>Preis</strong>: schlichtere Screens; visuell muss das über konsistente Details wieder hereingeholt werden (siehe 06).</p><div class="foot"><span class="tag tag--fact">Live umgesetzt</span></div></article>
+        </div>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/02-channel-menu.webp" alt="Kanalmenü" loading="lazy"><figcaption>Ist-Stand: Neben dem Eingang öffnet sich ein Kanalmenü (Quick Input / Upload audio).</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/17-multifile-into-quick-input.webp" alt="Mehrere Dateien in Quick Input übernommen" loading="lazy"><figcaption>Bildbereich Variante E: einzeilige, horizontal scrollende Miniaturleiste, das Eingabefeld bleibt sichtbar.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="csec" id="s5">
+        <p class="csec__eyebrow">05 Hauptfluss · Zustandsmatrix · Fehlerbehebung</p>
+        <h2>Ein Eingang – und jeder Zustand hat seinen Weg</h2>
+        <div class="steps"><span>Add in der linken Seitenleiste</span><i>→</i><span>Quick Input (Text + Zähler / Bilder / Screenshot / Organize as / Mikrofon)</span><i>→</i><span>Senden</span><i>→</i><span>Kurzer Hinweis oben</span><i>→</i><span>„+1“-Badge an der Kategorie</span><i>→</i><span>Memo-Details (Original / Content)</span><i>→</i><span>Bildbetrachter</span></div>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/01-home-add-entry.webp" alt="Startseite: Eingang über +" loading="lazy"><figcaption>Schritt 1 · Startseite (Eingang über ＋)</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/03-quick-input-empty.webp" alt="Quick Input, leerer Zustand" loading="lazy"><figcaption>Schritt 3 · Quick Input, leerer Zustand</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/09-taskbar-expanded.webp" alt="Aufgabenleiste ausgeklappt" loading="lazy"><figcaption>Verarbeitung · farbige Aufgabenleiste (Miniatur + Zusammenfassung + Processing), klappt bei Hover auf</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/11-taskbar-done-badge.webp" alt="Fertig: Badge +1" loading="lazy"><figcaption>Ergebnis · „+1“-Badges summieren sich pro Kategorie und verschwinden beim Öffnen der Liste</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/12-memo-content.webp" alt="Memo Content" loading="lazy"><figcaption>Details · Memo Content (von der KI geordnetes Ergebnis)</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/14-todo-gallery-viewer.webp" alt="Todo-Galerie: großes Bild + Miniaturleiste" loading="lazy"><figcaption>Bildbetrachter · Todo-Galerie: großes Bild + Miniaturleiste + Kapsel unten</figcaption></figure>
+        </div>
+        <h3>Zustandsmatrix: Entwurf vs. Live-Stand bei der Abnahme</h3>
+        <div class="table-wrap"><table class="matrix">
+          <tr><th>Schritt</th><th>Standard</th><th>Rand / Ausnahme (Entwurf)</th><th>Live (bei Abnahme)</th></tr>
+          <tr><td>Einstieg</td><td>Add</td><td>Kanalmenü: Hover- / Aktiv-Zustand für beide Optionen</td><td>Direkt in Quick Input (Kanalmenü seit 11-03 zurück)</td></tr>
+          <tr><td>Eingabe</td><td>Text / Bilder / Mikrofon</td><td>Zähler in drei Zuständen ab 4000; Bubble + Toast beim Limit von 10 Bildern; Mikrofon während der Aufnahme ausgegraut; Hilfestellung bei verweigerter Berechtigung</td><td>Zähler sofort beim Öffnen sichtbar; Hinweis bei Überschreitung 3 Sekunden oben auf der Seite</td></tr>
+          <tr><td>Senden</td><td>Leer grau / mit Text schwarz</td><td>Fehlendes Kontingent: Hinweis über dem Dialog, Entwurf bleibt erhalten</td><td>Mac entspricht; Web mit zwei unterschiedlichen Varianten</td></tr>
+          <tr><td>Verarbeitung</td><td>Farbige Aufgabenleiste</td><td>Stapeln; Fehlerzustand bleibt stehen + Retry; Warten ohne Netz</td><td>Kleine Kapsel, die nur kurz aufblitzt; Fehler auf der Listenkarte</td></tr>
+          <tr><td>Ergebnis</td><td>„+1“-Badges summieren sich</td><td>Verschwinden beim Öffnen der Liste</td><td>Verschwinden nach Zeitablauf von selbst (Web 4–6 Sek. / Mac 25 Sek.)</td></tr>
+          <tr><td>Details</td><td>Original / Content</td><td>Dreistufiger Fortschritt in den Details während der Verarbeitung; Meeting mit mehreren Bildern</td><td>Oben weder Titel noch Uhrzeit (Web)</td></tr>
+          <tr><td>Bildbetrachter</td><td>Miniaturleiste + Kapsel unten</td><td>Löschbestätigung in zwei Versionen; Download „Saved“; Ladefehler</td><td>Kein Löschen / keine Pfeile; auf dem Mac ohne untere Leiste, wenn aus einem Memo geöffnet</td></tr>
+          <tr><td>Nebenwege</td><td>Entwurf wird automatisch gespeichert</td><td>Overlay über das ganze Fenster beim Ziehen „Release to organize“; Rückfrage zum Kanalwechsel, wenn Audio hineingezogen wird; Entwurfskonflikt Discard / Save draft</td><td>Kein Overlay; im Web werden beim erneuten Öffnen alter und neuer Text aneinandergehängt</td></tr>
+        </table></div>
+        <h3>Drei Grundregeln für die Fehlerbehebung</h3>
+        <ul>
+          <li>Eine Eingabe erzeugt nie doppelte Aufgaben.</li>
+          <li>Bei einem Fehler bleiben Originaltext und Auswahl erhalten; Wiederholungen sind unbegrenzt möglich.</li>
+          <li>Nutzende finden ihr Ergebnis immer über die Aufgabenleiste oder die Liste wieder.</li>
+        </ul>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/08-draft-conflict.webp" alt="Entwurfskonflikt" loading="lazy"><figcaption>Randzustand · Entwurfskonflikt beim Öffnen aus dem Finder: Save draft / Discard</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/15-drag-release-overlay.webp" alt="Overlay über das ganze Fenster beim Ziehen" loading="lazy"><figcaption>Nebenweg · Overlay über das ganze Fenster beim Drag-Hover, „Release to organize“</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/10-taskbar-failed-hover.webp" alt="Aufgabenleiste im Fehlerzustand" loading="lazy"><figcaption>Ausnahme · der Fehlerzustand der Aufgabenleiste bleibt stehen, per Hover löschen / Retry</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/16-finder-open-with.webp" alt="Finder-Kontextmenü „Öffnen mit“" loading="lazy"><figcaption>Direkteinstieg · Finder-Kontextmenü „Mit Flowtica öffnen“ (offizielle Apple-Komponenten)</figcaption></figure>
+        </div>
+        <h3>Audio-Zweig</h3>
+        <p>Audio geht nicht in Quick Input, sondern über einen eigenen Kanal: im Kanalmenü Hochladen wählen → Dateiauswahl des Systems → Prüfung (länger als 5 Stunden / Datei nicht lesbar / nur eine Audiodatei erlaubt) → Datenschutzhinweis → Kontingentprüfung → Farbleiste „Transkription läuft“.</p>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/18-audio-upload-channel.webp" alt="Audio-Zweig, Schritt 1" loading="lazy"><figcaption>Audio Schritt 1 · im Kanalmenü „Audio hochladen“ wählen</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/19-audio-privacy-notice.webp" alt="Datenschutzhinweis" loading="lazy"><figcaption>Audio Schritt 5 · Datenschutzhinweis (weiter erst nach dem Häkchen)</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/20-audio-quota-exceeded.webp" alt="Fehlendes Kontingent" loading="lazy"><figcaption>Audio Schritt 7 · fehlendes Kontingent: Hinweis über dem Dialog, Datei bleibt erhalten</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/22-audio-dropped-into-quick-input.webp" alt="Audio hineingezogen: Rückfrage zum Kanalwechsel" loading="lazy"><figcaption>Randzustand · Audio in Quick Input gezogen: zuerst die Rückfrage, ob der Kanal gewechselt werden soll</figcaption></figure>
+        </div>
+        <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/21-meeting-card-states.webp" alt="Zustandsboard der Meeting-Karte" loading="lazy"><figcaption>Zustandsboard der Meeting-Karte: Verarbeitung / fertig / fehlgeschlagen / mehrere Bilder.</figcaption></figure>
+        <p class="small muted">Nicht abgedeckte Zustände (bei der Abnahme nicht ausgelöst): Web 11, Mac 15.</p>
+      </section>
+
+      <section class="csec" id="s6">
+        <p class="csec__eyebrow">06 So lief die Detailprüfung</p>
+        <h2>PRD, Entwurf und Live-Produkt – Frame für Frame abgeglichen</h2>
+        <p>Methode: Jeder Punkt nennt „Position + falsche Eigenschaft + Wert im Entwurf“, nie nur „getestet / bestanden“ – so kann die Entwicklung ihn sofort abhaken.</p>
+        <dl class="kv">
+          <dt>Web (10-15)</dt><dd>27 UI-Abweichungen · 15 UX-Auffälligkeiten · 11 ungeprüfte Zustände</dd>
+          <dt>Mac (10-19)</dt><dd>32 UI-Abweichungen · 15 UX-Auffälligkeiten · 15 ungeprüfte Zustände</dd>
+          <dt>Plattform-Abweichungen</dt><dd>Mindestens 6 Stellen (Screenshot-Button, Drag-and-drop, Audio hineinziehen, Darstellung des Kontingents, Verweildauer des Badges, untere Leiste im Bildbetrachter)</dd>
+          <dt>PRD wörtlich zitiert</dt><dd>5 UX-Auffälligkeiten sind durch das PRD gedeckt (Zeitpunkt, zu dem Badges zurückgesetzt werden; Überschreiben von Entwürfen; Kontingenthinweis über dem Dialog; Zeitpunkt der Paywall): formuliert als „Umsetzung weicht vom PRD ab“ statt als „UX-Vorschlag“</dd>
+          <dt>Ergebnis</dt><dd>Die Auffälligkeiten hat die Entwicklung behoben; Abweichungen und Auffälligkeiten wurden weitgehend anerkannt</dd>
+        </dl>
+      </section>
+
+      <section class="csec" id="s7">
+        <p class="csec__eyebrow">07 Ergebnisse und Grenzen</p>
+        <h2>Gelauncht; ohne Nutzungsdaten keine Zahlen</h2>
+        <ul>
+          <li>Live auf Web und Mac; Kanalmenü und Audio-Zweig sind seit 11-03 live.</li>
+          <li>Bekannte Wirkung: Es gibt keine überprüfbaren Nutzungsdaten, daher keine Angabe.</li>
+          <li>Grenzen: Für die erneute Prüfung der 30 UX-Auffälligkeiten nach der Abnahme gibt es keine schriftliche Dokumentation; nicht abgedeckte Zustände 11 + 15; Mehrbild-Raster B, das Overlay über das ganze Fenster und die farbige Aufgabenleiste sind nicht live gegangen.</li>
+        </ul>
+      </section>
+
+      <section class="csec" id="s8">
+        <p class="csec__eyebrow">08 Persönliche Retrospektive · Redesign</p>
+        <h2>Wenn ich die Richtung bestimmen könnte, würde ich Folgendes ändern</h2>
+        <div class="notice"><strong>Hinweis</strong>: Das Folgende ist meine persönliche Retrospektive nach dem Launch, nicht der damalige Lieferumfang; maßgeblich für das Live-Produkt ist Abschnitt 07.</div>
+        <ol>
+          <li>Den Einstieg in Richtung einheitliches Eingabefeld weiterentwickeln (siehe 04, Entscheidung 01).</li>
+          <li>Organize as beim Erfassen einklappen, Standard Auto; auf der Ergebnisseite die Kategorie änderbar machen und „Neu ordnen“ ergänzen.</li>
+          <li>Limits: Der Zähler erscheint erst ab 4000 und wechselt bei vollem Limit in eine Warnfarbe; der Button wird bei 10 Bildern ausgegraut; bei zu langem eingefügtem Text sagen, wie viel abgeschnitten wurde, oder ihn als Anhang übernehmen.</li>
+          <li>Sprache: ein Leuchten, das der Lautstärke folgt, ein anderer Text nach etwa 5 Sekunden Stille, automatisch ergänzte Leerzeichen; KI-Umformulierungen sichtbar und rücknehmbar.</li>
+          <li>Ergebnisse laufen nicht über die Aufgabenleiste, sondern landen auf einer Zeitleiste, die Karten automatisch nach Zeit wechselt; Badges summieren sich und werden erst beim Öffnen der Kategorie zurückgesetzt.</li>
+          <li>Nachvollziehbare Ergebnisse: Content mit KI-Kennzeichnung sowie einer Zeile mit Titel + Uhrzeit; jede Aussage führt zurück zum Originalwortlaut / Originalbild.</li>
+          <li>Mehrere Bilder nutzen „Todo-Galerie · großes Bild + Miniaturleiste“: eine Betrachter-Komponente + Hervorhebung Original / Enhanced + Pfeile links / rechts.</li>
+          <li>Beim Schließen automatisch speichern und nur das Überschreiben beim erneuten Öffnen sowie den Cursor beheben; Kontingent in einem einheitlichen Dialog: verbleibendes Kontingent + Rücksetzdatum + Upgrade als Hauptbutton; Overlay über das ganze Fenster „Release to organize“.</li>
+        </ol>
+        <p class="small muted">In Erweiterung: dieselbe Funktion in der App (mobile Version mit drei Kanälen), geräteübergreifende Synchronisierung mit der Apple Watch (Konzept, keine gelaunchte Funktion), Strukturierung direkt nach dem Sprechen, automatische Transkription und Zusammenfassung (Meeting-Flow).</p>
+      </section>
+
+      <section class="csec" id="s9">
+        <p class="csec__eyebrow">09 Wie ich es noch einmal machen würde</p>
+        <h2>Erst die drei Grundregeln als Zustandstabelle, dann der erste Screen</h2>
+        <p>„Reinwerfen → geordnet → wiederfinden“ wird zuerst zur Zustandstabelle; der Einstieg verlangt nie, vorab zu sortieren; alle Extras, die nur „besser aussehen“, kommen erst nach dem Launch.</p>
+      </section>
+
+    </div>
+  </div>
+</div></section>
+<section class="more-works"><div class="container">
+  <div class="section-head"><h2>Weitere Arbeiten</h2></div>
+  <div class="cards cards--2">
+    <a class="card" href="{{HOME}}work/verso/"><img src="{{ROOT}}assets/img/verso/cover.webp" alt="Verso" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>Verso-Visitenkarte · iOS-Flows</h3></div><span class="card__cta">Projekt ansehen</span></div></a>
+    <a class="card" href="{{HOME}}work/deepchat-bi/"><img src="{{ROOT}}assets/img/deepchat/hero.webp" alt="DeepChat BI" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>DeepChat BI · Agent-SaaS</h3></div><span class="card__cta">Projekt ansehen</span></div></a>
+  </div>
+</div></section>

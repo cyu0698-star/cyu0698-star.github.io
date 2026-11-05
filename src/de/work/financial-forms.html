@@ -1,0 +1,114 @@
+<!-- title: I Love Financial Forms · Finanzformulare im Unternehmen, mit einem KI-Agenten neu gedacht — Portfolio Yuqian Cheng -->
+<!-- desc: KI-Finanz-Workspace von 0 auf 1: chaotische Belege rein, die eigene Vorlage raus, gemessen rund 40 Sekunden; zweigleisige Eingabe, sichtbares Reasoning, Edit Form als Checkpoint; eine Designerin treibt das Frontend- und Backend-MVP direkt voran. -->
+<!-- nav: work -->
+<div class="case-top">
+  <div class="case-hero"><img src="{{ROOT}}assets/img/financial-forms/hero.webp" alt="I Love Financial Forms" fetchpriority="high"></div>
+</div>
+<section class="case-body"><div class="container">
+  <div class="crumb"><a href="{{HOME}}#works">Arbeiten</a><span>/</span><span>I Love Financial Forms</span></div>
+  <h1 class="case-title">I Love Financial Forms · Finanzformulare im Unternehmen, mit einem KI-Agenten neu gedacht<br><span class="muted" style="font-size:var(--fs-h3);font-weight:400">Omnigence AI · Produktmanagerin &amp; Designerin · 2025 · 0→1</span></h1>
+  <p class="case-sub">Chaotische Finanzbelege (PDFs, Bilder, Scans) werden intelligent in saubere, bearbeitbare Tabellen umgewandelt. Die gesamte Interaktion folgt dem Prinzip „der KI vertrauen, aber vor dem Export prüfen“. Dem Agenten beim Denken zusehen – und am Ende selbst freigeben.</p>
+  <div class="meta">
+    <div><span>Rolle</span><span>Produktmanagerin &amp; Designerin: das gesamte Nutzungserlebnis + Mitarbeit an der Umsetzung des Frontend- und Backend-MVP</span></div>
+    <div><span>Positionierung</span><span>Eine AI-native Anwendung, gebaut nach den Prinzipien Vertrauen, Kontrolle und Erklärbarkeit</span></div>
+    <div><span>Toolchain</span><span>Claude Design / ChatGPT (Wettbewerbsanalyse) → Figma Make (Prototypen) → Cursor + Gemini (Full-Stack-MVP und Design-Review)</span></div>
+    <div><span>Gemessene Effizienz</span><span>Einen Beleg von Hand neu erfassen: 5–10 Minuten (laut Kundeninterviews); der Agent, gemessen: rund 20 Sekunden zum Parsen, 40 Sekunden bis zur Excel-Datei (Produktivumgebung, 2026.07)</span></div>
+    <div><span>Links</span><span><a class="link-u" href="https://receiptsys-frontend-en.onrender.com" target="_blank" rel="noopener">Feature-Sandbox ↗</a> · <a class="link-u" href="https://github.com/cyu0698-star/I-Love-Financial-Forms" target="_blank" rel="noopener">GitHub-Repository ↗</a></span></div>
+  </div>
+
+  <div class="case-layout">
+    <nav class="toc" aria-label="Inhalt"><p>Inhalt</p>
+      <a href="#f0">00 Überblick</a><a href="#f1">01 Problem</a><a href="#f2">02 AI-nativer Workflow</a><a href="#f3">03 Agent-Strategie</a><a href="#f4">04 KI-Grenzen als Designchance</a><a href="#f5">05 Liefern heißt debuggen</a><a href="#f6">06 Nächste Schritte</a>
+    </nav>
+    <div class="case-content">
+
+      <section class="csec csec--first" id="f0">
+        <div class="overview">
+          <p class="label">Überblick in 30 Sekunden</p>
+          <p class="big">Chaotische Belege rein, die eigene Vorlage raus – gemessen rund 40 Sekunden; das Reasoning des Agenten ist bei jedem Schritt sichtbar, vor dem Export geht die Kontrolle an den Menschen zurück.</p>
+          <div class="steps"><span>Anmelden</span><i>→</i><span>Datei hochladen</span><i>→</i><span>Dateidetails prüfen</span><i>→</i><span>Datei herunterladen</span><i>→</i><span>Ergebnis prüfen</span></div>
+          <div class="tag-line"><span class="tag tag--fact">Real im Einsatz (private Kundenumgebungen)</span><span class="tag">0→1</span><span class="tag">Agent-Workflow</span><span class="tag">Vibe Coding · Next.js + FastAPI</span></div>
+        </div>
+      </section>
+
+      <section class="csec" id="f1">
+        <p class="csec__eyebrow">01 Problem</p>
+        <h2>Die „Handarbeitshölle“ der klassischen Buchhaltung</h2>
+        <p>Vor dem eigentlichen Design stand die Recherche: Gespräche mit 50+ Unternehmen und Tiefeninterviews mit 5 Kernkunden. Die Schmerzpunkte lagen schnell auf dem Tisch:</p>
+        <ul>
+          <li><strong>Kein ERP, hohe Personalkosten</strong>: KMU haben meist kein großes ERP-System; die Buchhaltung tippt Lieferscheine, Abrechnungen und Angebote 20–50 Mal am Tag von Hand in Excel ab.</li>
+          <li><strong>Nahezu null Fehlertoleranz</strong>: Ein falscher Wert pflanzt sich fort, ein einziger Tippfehler kann Stunden manueller Abstimmung bedeuten.</li>
+          <li><strong>Technologische Lücke</strong>: Klassisches OCR liefert unstrukturierten Text ohne Logik; generische Chatbots vergessen in jeder Runde das Format und tragen keinen stabilen Workflow.</li>
+          <li><strong>Der eigentliche Wunsch</strong>: „Pack dieses chaotische PDF in genau die Excel-Vorlage, die unsere Firma ohnehin benutzt.“ – kein vorhandenes Tool schafft das.</li>
+        </ul>
+        <figure class="fig"><img src="{{ROOT}}assets/img/financial-forms/01.webp" alt="Hochladen und Erkennen" loading="lazy"><figcaption>Beleg hochladen → der Agent erkennt den Dateityp und empfiehlt einen Verarbeitungsablauf.</figcaption></figure>
+      </section>
+
+      <section class="csec" id="f2">
+        <p class="csec__eyebrow">02 AI-nativer persönlicher Workflow</p>
+        <h2>Wie ich dieses Projekt umgesetzt habe</h2>
+        <p>Ich habe die klassische Designpipeline „alles von Hand“ aufgegeben und Entwicklungs- und Designeffizienz mit einem KI-gestützten Workflow vervielfacht:</p>
+        <ul>
+          <li><strong>Wettbewerbsanalyse und Content-Erstellung</strong> (ChatGPT / Claude Design): mit großen Sprachmodellen die Erlebnislücken zwischen klassischem OCR und generischen Chatbots analysiert und schnell realistische synthetische Daten und Texte für Compliance-Szenarien im Finanzbereich erzeugt.</li>
+          <li><strong>Prototypen</strong> (Figma Make): Die Kopplung von natürlicher Sprache und Komponentenbibliothek lieferte mehrere Interaktions- und Layoutvarianten und verkürzte den PoC-Zyklus erheblich.</li>
+          <li><strong>Code-Umsetzung und Design-Review</strong> (Cursor / Gemini): als Designerin den Frontend-Code (Next.js) und das Agent-Backend (FastAPI) direkt vorangetrieben, mit Gemini für Code-Review und Audits der Designtreue.</li>
+        </ul>
+      </section>
+
+      <section class="csec" id="f3">
+        <p class="csec__eyebrow">03 Agent-Strategie</p>
+        <h2>Warum das ein starkes KI-Agent-Produkt ist</h2>
+        <p>Um die Anforderung der Finanzteams nach „100 % Genauigkeit“ zu erfüllen, habe ich ein KI-Tool mit einmaliger Ein- und Ausgabe zu einem Agentic Workflow umgebaut: mehrschichtiges Verstehen, Konfidenzbewertung und automatische Fallbacks – als Antwort auf die vier Kernelemente des Agent-Designs in komplexen Geschäftsszenarien.</p>
+        <div class="cgrid cgrid--3">
+          <article class="ccard"><p class="k">1 Zweigleisige Eingabe</p><h4>Für den Einstieg „⚡ Smart Convert“, für Profis „eigene Vorlagen“</h4><p>Einstiegspfad: keine Vorlagenauswahl nötig – der Agent erkennt den Dateityp automatisch und empfiehlt einen Ablauf. Profipfad: einen Screenshot des Unternehmensformulars hochladen und präzise räumliche Parsing-Regeln festlegen; aus einem Screenshot entsteht in unter 30 Sekunden eine fertige Vorlage.</p></article>
+          <article class="ccard ccard--blue"><p class="k">2 Sichtbares Reasoning</p><h4>Dynamische Fähigkeits-Labels + drei Ebenen der Lesbarkeit</h4><p>In den 30 Sekunden, in denen der Agent arbeitet, kein kalter Ladekreis: „Analysiere Tabellenkopf… Extrahiere Beträge… Gleiche Lieferanten ab…“ macht das Reasoning sichtbar; bei der Vorlagenbestätigung sorgen eine grüne Qualitätskarte (Konfidenz), eine Tabellenraster-Vorschau und nach Typ gruppierte Feld-Labels dafür, dass alles auf einen Blick verständlich ist.</p></article>
+          <article class="ccard ccard--orange"><p class="k">3 Human-in-the-loop</p><h4>Edit Form als Checkpoint: Vor dem Export geht die Kontrolle an den Menschen zurück</h4><p>Nach der Extraktion folgt eine dreiteilige, semantisch gegliederte Bearbeitungsseite (Firmendaten, Positionsdaten, Summen), auf der sich Werte korrigieren und Zeilen hinzufügen oder löschen lassen. Diese „eine Sekunde Reibung“ nimmt die Angst, dass die KI automatisch falsche Daten exportiert.</p></article>
+        </div>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="{{ROOT}}assets/img/financial-forms/02.webp" alt="Smart Convert" loading="lazy"><figcaption>Smart Convert · dynamische Fähigkeits-Labels.</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/financial-forms/03.webp" alt="Vorlagenbestätigung" loading="lazy"><figcaption>Vorlagenbestätigung · Qualitätskarte + Rastervorschau + Feldgruppen.</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/financial-forms/04.webp" alt="Edit Form" loading="lazy"><figcaption>Edit Form · dreiteilige Bearbeitungsseite.</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/financial-forms/05.webp" alt="Export" loading="lazy"><figcaption>Export · Erfolgsmeldung und Excel-Download.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="csec" id="f4">
+        <p class="csec__eyebrow">04 KI-Grenzen als Designchance</p>
+        <h2>Strategie für das Agent-Tuning</h2>
+        <div class="table-wrap"><table class="matrix">
+          <tr><th>Geschäftsproblem / KI-Schwäche</th><th>Gegenmaßnahme</th><th>Prinzip</th></tr>
+          <tr><td>LLM-Halluzination: erfindet Adressen und Telefonnummern, wenn Felder fehlen</td><td>Temperature 0 + Prompt mit Selbstprüfungs-Checkliste, der „im Zweifel leer lassen“ erzwingt</td><td>Lieber leer als geraten: Eine ehrliche Lücke gewinnt das langfristige Vertrauen von Finanzteams weit eher als eine geschönte Lüge</td></tr>
+          <tr><td>Single Point of Failure: Abhängigkeit von einem einzigen LLM-Anbieter</td><td>Austauschbares Backend: Eine Umgebungsvariable schaltet zwischen Claude / OpenAI / lokalem PaddleOCR um</td><td>Sicherheit und Geschäftskontinuität sind die Untergrenze für jedes Agent-Produkt auf Enterprise-Niveau</td></tr>
+          <tr><td>Sicherheit und Datenschutz: sensible Finanzdaten</td><td>Alle KI-Aufrufe laufen über Proxy-Endpunkte im Backend; direkte API-Aufrufe aus dem Frontend sind ausgeschlossen</td><td>Sicherheit ist eine Grundeigenschaft, kein Marketing-Gag</td></tr>
+        </table></div>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="{{ROOT}}assets/img/financial-forms/06.webp" alt="Eigene Vorlage" loading="lazy"><figcaption>Eigene Vorlage · räumliche Parsing-Regeln.</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/financial-forms/07.webp" alt="Ergebnis" loading="lazy"><figcaption>Ergebnis · bearbeitbare Tabelle.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="csec" id="f5">
+        <p class="csec__eyebrow">05 Liefern heißt debuggen</p>
+        <h2>Ein „stiller Erfolg“</h2>
+        <p>Im Juli 2026 bin ich auf einen selbst eingebauten Fehler gestoßen: Nach erfolgreichem Smart Convert gab die Oberfläche keinerlei Rückmeldung – die Excel-Datei war heruntergeladen, doch die Nutzenden hielten den Vorgang für gescheitert. Noch am selben Tag habe ich ein Erfolgspanel ergänzt. Lektion: In einem KI-Produkt sieht ein stummer Erfolg genauso aus wie ein Fehlschlag.</p>
+      </section>
+
+      <section class="csec" id="f6">
+        <p class="csec__eyebrow">06 Nächste Schritte</p>
+        <h2>Diff-Ansicht und Stapelmodus</h2>
+        <ul>
+          <li><strong>Diff-Vergleichsansicht</strong>: Wird dieselbe Datei erneut geparst, werden Änderungen im Extraktionsergebnis des Agenten hervorgehoben – mit Annehmen / Ablehnen pro Feld per Klick.</li>
+          <li><strong>Stapelmodus für mehrere Dokumente</strong>: mehrere Agent-Instanzen parallel einsetzen, um Belege im Stapel zu verarbeiten, und die Ausgabe in einer strukturierten Gesamttabelle zusammenführen.</li>
+        </ul>
+      </section>
+
+    </div>
+  </div>
+</div></section>
+<section class="more-works"><div class="container">
+  <div class="section-head"><h2>Weitere Arbeiten</h2></div>
+  <div class="cards cards--2">
+    <a class="card" href="{{HOME}}work/deepchat-bi/"><img src="{{ROOT}}assets/img/deepchat/hero.webp" alt="DeepChat BI" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>DeepChat BI · Agent-SaaS</h3></div><span class="card__cta">Projekt ansehen</span></div></a>
+    <a class="card" href="{{HOME}}work/helpyou/"><img src="{{ROOT}}assets/img/helpyou/cover.webp" alt="Help-You-Organize" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>Help-You-Organize · KI-Ordnungsfunktion</h3></div><span class="card__cta">Projekt ansehen</span></div></a>
+  </div>
+</div></section>

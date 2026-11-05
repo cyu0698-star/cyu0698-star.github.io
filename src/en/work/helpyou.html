@@ -1,0 +1,198 @@
+<!-- title: Help-You-Organize · AI organizing feature (Flowtica, Web / Mac) — Yuqian Cheng Portfolio -->
+<!-- desc: One entry takes text, images and voice, and AI organizes them into memos or to-dos. Main flow and every edge case designed, acceptance on both platforms, personal retrospective redesign. -->
+<!-- nav: work -->
+<div class="case-top">
+  <div class="case-hero"><img src="{{ROOT}}assets/img/helpyou/cover.webp" alt="Help-You-Organize Quick Input design" fetchpriority="high"></div>
+</div>
+<section class="case-body"><div class="container">
+  <div class="crumb"><a href="{{HOME}}#works">Work</a><span>/</span><span>Help-You-Organize</span></div>
+  <h1 class="case-title">Help-You-Organize · AI organizing feature<br><span class="muted" style="font-size:var(--fs-h3);font-weight:400">Flowtica · Web / Mac · 2026.08 – 2026.11</span></h1>
+  <p class="case-sub">Drop whatever comes to mind — text, images, voice — into one entry, without first deciding whether it’s a memo or a to-do. AI organizes it, and it shows up on every device. I designed the main flow and every edge case, and ran acceptance reviews on both platforms after launch.</p>
+  <div class="meta">
+    <div><span>Role</span><span>UI designer (execution) · all main-flow + edge-case frames (85) · acceptance on both platforms</span></div>
+    <div><span>Team</span><span>PM set requirements and scope · review meeting · Web / Mac engineering</span></div>
+    <div><span>Timeline</span><span>Design 2026.08.09 – 09.05 (28 days) · acceptance 10.15 / 10.19 · channel menu and audio branch live 11.03</span></div>
+    <div><span>Deliverables</span><span>85 frames in the Figma delivery section · Web and Mac acceptance reports · the “personal retrospective” redesign at the end of this page</span></div>
+    <div><span>Status</span><span>Live on Web and Mac</span></div>
+  </div>
+
+  <div class="case-layout">
+    <nav class="toc" aria-label="Contents"><p>Contents</p>
+      <a href="#s0">00 Overview</a><a href="#s1">01 What users want</a><a href="#s2">02 Problem &amp; context</a><a href="#s3">03 Roles &amp; boundaries</a><a href="#s4">04 Three judgment calls</a><a href="#s5">05 Flow &amp; states</a><a href="#s6">06 Detail checks</a><a href="#s7">07 Results &amp; limits</a><a href="#s8">08 Personal retrospective</a><a href="#s9">09 If I did it again</a>
+    </nav>
+    <div class="case-content">
+
+      <section class="csec csec--first" id="s0">
+        <div class="overview">
+          <p class="label">30-sec overview</p>
+          <p class="big">One entry for many kinds of input; every state and exception covered; Web and Mac built from one set of designs and kept consistent.</p>
+          <p>Three judgment calls: for the entry, I argued for a <strong>unified input box</strong> instead of picking a channel first; for the image area, I overturned the grid four reviewers had recommended and chose <strong>Option E, a horizontal scroller that doesn’t make the dialog taller</strong> — the live product follows it; in the review meeting I cut the motion and three visual add-ons myself. Acceptance on both platforms after launch: Web 27 UI discrepancies + 15 UX concerns, Mac 32 + 15; 5 concerns quoted the PRD verbatim, and engineering fixed them.</p>
+          <div class="tag-line"><span class="tag tag--fact">Shipped</span><span class="tag">Web / Mac</span><span class="tag">AI organizing · agent state design</span><span class="tag">PRD ↔ design ↔ live audit</span></div>
+        </div>
+      </section>
+
+      <section class="csec" id="s1">
+        <p class="csec__eyebrow">01 What users want</p>
+        <h2>Drop it in and it’s organized — no sorting first</h2>
+        <p>The product is Flowtica’s “Help-You-Organize” on Web and Mac (mobile has a separate three-channel version). Text / images in → AI organizes them into a Memo or To-do; audio → advanced transcription and summary, producing a Meeting.</p>
+        <p>Five goals for this release: a channel menu pops up next to the entry (Quick Input / Upload audio); text and images can coexist in Quick Input, with multi-select for images; “Open with Flowtica” in Finder brings files straight into the matching dialog, skipping the channel menu; text and images are organized by AI, while audio goes straight to transcription and summary; across closing, failure, insufficient quota and asynchronous generation, one submission never creates duplicate tasks, and users can always get their results back.</p>
+        <p>Organize as offers Auto / To-do / Memo, with Auto as the default: AI decides between Memo and To-do, and one input can produce one Memo, one or more To-dos, or both.</p>
+        <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/04-organize-as-dropdown.webp" alt="Quick Input: the three Organize as options" loading="lazy"><figcaption>Quick Input · the three Organize as options (Auto by default). Design file.</figcaption></figure>
+        <p>Among comparable products, mymind, Mem and Notion all work as “drop it into one entry”; Gemini Notebook has a unified entry but asks for the source type first; Plaud, iFlytek, Limitless and DingTalk Tingji are recording-only. Not one of these 8 stops mid-organizing to ask the user.</p>
+      </section>
+
+      <section class="csec" id="s2">
+        <p class="csec__eyebrow">02 Problem &amp; context</p>
+        <h2>Three things to solve before launch</h2>
+        <p>The Mac app already had a “help me process” entry, but no consistent organizing queue for text, images, audio and desktop files; mobile has three channels (text only / add photos / upload audio), which Mac narrowed to two.</p>
+        <ol>
+          <li><strong>One entry for many kinds of input</strong>: text and images in the same box, audio on its own.</li>
+          <li><strong>Every state and exception covered</strong>: drafts, drag and drop, insufficient quota, failure, no network, processing, multiple images.</li>
+          <li><strong>Web and Mac built from one set of designs and kept consistent.</strong></li>
+        </ol>
+        <h3>Hard rules in the PRD (the design has to catch every one)</h3>
+        <ul>
+          <li>5000-character limit; the counter appears from 4000; once the limit is reached, the microphone is disabled.</li>
+          <li>Up to 10 images; going over shows a prompt but clears nothing; a successful send clears the draft, a failed one keeps the original text and the category choice.</li>
+          <li>Task bar (colored bar) + stacking for multiple tasks + Retry in the failed state; a category +1 hint; drafts save automatically.</li>
+          <li>Dragging files onto the main window or the Dock icon shows a dark full-window hover state, “Release to organize with Flowtica”; dragging audio into Quick Input first asks whether to switch channels.</li>
+          <li>Bringing files in from Finder triggers a draft-conflict dialog (Discard / Save draft); a cancelled voice input can be undone within 10 seconds; transcription with no response for 20 seconds counts as failed, with unlimited retries; voice credits and AI interactions are two separate quotas.</li>
+        </ul>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/06-counter-three-states.webp" alt="Counter in three states" loading="lazy"><figcaption>The counter’s three states: appears from 4000, near the limit, limit reached.</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/07-over-limit-toast.webp" alt="Over-limit toast and long text" loading="lazy"><figcaption>Pasting overly long text: over-limit toast + truncated long-text state.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="csec" id="s3">
+        <p class="csec__eyebrow">03 Roles &amp; collaboration boundaries</p>
+        <h2>Who decided what</h2>
+        <div class="table-wrap"><table class="matrix">
+          <tr><th>Who</th><th>What they decided</th></tr>
+          <tr><td>PM</td><td>Requirements and scope: PRD 08-13 → v6 08-20 (channel selection + two-dialog architecture); plus the team lead’s original drafts (multiple images with text / single-audio state / Loading / insufficient quota).</td></tr>
+          <tr><td>Me</td><td>All main-flow + edge-case frames (85 at 1512×982); 08-11 researched and proposed the “unified input box” as the main option; 08-12 entry dialog; 08-23 task bar Option A → my own capsule component; 08-23 multi-image grid B; 08-24 three large polished showcase images (the Finder right-click menu uses Apple’s official components) and the Todo gallery master component; 08-24/25 two drag-hover frames; 09-04 Quick Input image area Option E plus 5 corrections; strict rules for values and standardized delivery (whole numbers, even numbers first, no code names in frame notes).</td></tr>
+          <tr><td>Review meeting 8/19</td><td>Cut image download and editing inside Quick Input; asked for a title / time on Memo details; left me a to-do on multi-image layout.</td></tr>
+          <tr><td>Engineering</td><td>Simplifications during the build: the task bar became a small capsule, multiple images stacked vertically at full width (per the PRD’s wording “fill the width of the content area”), the badge disappears after a timeout.</td></tr>
+        </table></div>
+        <p>I changed multi-image grid B myself in the design file — it wasn’t changed by the PM or engineering. So this case isn’t about “the option that got overruled”; it’s about what I proposed, what I traded off, and which parts made it into the live product.</p>
+        <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/00-section-overview.webp" alt="Overview of the 85 frames in the Help-You-Organize delivery section" loading="lazy"><figcaption>Delivery section overview: main flow, audio branch, Quick Input supplementary and edge states, task bar, result details, direct entry from Finder and Dock, showcase images. 122 frames after the naming audit.</figcaption></figure>
+      </section>
+
+      <section class="csec" id="s4">
+        <p class="csec__eyebrow">04 Three judgment calls</p>
+        <h2>Why this, why not the alternatives, and what it costs</h2>
+        <div class="cgrid cgrid--3">
+          <article class="ccard"><p class="k">01 Entry</p><h4>A unified input box, not channel-first</h4><p>Users want to “drop it in”, not “sort it first”; mymind / Mem / Notion never ask. The PRD split channels in this release for technical reasons: audio runs through the transcription pipeline and needs fast upload and fast structuring.</p><p><strong>How it would work</strong> (a design-side judgment): one drop zone on the front end + detection by file type; on the back end, a routing layer sends files to the existing per-type pipelines (audio transcription, image recognition, text extraction) — no pipeline rebuild. The real risk is upload progress and timeouts for large video / PPT files, which has nothing to do with whether the entry is unified; progress and failure recovery need their own design.</p><p><strong>Cost</strong>: when the type is detected wrongly, there has to be a “switch channel” way out; audio entering the unified box still has to go through the privacy notice and quota check.</p><div class="foot"><span class="tag tag--personal">Personal retrospective proposal</span><span class="tag">Live: channel menu + audio branch</span></div></article>
+          <article class="ccard ccard--blue"><p class="k">02 Image area</p><h4>Option E, overturning grid A, which four AI reviewers unanimously recommended</h4><p>E = a single horizontally scrolling row + fade + arrows; the thumbnail strip doesn’t make the dialog taller (dialog height 380 → 304), and the input area stays visible. A’s grid pushes the text area down.</p><p><strong>Cost</strong>: from 6 images on, thumbnails switch to the 72 / 8 size; I did a round of corrections myself on 5 details, such as where the × sits and dropping the arrows’ backing plate.</p><p><strong>Result</strong>: on both platforms, the live thumbnail strip matches E.</p><div class="foot"><span class="tag tag--fact">In the live product</span></div></article>
+          <article class="ccard ccard--orange"><p class="k">03 Subtraction</p><h4>No motion, none of the three “visual upgrades”</h4><p>The hover pop-up animation on images: I proposed dropping it myself in the review meeting; all three “visual upgrades” were rejected; after the review cut download / edit inside Quick Input, I didn’t bring them back.</p><p><strong>Why</strong>: this release’s value is “drop it in and it’s organized”, not decoration; every extra animation means aligning both platforms one more time.</p><p><strong>Cost</strong>: plainer screens; the visual points have to be won back through consistent details (see 06).</p><div class="foot"><span class="tag tag--fact">In the live product</span></div></article>
+        </div>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/02-channel-menu.webp" alt="Channel menu" loading="lazy"><figcaption>As shipped: a channel menu pops up next to the entry (Quick Input / Upload audio).</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/17-multifile-into-quick-input.webp" alt="Multiple files brought into Quick Input" loading="lazy"><figcaption>Image area Option E: a single horizontally scrolling thumbnail strip; the input area stays visible.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="csec" id="s5">
+        <p class="csec__eyebrow">05 Main flow · state matrix · error recovery</p>
+        <h2>One entry, and every state has somewhere to go</h2>
+        <div class="steps"><span>Add in the left sidebar</span><i>→</i><span>Quick Input (text + counter / images / screenshot / Organize as / mic)</span><i>→</i><span>Send</span><i>→</i><span>Brief notice at the top</span><i>→</i><span>Category +1 badge</span><i>→</i><span>Memo details (Original / Content)</span><i>→</i><span>Image viewer</span></div>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/01-home-add-entry.webp" alt="Home: the + entry" loading="lazy"><figcaption>Step 1 · Home (＋ entry)</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/03-quick-input-empty.webp" alt="Quick Input empty state" loading="lazy"><figcaption>Step 3 · Quick Input empty state</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/09-taskbar-expanded.webp" alt="Task bar expanded" loading="lazy"><figcaption>Processing · colored task bar (thumbnail + summary + Processing), expands on hover</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/11-taskbar-done-badge.webp" alt="Done: +1 badge" loading="lazy"><figcaption>Result · category +1 badges accumulate and clear when the list is opened</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/12-memo-content.webp" alt="Memo Content" loading="lazy"><figcaption>Details · Memo Content (the AI-organized result)</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/14-todo-gallery-viewer.webp" alt="Todo gallery: large image + thumbnail strip" loading="lazy"><figcaption>Image viewer · Todo gallery: large image + thumbnail strip + bottom capsule</figcaption></figure>
+        </div>
+        <h3>State matrix: design coverage vs. the live product at acceptance</h3>
+        <div class="table-wrap"><table class="matrix">
+          <tr><th>Stage</th><th>Default</th><th>Edge / exception (design)</th><th>Live (at acceptance)</th></tr>
+          <tr><td>Entry</td><td>Add</td><td>Channel menu: hover / active states for both items</td><td>Goes straight into Quick Input (channel menu back after 11-03)</td></tr>
+          <tr><td>Input</td><td>Text / images / mic</td><td>Counter in three states from 4000; 10-image limit bubble + toast; mic greyed out while recording; guidance when permission is denied</td><td>Counter shows as soon as the dialog opens; over-limit notice at the top of the page for 3 seconds</td></tr>
+          <tr><td>Send</td><td>Grey when empty / black with text</td><td>Insufficient quota: notice covers the dialog, draft kept</td><td>Mac matches; Web has two different forms</td></tr>
+          <tr><td>Processing</td><td>Colored task bar</td><td>Stacking; failed state stays + Retry; waits when offline</td><td>A small capsule that flashes by; failures show on the list card</td></tr>
+          <tr><td>Result</td><td>+1 badges accumulate</td><td>Cleared when the list is opened</td><td>Disappears on its own after a timeout (Web 4–6 s / Mac 25 s)</td></tr>
+          <tr><td>Details</td><td>Original / Content</td><td>Three-step progress in processing details; Meeting with multiple images</td><td>No title / time at the top (Web)</td></tr>
+          <tr><td>Image viewer</td><td>Thumbnail strip + bottom capsule</td><td>Two versions of delete confirmation; download “Saved”; load failure</td><td>No delete / arrows; on Mac, no bottom bar when opened from a Memo</td></tr>
+          <tr><td>Side paths</td><td>Draft autosave</td><td>Full-window drag overlay “Release to organize”; asks to switch when audio is dropped in; draft conflict Discard / Save draft</td><td>No overlay; on Web, reopening stitches old and new text together</td></tr>
+        </table></div>
+        <h3>Three baselines for error recovery</h3>
+        <ul>
+          <li>One submission never creates duplicate tasks.</li>
+          <li>A failure keeps the original text and choices; retries are unlimited.</li>
+          <li>Users can always get their results back from the task bar or the list.</li>
+        </ul>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/08-draft-conflict.webp" alt="Draft conflict" loading="lazy"><figcaption>Edge state · draft conflict when bringing files in from Finder: Save draft / Discard</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/15-drag-release-overlay.webp" alt="Full-window drag overlay" loading="lazy"><figcaption>Side path · full-window overlay on drag hover, “Release to organize”</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/10-taskbar-failed-hover.webp" alt="Task bar failed state" loading="lazy"><figcaption>Exception · the task bar’s failed state stays; hover to delete / Retry</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/16-finder-open-with.webp" alt="Finder right-click Open With" loading="lazy"><figcaption>Direct entry · Finder right-click “Open with Flowtica” (Apple’s official components)</figcaption></figure>
+        </div>
+        <h3>Audio branch</h3>
+        <p>Audio doesn’t go into Quick Input; it has its own channel: choose upload in the channel menu → system file picker → validation (longer than 5 hours / unreadable file / single-audio limit) → privacy notice → quota check → colored “transcribing” bar.</p>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/18-audio-upload-channel.webp" alt="Audio branch, step 1" loading="lazy"><figcaption>Audio step 1 · choose Upload audio in the channel menu</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/19-audio-privacy-notice.webp" alt="Privacy notice" loading="lazy"><figcaption>Audio step 5 · privacy notice (can’t continue until checked)</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/20-audio-quota-exceeded.webp" alt="Insufficient quota" loading="lazy"><figcaption>Audio step 7 · insufficient quota: notice covers the dialog, file kept</figcaption></figure>
+          <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/22-audio-dropped-into-quick-input.webp" alt="Audio dropped in: asks to switch" loading="lazy"><figcaption>Edge state · audio dragged into Quick Input: first asks whether to switch channels</figcaption></figure>
+        </div>
+        <figure class="fig"><img src="{{ROOT}}assets/img/helpyou/21-meeting-card-states.webp" alt="Meeting card state board" loading="lazy"><figcaption>Meeting card state board: processing / done / failed / multiple images.</figcaption></figure>
+        <p class="small muted">Uncovered states (not triggered during acceptance): 11 on Web, 15 on Mac.</p>
+      </section>
+
+      <section class="csec" id="s6">
+        <p class="csec__eyebrow">06 How the detail checks worked</p>
+        <h2>PRD, design and live product, compared frame by frame</h2>
+        <p>Method: every item states “location + the wrong property + the value in the design”, never just “tested / passed”, so engineering can tick it off the moment they get it.</p>
+        <dl class="kv">
+          <dt>Web (10-15)</dt><dd>27 UI discrepancies · 15 UX concerns · 11 unverified states</dd>
+          <dt>Mac (10-19)</dt><dd>32 UI discrepancies · 15 UX concerns · 15 unverified states</dd>
+          <dt>Platform divergence</dt><dd>At least 6 places (screenshot button, drag and drop, dropping in audio, quota UI, how long the badge stays, image viewer bottom bar)</dd>
+          <dt>Quoting the PRD</dt><dd>5 UX concerns are backed by the PRD (when badges clear, draft overwriting, the quota notice covering the dialog, paywall timing): framed as “the build deviates from the PRD” rather than “UX suggestions”</dd>
+          <dt>Result</dt><dd>Engineering fixed the concerns; the discrepancies and concerns were broadly accepted</dd>
+        </dl>
+      </section>
+
+      <section class="csec" id="s7">
+        <p class="csec__eyebrow">07 Results &amp; limits</p>
+        <h2>Shipped; no usage data, so no numbers</h2>
+        <ul>
+          <li>Live on Web and Mac; the channel menu and audio branch went live on 11-03.</li>
+          <li>Known impact: there is no verifiable usage data, so none is stated.</li>
+          <li>Limits: there is no written record of re-checking the 30 UX concerns after acceptance; uncovered states 11 + 15; multi-image grid B, the full-window drag overlay and the colored task bar didn’t make it into the live product.</li>
+        </ul>
+      </section>
+
+      <section class="csec" id="s8">
+        <p class="csec__eyebrow">08 Personal retrospective · redesign</p>
+        <h2>If I set the direction, this is what I’d change</h2>
+        <div class="notice"><strong>Note</strong>: what follows is my personal post-launch retrospective, not what was delivered at the time; for the live product, see 07.</div>
+        <ol>
+          <li>Move the entry toward a unified input box (see 04, call 01).</li>
+          <li>Collapse Organize as during capture, defaulting to Auto; let users change the category on the result page, and add “Reorganize”.</li>
+          <li>Limits: the counter appears only at 4000 and switches to a warning color when full; the button greys out at 10 images; when pasted text is too long, say how much was cut, or turn it into an attachment.</li>
+          <li>Voice: a glow that follows the volume, new copy after about 5 seconds of silence, automatic spacing; AI rewrites visible and reversible.</li>
+          <li>Results skip the task bar and land on a timeline that switches cards automatically by time; badges accumulate and only reset when the category is opened.</li>
+          <li>Traceable results: Content gets an AI label plus a title + time line, and every conclusion links back to the original words / image.</li>
+          <li>Multiple images reuse “Todo gallery · large image + thumbnail strip”: one viewer component + Original / Enhanced highlighting + left / right arrows.</li>
+          <li>Save automatically on close, fixing only the overwrite on reopen and the cursor; unify quota into one dialog: remaining quota + reset date + an Upgrade primary button; full-window overlay “Release to organize”.</li>
+        </ol>
+        <p class="small muted">Expanding into: the same feature in the app (the three-channel mobile version), Apple Watch multi-device sync (a concept, not a shipped feature), structuring as soon as you finish speaking, automatic transcription and summaries (the meeting flow).</p>
+      </section>
+
+      <section class="csec" id="s9">
+        <p class="csec__eyebrow">09 How I’d do it again</p>
+        <h2>Turn the three baselines into a state table first, then draw the first screen</h2>
+        <p>“Drop it in → it’s organized → you can find it again” becomes a state table first; the entry never makes users sort first; every “looks nicer” addition waits until after launch.</p>
+      </section>
+
+    </div>
+  </div>
+</div></section>
+<section class="more-works"><div class="container">
+  <div class="section-head"><h2>More work</h2></div>
+  <div class="cards cards--2">
+    <a class="card" href="{{HOME}}work/verso/"><img src="{{ROOT}}assets/img/verso/cover.webp" alt="Verso" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>Verso business card · iOS flows</h3></div><span class="card__cta">View project</span></div></a>
+    <a class="card" href="{{HOME}}work/deepchat-bi/"><img src="{{ROOT}}assets/img/deepchat/hero.webp" alt="DeepChat BI" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>DeepChat BI · Agent SaaS</h3></div><span class="card__cta">View project</span></div></a>
+  </div>
+</div></section>

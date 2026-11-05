@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verso business card · iOS flows (Flowtica, e-ink NFC card) — Yuqian Cheng Portfolio</title>
+<meta name="description" content="The iOS setup flow for an e-ink NFC business-card device: PRD breakdown, interaction gallery, competitor gallery, a 47-frame delivery version; a redesign of page hierarchy and UI polish is in progress.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="alternate" hreflang="zh-CN" href="https://cyu0698-star.github.io/work/verso/">
+<link rel="alternate" hreflang="en" href="https://cyu0698-star.github.io/en/work/verso/">
+<link rel="alternate" hreflang="de" href="https://cyu0698-star.github.io/de/work/verso/">
+<meta property="og:title" content="Verso business card · iOS flows (Flowtica, e-ink NFC card) — Yuqian Cheng Portfolio"><meta property="og:description" content="The iOS setup flow for an e-ink NFC business-card device: PRD breakdown, interaction gallery, competitor gallery, a 47-frame delivery version; a redesign of page hierarchy and UI polish is in progress.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230c0c0c'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23fff' font-family='Inter,system-ui'%3E雨%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../assets/css/tokens.css">
+<link rel="stylesheet" href="../../../assets/css/site.css">
+<style>
+@media (max-width: 767px) {
+  .nav__in { flex-wrap: wrap; column-gap: 16px; row-gap: 4px; }
+  .nav__brand, .nav__lang { white-space: nowrap; }
+  .nav__links { order: 3; width: 100%; flex-wrap: wrap; column-gap: 12px; row-gap: 4px; }
+  .nav__links a { letter-spacing: .1em; white-space: nowrap; }
+}
+.case-content { min-width: 0; }
+</style>
+</head>
+<body>
+<nav class="nav" id="nav"><div class="container nav__in">
+  <a class="nav__brand" href="../../../en/">程雨芊</a>
+  <div class="nav__links">
+    <a href="../../../en/">Home</a>
+    <a href="../../../en/#works" class="is-active">Work</a>
+    <a href="../../../en/#about">About</a>
+    <a href="../../../en/#contact">Contact</a>
+  </div>
+  <div class="nav__lang"><a href="../../../work/verso/">中文</a><span>｜</span><a href="../../../en/work/verso/" class="is-active">EN</a><span>｜</span><a href="../../../de/work/verso/">DE</a></div>
+</div></nav>
+<main>
+<!-- title: Verso business card · iOS flows (Flowtica, e-ink NFC card) — Yuqian Cheng Portfolio -->
+<!-- desc: The iOS setup flow for an e-ink NFC business-card device: PRD breakdown, interaction gallery, competitor gallery, a 47-frame delivery version; a redesign of page hierarchy and UI polish is in progress. -->
+<!-- nav: work -->
+<div class="case-top">
+  <div class="case-hero case-hero--contain"><img src="../../../assets/img/verso/cover.webp" alt="Verso business card iOS screens" fetchpriority="high"></div>
+</div>
+<section class="case-body"><div class="container">
+  <div class="crumb"><a href="../../../en/#works">Work</a><span>/</span><span>Verso business card</span></div>
+  <h1 class="case-title">Verso business card · iOS flows<br><span class="muted" style="font-size:var(--fs-h3);font-weight:400">Flowtica · iOS · 2026.09 – 2026.10</span></h1>
+  <p class="case-sub">Verso is an NFC business-card device with an e-ink screen: users set up their card in the iOS app, and the people they meet tap it or scan a code to view a web page, open a link or save the contact. I owned every design deliverable, from the PRD to the delivery version of the iOS flows.</p>
+  <div class="meta">
+    <div><span>Role</span><span>UI designer (execution) · PRD breakdown · interaction and competitor galleries · delivery version of the flows</span></div>
+    <div><span>Team</span><span>PM set the requirements (e-business card PRD V2.0, photo card creation PRD, card logo &amp; template PRD) · iOS engineering</span></div>
+    <div><span>Deliverables</span><span>Card interaction gallery (09-23) · competitor gallery (09-26) · contact-exchange &amp; lead-capture explainer (09-27) · 47-frame delivery version (10-10)</span></div>
+    <div><span>Status</span><span>Delivery version handed to engineering; the redesign part of this page is in progress</span></div>
+  </div>
+
+  <div class="case-layout">
+    <nav class="toc" aria-label="Contents"><p>Contents</p>
+      <a href="#v0">00 Overview</a><a href="#v1">01 What the product is</a><a href="#v2">02 What I did</a><a href="#v3">03 Flows &amp; states</a><a href="#v4">04 Hardware constraints &amp; open questions</a><a href="#v5">05 Next: redesign</a>
+    </nav>
+    <div class="case-content">
+
+      <section class="csec csec--first" id="v0">
+        <div class="overview">
+          <p class="label">30-sec overview</p>
+          <p class="big">A software flow under hardware constraints: the e-ink screen is greyscale only and refreshes slowly, so the app has to make the card’s “edit → publish to the device → the other person sends details back” crystal clear.</p>
+          <p>My path: first break the PRD down into a frame-level flow list, then build two galleries from real captures (card interactions, competitors) to lay out the decision points, and finally deliver 47 frames of iOS flows: entry (A1–A4), card home and the Update flow (B0–B13, including draft autosave, required-field validation, link validation, offline, updating / success / failure) and wallpaper preview (W9).</p>
+          <div class="tag-line"><span class="tag tag--fact">Delivered</span><span class="tag">iOS</span><span class="tag">Hardware + software</span><span class="tag tag--personal">Redesign in progress</span></div>
+        </div>
+      </section>
+
+      <section class="csec" id="v1">
+        <p class="csec__eyebrow">01 What the product is</p>
+        <h2>An e-ink screen that shows your business card, and the app behind it</h2>
+        <p>On the device: the e-ink screen shows the card face; an NFC tap or a QR scan takes the other person to a web card, a custom link or “save as contact”. In the app (PRD V2.0): device settings → Contact Card, where you set name, title, contact details, Opens (what opens after a tap) and the Bio page; later PRDs added generating a greyscale card face from a photo of a business card, uploading a logo, and three templates.</p>
+        <p>Competitor reference: digital business cards such as Blinq, HiHello, Popl, Mobilo and Linq rely on phone-to-phone taps or QR codes and have no screen of their own. Verso’s difference is that “the card itself is the screen” — so what the card face looks like, when it refreshes and what happens offline all become design questions.</p>
+      </section>
+
+      <section class="csec" id="v2">
+        <p class="csec__eyebrow">02 What I did</p>
+        <h2>From the PRD to a 47-frame delivery version</h2>
+        <div class="steps"><span>09-22 PRD breakdown</span><i>→</i><span>09-23 Card interaction gallery</span><i>→</i><span>09-26 Competitor gallery</span><i>→</i><span>09-27 Contact-exchange &amp; lead-capture explainer</span><i>→</i><span>10-10 iOS flows, delivery version</span></div>
+        <ul>
+          <li><strong>Frame-level flow list</strong>: every frame states its content, the matching PRD clause and notes for engineering; I didn’t improvise anything the PRD didn’t cover — those points went into a list of open questions for the PM.</li>
+          <li><strong>Two galleries from real captures</strong> (continuous HTML pages): the card interaction gallery collects 11 ways of handling “what happens after the other person taps”; the competitor gallery looks at how 11 products handle edit pages, the Opens menu, validation and errors, across 42 screenshots.</li>
+          <li><strong>Contact-exchange &amp; lead-capture explainer</strong>: how the other person sends their details back to me (lead-capture forms and notifications in Blinq / HiHello / Popl / Mobilo).</li>
+          <li><strong>47-frame delivery version</strong> (402×874): entry A1–A4, card home B0–B13, wallpaper preview W9; every frame’s label states its state and trigger condition.</li>
+        </ul>
+      </section>
+
+      <section class="csec" id="v3">
+        <p class="csec__eyebrow">03 Flows &amp; states</p>
+        <h2>Card home and the Update flow</h2>
+        <p>The home screen is an editable card + an Update button at the bottom: any change saves a draft automatically and enables Update; Update publishes the card to the device, with three states in between — updating, success, failure; offline you can edit but not Update.</p>
+        <div class="phones">
+          <figure><img src="../../../assets/img/verso/A2-verso-connected.webp" alt="A2 Verso Connected" loading="lazy"><figcaption>A2 · Entry · device connected</figcaption></figure>
+          <figure><img src="../../../assets/img/verso/B1-business-card-default.webp" alt="B1 Default" loading="lazy"><figcaption>B1 · Card home · default (no unpublished changes)</figcaption></figure>
+          <figure><img src="../../../assets/img/verso/B2-edited-draft-saved.webp" alt="B2 Editing" loading="lazy"><figcaption>B2 · Editing · draft saved automatically, Update enabled</figcaption></figure>
+          <figure><img src="../../../assets/img/verso/B3-name-empty.webp" alt="B3 Name empty" loading="lazy"><figcaption>B3 · Name empty · required-field validation</figcaption></figure>
+          <figure><img src="../../../assets/img/verso/B5-opens-menu.webp" alt="B5 Opens menu" loading="lazy"><figcaption>B5 · Opens menu expanded (web page / custom link / save contact)</figcaption></figure>
+          <figure><img src="../../../assets/img/verso/B11-updating.webp" alt="B11 Updating" loading="lazy"><figcaption>B11 · Updating… · button greyed out</figcaption></figure>
+          <figure><img src="../../../assets/img/verso/B13-update-failed.webp" alt="B13 Update failed" loading="lazy"><figcaption>B13 · Failed · toast + retry</figcaption></figure>
+          <figure><img src="../../../assets/img/verso/W9-wallpaper-preview.webp" alt="W9 Wallpaper preview" loading="lazy"><figcaption>W9 · Tap the device preview → full-screen wallpaper preview</figcaption></figure>
+        </div>
+        <h3>Contact Card and Customize</h3>
+        <div class="phones">
+          <figure><img src="../../../assets/img/verso/A1-contact-card-bio.webp" alt="A1 Contact Card" loading="lazy"><figcaption>A1 · Contact Card · Opens = Bio Page</figcaption></figure>
+          <figure><img src="../../../assets/img/verso/A2-customize.webp" alt="A2 Customize" loading="lazy"><figcaption>A2 · Customize · Display and Add More</figcaption></figure>
+          <figure><img src="../../../assets/img/verso/B0-full-page.webp" alt="B0 Full page" loading="lazy"><figcaption>B0 · Card home, full page (reference for scroll length)</figcaption></figure>
+        </div>
+        <h3>State table (covered in the delivery version)</h3>
+        <div class="table-wrap"><table class="matrix">
+          <tr><th>Stage</th><th>Default</th><th>States &amp; exceptions</th></tr>
+          <tr><td>Entry</td><td>Verso connected</td><td>Paired but offline (Not Connected) · not paired (device info shows —)</td></tr>
+          <tr><td>Edit</td><td>Card home</td><td>Draft saved automatically while editing · required-field check when Name is empty · HTTPS-prefix check on the custom link once it loses focus · empty-URL prompt right after the custom link is selected</td></tr>
+          <tr><td>Opens</td><td>Web card</td><td>Custom link (valid / invalid) · save contact · Update unavailable while LinkedIn is empty</td></tr>
+          <tr><td>Update</td><td>Available / unavailable</td><td>Greyed out while updating · success toast (“nothing to update” when nothing changed) · failure toast + retry · no Update while offline</td></tr>
+          <tr><td>Preview</td><td>Device thumbnail preview</td><td>Tap to open the full-screen wallpaper preview, × to close</td></tr>
+        </table></div>
+      </section>
+
+      <section class="csec" id="v4">
+        <p class="csec__eyebrow">04 Hardware constraints &amp; open questions</p>
+        <h2>An e-ink screen is not a phone screen</h2>
+        <ul>
+          <li><strong>Greyscale and resolution</strong>: the card face is greyscale only, so photos and logos have to be converted to greyscale before they go on screen; the exact resolution and number of grey levels was the first open question I raised with the PM.</li>
+          <li><strong>Refresh</strong>: e-ink refreshes slowly and leaves ghosting, so Update needs clear “updating / success / failure” feedback, instead of the instant effect people expect from phone apps.</li>
+          <li><strong>Content length</strong>: the Bio character count, which of several contact entries goes on screen, and the final copy weren’t covered by the PRD; the delivery version uses placeholders + open-question notes.</li>
+        </ul>
+        <div class="notice"><strong>Open questions (for the PM)</strong>: screen resolution and grey levels · Bio character limit · rules for which of several contact entries is used · final copy · how to flag it when, offline, the draft and the content on the device don’t match.</div>
+      </section>
+
+      <section class="csec" id="v5">
+        <p class="csec__eyebrow">05 Next · redesign (in progress)</p>
+        <h2>Page hierarchy and UI polish</h2>
+        <p>The delivery version’s goal was “draw every state the PRD defines, so engineering can build it”. Next, as a personal retrospective, I’m redoing two things: ① page hierarchy — re-layering entry, card home, Contact Card, Customize and device settings to cut down on jumping back and forth; ② UI polish — making the card-face preview and the card home visually consistent, in the style of the Verso page on Flowtica’s official website. The demo will use content from two PRDs: photo card creation and logo templates.</p>
+        <div class="tag-line"><span class="tag tag--personal">Personal retrospective, not delivered at the time</span><span class="tag">In progress</span></div>
+      </section>
+
+    </div>
+  </div>
+</div></section>
+<section class="more-works"><div class="container">
+  <div class="section-head"><h2>More work</h2></div>
+  <div class="cards cards--2">
+    <a class="card" href="../../../en/work/helpyou/"><img src="../../../assets/img/helpyou/cover.webp" alt="Help-You-Organize" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>Help-You-Organize · AI organizing feature</h3></div><span class="card__cta">View project</span></div></a>
+    <a class="card" href="../../../en/work/deepchat-bi/"><img src="../../../assets/img/deepchat/hero.webp" alt="DeepChat BI" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>DeepChat BI · Agent SaaS</h3></div><span class="card__cta">View project</span></div></a>
+  </div>
+</div></section>
+
+</main>
+<footer class="footer"><div class="container">
+  <div class="footer__grid">
+    <div class="footer__col"><h4>Navigation</h4><ul><li><a href="../../../en/">Home</a></li><li><a href="../../../en/#works">Work</a></li><li><a href="../../../en/#about">About</a></li><li><a href="../../../en/#contact">Contact</a></li></ul></div>
+    <div class="footer__col"><h4>Work</h4><ul><li><a href="../../../en/work/deepchat-bi/">DeepChat BI · Agent SaaS</a></li><li><a href="../../../en/work/helpyou/">Help-You-Organize · AI organizing</a></li><li><a href="../../../en/work/financial-forms/">I Love Financial Forms</a></li><li><a href="../../../en/work/verso/">Verso card · iOS</a></li></ul></div>
+    <div class="footer__col footer__col--wide"><h4>Contact</h4><ul><li><a href="mailto:yuqiancheng818@gmail.com">yuqiancheng818@gmail.com</a></li><li><span class="muted small">Open to Shenzhen · Guangzhou · Hangzhou · Shanghai · Beijing</span></li></ul></div>
+  </div>
+  <div class="footer__name"><h2>程雨芊</h2><div class="row"><span>AI Product Designer</span><span>© 2026 · see you soon…</span></div></div>
+</div></footer>
+<script src="../../../assets/js/site.js"></script>
+</body>
+</html>
