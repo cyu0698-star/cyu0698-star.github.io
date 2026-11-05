@@ -11,7 +11,7 @@ ul, ol { padding: 0; list-style: none; }
 
 /* 导航 */
 .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background-color var(--ease-nav); }
-.nav.is-scrolled { background: var(--nav-scrolled); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.nav.is-scrolled { background: var(--nav-scrolled); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }  /* 12px = 旧站 backdrop-blur-md（11-06 按源码校正） */
 .nav__in { display: flex; align-items: center; justify-content: space-between; padding-top: 20px; padding-bottom: 20px; }
 .nav__brand { font-size: 15px; letter-spacing: .02em; color: var(--t100); line-height: 1.5; }
 .nav__links { display: flex; gap: 32px; align-items: center; }
