@@ -1,0 +1,110 @@
+<!-- title: Verso 名片 · iOS 页面流程（Flowtica，墨水屏 NFC 名片）— 程雨芊作品集 -->
+<!-- desc: 墨水屏 NFC 名片设备的 iOS 配置链路：PRD 拆解、交互图鉴、竞品图鉴、47 帧交付版；页面层级与 UI 美观度 redesign 施工中。 -->
+<!-- nav: work -->
+<div class="case-top">
+  <div class="case-hero case-hero--contain"><img src="{{ROOT}}assets/img/verso/cover.webp" alt="Verso 名片 iOS 页面" fetchpriority="high"></div>
+</div>
+<section class="case-body"><div class="container">
+  <div class="crumb"><a href="{{ROOT}}#works">作品</a><span>/</span><span>Verso 名片</span></div>
+  <h1 class="case-title">Verso 名片 · iOS 页面流程<br><span class="muted" style="font-size:var(--fs-h3);font-weight:400">Flowtica · iOS · 2026.09 – 2026.10</span></h1>
+  <p class="case-sub">Verso 是一块 NFC 墨水屏名片设备：用户在 iOS App 里配置名片，对方碰一碰或扫码就能看网页、开链接或存联系人。我负责从 PRD 到 iOS 页面流程交付版的全部设计产物。</p>
+  <div class="meta">
+    <div><span>角色</span><span>UI 执行设计师 · PRD 拆解 · 交互与竞品图鉴 · 页面流程交付版</span></div>
+    <div><span>团队</span><span>PM 定需求（电子名片 PRD V2.0、照片名片创建 PRD、名片 Logo 与模板 PRD）· iOS 开发</span></div>
+    <div><span>产物</span><span>名片交互图鉴（09-23）· 竞品图鉴（09-26）· 回传与留资图解（09-27）· 交付版 47 帧（10-10）</span></div>
+    <div><span>状态</span><span>交付版已给开发；本页 redesign 部分施工中</span></div>
+  </div>
+
+  <div class="case-layout">
+    <nav class="toc" aria-label="目录"><p>目录</p>
+      <a href="#v0">00 速览</a><a href="#v1">01 产品是什么</a><a href="#v2">02 我做了什么</a><a href="#v3">03 页面流程与状态</a><a href="#v4">04 硬件约束与疑点</a><a href="#v5">05 下一步 redesign</a>
+    </nav>
+    <div class="case-content">
+
+      <section class="csec csec--first" id="v0">
+        <div class="overview">
+          <p class="label">30 秒速览 · 30-sec overview</p>
+          <p class="big">硬件约束下的软件链路：墨水屏只有灰阶、刷新慢，名片的「编辑 → 发布到设备 → 对方回传」要在 App 里讲清楚。</p>
+          <p>我的路径：先拆 PRD 成帧级链路清单，再做两份实拍图鉴（名片交互、竞品）把决策点列出来，最后交付 47 帧 iOS 页面流程：入口（A1–A4）、名片主页与 Update 流程（B0–B13，含草稿自动保存、必填校验、链接校验、离线、更新中 / 成功 / 失败）、壁纸预览（W9）。</p>
+          <div class="tag-line"><span class="tag tag--fact">真实交付</span><span class="tag">iOS</span><span class="tag">软硬结合</span><span class="tag tag--personal">redesign 施工中</span></div>
+        </div>
+      </section>
+
+      <section class="csec" id="v1">
+        <p class="csec__eyebrow">01 产品是什么</p>
+        <h2>一块会显示名片的墨水屏，和它背后的 App</h2>
+        <p>设备侧：墨水屏显示名片卡面，NFC 碰一碰或扫二维码把对方带到网页名片、自定义链接或「存为联系人」。App 侧（PRD V2.0）：设备设置 → Contact Card，配置姓名、头衔、联系方式、Opens（碰触后打开什么）、Bio 页；后续 PRD 加了从名片照片生成灰阶卡面、上传 Logo 与三款模板。</p>
+        <p>竞品参照：Blinq、HiHello、Popl、Mobilo、Linq 等数字名片靠手机碰手机或二维码，没有自带屏幕；Verso 的差异点是「名片本身就是屏」，所以卡面长什么样、什么时候刷新、离线怎么办，都变成设计问题。</p>
+      </section>
+
+      <section class="csec" id="v2">
+        <p class="csec__eyebrow">02 我做了什么</p>
+        <h2>从 PRD 到 47 帧交付版</h2>
+        <div class="steps"><span>09-22 拆 PRD</span><i>→</i><span>09-23 名片交互图鉴</span><i>→</i><span>09-26 竞品图鉴</span><i>→</i><span>09-27 回传与留资图解</span><i>→</i><span>10-10 iOS 页面流程交付版</span></div>
+        <ul>
+          <li><strong>帧级链路清单</strong>：每一帧写清内容、对应 PRD 条号、给开发的标注；PRD 没写到的点不自作主张画，列成疑点清单给 PM。</li>
+          <li><strong>两份实拍图鉴</strong>（HTML 连页）：名片交互图鉴看「对方碰到后发生什么」的 11 种做法；竞品图鉴看 11 个产品 42 张截图里编辑页、Opens 菜单、校验与异常的处理。</li>
+          <li><strong>回传与留资图解</strong>：对方怎么把信息回传给我（Blinq / HiHello / Popl / Mobilo 的留资表单与通知）。</li>
+          <li><strong>交付版 47 帧</strong>（402×874）：入口 A1–A4、名片主页 B0–B13、壁纸预览 W9，每帧标签写明状态与触发条件。</li>
+        </ul>
+      </section>
+
+      <section class="csec" id="v3">
+        <p class="csec__eyebrow">03 页面流程与状态</p>
+        <h2>名片主页与 Update 流程</h2>
+        <p>主页是一张可编辑的名片 + 底部 Update 按钮：改动即自动保存草稿、Update 变可用；Update 把名片发布到设备，中间有更新中、成功、失败三态；离线时可编辑但不能 Update。</p>
+        <div class="phones">
+          <figure><img src="{{ROOT}}assets/img/verso/A2-verso-connected.webp" alt="A2 Verso Connected" loading="lazy"><figcaption>A2 · 入口 · 设备已连接</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/B1-business-card-default.webp" alt="B1 默认" loading="lazy"><figcaption>B1 · 名片主页 · 默认（无未发布改动）</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/B2-edited-draft-saved.webp" alt="B2 编辑中" loading="lazy"><figcaption>B2 · 编辑中 · 草稿自动保存，Update 可用</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/B3-name-empty.webp" alt="B3 Name 为空" loading="lazy"><figcaption>B3 · Name 为空 · 必填校验</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/B5-opens-menu.webp" alt="B5 Opens 菜单" loading="lazy"><figcaption>B5 · Opens 菜单展开（网页 / 自定义链接 / 存联系人）</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/B11-updating.webp" alt="B11 更新中" loading="lazy"><figcaption>B11 · Updating… · 按钮置灰</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/B13-update-failed.webp" alt="B13 更新失败" loading="lazy"><figcaption>B13 · 失败 · Toast + 重试</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/W9-wallpaper-preview.webp" alt="W9 壁纸预览" loading="lazy"><figcaption>W9 · 点设备预览 → 全屏壁纸预览</figcaption></figure>
+        </div>
+        <h3>Contact Card 与 Customize</h3>
+        <div class="phones">
+          <figure><img src="{{ROOT}}assets/img/verso/A1-contact-card-bio.webp" alt="A1 Contact Card" loading="lazy"><figcaption>A1 · Contact Card · Opens = Bio Page</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/A2-customize.webp" alt="A2 Customize" loading="lazy"><figcaption>A2 · Customize · Display 与 Add More</figcaption></figure>
+          <figure><img src="{{ROOT}}assets/img/verso/B0-full-page.webp" alt="B0 整页" loading="lazy"><figcaption>B0 · 名片主页整页（滚动长度参考）</figcaption></figure>
+        </div>
+        <h3>状态表（交付版覆盖）</h3>
+        <div class="table-wrap"><table class="matrix">
+          <tr><th>环节</th><th>默认</th><th>状态与异常</th></tr>
+          <tr><td>入口</td><td>Verso 已连接</td><td>已绑定但离线（Not Connected）· 未绑定（设备信息为 —）</td></tr>
+          <tr><td>编辑</td><td>名片主页</td><td>编辑中自动保存草稿 · Name 为空必填校验 · 自定义链接失焦后 HTTPS 前缀校验 · 刚选中自定义链接即提示空 URL</td></tr>
+          <tr><td>Opens</td><td>网页名片</td><td>自定义链接（有效 / 无效）· 存联系人 · LinkedIn 为空时 Update 不可用</td></tr>
+          <tr><td>Update</td><td>可用 / 不可用</td><td>更新中置灰 · 成功 Toast（无改动时「nothing to update」）· 失败 Toast + 重试 · 离线不可 Update</td></tr>
+          <tr><td>预览</td><td>设备缩略预览</td><td>点开全屏壁纸预览，× 关闭</td></tr>
+        </table></div>
+      </section>
+
+      <section class="csec" id="v4">
+        <p class="csec__eyebrow">04 硬件约束与疑点</p>
+        <h2>墨水屏不是手机屏</h2>
+        <ul>
+          <li><strong>灰阶与分辨率</strong>：卡面只有灰阶，照片与 Logo 要先转灰阶再上屏；具体分辨率与灰阶级数是我列给 PM 的第一条疑点。</li>
+          <li><strong>刷新</strong>：墨水屏刷新慢、有残影，所以 Update 必须有明确的「更新中 / 成功 / 失败」反馈，而不是手机 App 里常见的即时生效。</li>
+          <li><strong>内容长度</strong>：Bio 字数、多条联系方式取哪一条上屏、文案定稿，PRD 没写到，交付版用占位 + 疑点标注。</li>
+        </ul>
+        <div class="notice"><strong>疑点清单（给 PM）</strong>：屏幕分辨率与灰阶 · Bio 字数上限 · 多条联系方式的取用规则 · 文案定稿 · 离线时草稿与设备上内容不一致如何提示。</div>
+      </section>
+
+      <section class="csec" id="v5">
+        <p class="csec__eyebrow">05 下一步 · redesign（施工中）</p>
+        <h2>页面层级与 UI 美观度</h2>
+        <p>交付版的目标是「按 PRD 把状态画全、给开发能做」。接下来我以个人复盘的方式重做两件事：① 页面层级——把入口、名片主页、Contact Card、Customize、设备设置重新分层，减少来回跳转；② UI 美观度——卡面预览与名片主页的视觉一致，参照 Flowtica 官网 Verso 页的风格。Demo 会用照片名片创建与 Logo 模板两份 PRD 的内容。</p>
+        <div class="tag-line"><span class="tag tag--personal">个人复盘，非当时交付</span><span class="tag">施工中</span></div>
+      </section>
+
+    </div>
+  </div>
+</div></section>
+<section class="more-works"><div class="container">
+  <div class="section-head"><h2>更多作品</h2></div>
+  <div class="cards cards--2">
+    <a class="card" href="{{ROOT}}work/helpyou/"><img src="{{ROOT}}assets/img/helpyou/cover.webp" alt="帮你理" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>帮你理 · AI 整理功能</h3></div><span class="card__cta">查看作品</span></div></a>
+    <a class="card" href="{{ROOT}}work/deepchat-bi/"><img src="{{ROOT}}assets/img/deepchat/hero.webp" alt="DeepChat BI" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>DeepChat BI · Agent SaaS</h3></div><span class="card__cta">查看作品</span></div></a>
+  </div>
+</div></section>

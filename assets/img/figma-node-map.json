@@ -1,0 +1,40 @@
+{
+ "helpyou": {
+  "9566-686732": "01-home-add-entry",
+  "9566-686736": "02-channel-menu",
+  "9566-686741": "03-quick-input-empty",
+  "9566-686838": "04-organize-as-dropdown",
+  "9566-686841": "05-voice-listening",
+  "9566-686801": "06-counter-three-states",
+  "9566-686793": "07-over-limit-toast",
+  "9566-686790": "08-draft-conflict",
+  "9566-686728": "09-taskbar-expanded",
+  "10827-778545": "10-taskbar-failed-hover",
+  "9566-688078": "11-taskbar-done-badge",
+  "9566-686816": "12-memo-content",
+  "9566-686859": "13-memo-original",
+  "9566-687111": "14-todo-gallery-viewer",
+  "9566-686902": "15-drag-release-overlay",
+  "9566-686867": "16-finder-open-with",
+  "9566-686931": "17-multifile-into-quick-input",
+  "9566-686749": "18-audio-upload-channel",
+  "9566-686761": "19-audio-privacy-notice",
+  "10827-768564": "20-audio-quota-exceeded",
+  "10827-782162": "21-meeting-card-states",
+  "9566-686937": "22-audio-dropped-into-quick-input",
+  "9566-686723": "00-section-overview"
+ },
+ "verso": {
+  "111721-66067": "A2-verso-connected",
+  "111721-66317": "B1-business-card-default",
+  "111721-80161": "B2-edited-draft-saved",
+  "111721-64734": "B5-opens-menu",
+  "111721-65175": "B11-updating",
+  "111721-65336": "B13-update-failed",
+  "111721-66410": "W9-wallpaper-preview",
+  "111721-65758": "B0-full-page",
+  "111721-64571": "B3-name-empty",
+  "111721-80454": "A1-contact-card-bio",
+  "111721-80338": "A2-customize"
+ }
+}

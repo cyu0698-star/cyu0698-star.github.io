@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>帮你理 · AI 整理功能（Flowtica，Web / Mac）— 程雨芊作品集</title>
+<meta name="description" content="一个入口承接文字、图片、语音，AI 整理成备忘或待办；主链路与全部边缘场景设计、两端验收、个人复盘 redesign。">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="帮你理 · AI 整理功能（Flowtica，Web / Mac）— 程雨芊作品集"><meta property="og:description" content="一个入口承接文字、图片、语音，AI 整理成备忘或待办；主链路与全部边缘场景设计、两端验收、个人复盘 redesign。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230c0c0c'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23fff' font-family='Inter,system-ui'%3E雨%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/css/tokens.css">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+<nav class="nav" id="nav"><div class="container nav__in">
+  <a class="nav__brand" href="../../">程雨芊</a>
+  <div class="nav__links">
+    <a href="../../">首页</a>
+    <a href="../../#works" class="is-active">作品</a>
+    <a href="../../#about">关于</a>
+    <a href="../../#contact">联系</a>
+  </div>
+  <div class="nav__lang"><span title="英文版筹备中" style="color:var(--t20)">EN</span><span>｜</span><a class="is-active" href="../../">中文</a></div>
+</div></nav>
+<main>
+<!-- title: 帮你理 · AI 整理功能（Flowtica，Web / Mac）— 程雨芊作品集 -->
+<!-- desc: 一个入口承接文字、图片、语音，AI 整理成备忘或待办；主链路与全部边缘场景设计、两端验收、个人复盘 redesign。 -->
+<!-- nav: work -->
+<div class="case-top">
+  <div class="case-hero"><img src="../../assets/img/helpyou/cover.webp" alt="帮你理 Quick Input 设计稿" fetchpriority="high"></div>
+</div>
+<section class="case-body"><div class="container">
+  <div class="crumb"><a href="../../#works">作品</a><span>/</span><span>帮你理</span></div>
+  <h1 class="case-title">帮你理 · AI 整理功能<br><span class="muted" style="font-size:var(--fs-h3);font-weight:400">Flowtica · Web / Mac · 2026.08 – 2026.11</span></h1>
+  <p class="case-sub">把随手冒出来的文字、图片、语音丢进一个入口，不用先想「这是备忘还是待办」，AI 整理好、多端都能看到。我负责主链路与全部边缘场景的设计，上线后做两端验收。</p>
+  <div class="meta">
+    <div><span>角色</span><span>UI 执行设计师 · 主链路 + 边缘场景全部画板（85 块）· 两端验收</span></div>
+    <div><span>团队</span><span>PM 定需求与范围 · 评审会 · Web / Mac 开发</span></div>
+    <div><span>时间</span><span>设计期 2026.08.09 – 09.05（28 天）· 验收 10.15 / 10.19 · 通道菜单与音频支线 11.03 上线</span></div>
+    <div><span>产物</span><span>Figma 交付区 85 块画板 · Web 与 Mac 验收报告 · 本页末「个人复盘」redesign</span></div>
+    <div><span>状态</span><span>Web、Mac 已上线</span></div>
+  </div>
+
+  <div class="case-layout">
+    <nav class="toc" aria-label="目录"><p>目录</p>
+      <a href="#s0">00 速览</a><a href="#s1">01 用户要什么</a><a href="#s2">02 问题与前因</a><a href="#s3">03 职责与边界</a><a href="#s4">04 三个判断</a><a href="#s5">05 链路与状态</a><a href="#s6">06 细节检查</a><a href="#s7">07 结果与限制</a><a href="#s8">08 个人复盘</a><a href="#s9">09 再做一次</a>
+    </nav>
+    <div class="case-content">
+
+      <section class="csec csec--first" id="s0">
+        <div class="overview">
+          <p class="label">30 秒速览 · 30-sec overview</p>
+          <p class="big">一个入口承接多种输入；状态与异常穷举；Web 与 Mac 按同一套设计稿实现并保持一致。</p>
+          <p>三个判断：入口主张<strong>统一输入框</strong>而不是先选通道；图片区推翻四个评审推荐的网格，选了<strong>不撑高弹窗的横滑方案 E</strong>，现网按它做；评审会上自己砍掉动效与三项视觉加法。上线后两端验收：Web 27 条 UI 差异 + 15 条体验疑点，Mac 32 + 15；5 条疑点引 PRD 原句，开发修了。</p>
+          <div class="tag-line"><span class="tag tag--fact">真实上线</span><span class="tag">Web / Mac</span><span class="tag">AI 整理 · Agent 状态设计</span><span class="tag">PRD ↔ 设计稿 ↔ 现网审计</span></div>
+        </div>
+      </section>
+
+      <section class="csec" id="s1">
+        <p class="csec__eyebrow">01 用户要什么</p>
+        <h2>丢进去就整理好，不用先分类</h2>
+        <p>产品是 Flowtica 的「帮你理」，Web 与 Mac 端（移动端另有三通道版）。输入文字 / 图片 → AI 自动整理成 Memo（备忘）或 To-do；音频 → 高级转写与总结，生成 Meeting。</p>
+        <p>本期目标五条：入口旁弹通道菜单（Quick Input / Upload audio）；Quick Input 里文字和图片可以同时存在、图片多选；Finder「用 Flowtica 打开」直接带入对应弹窗、跳过通道菜单；文字图片由 AI 整理、音频直接进转写与总结；关闭、失败、额度不足和异步生成期间，同一次提交不产生重复任务，用户总能找回结果。</p>
+        <p>Organize as 提供 Auto / To-do / Memo，默认 Auto：由 AI 在 Memo 与 To-do 之间判断，一次输入可以生成一张 Memo、一个或多个 To-do，或两者同时。</p>
+        <figure class="fig"><img src="../../assets/img/helpyou/04-organize-as-dropdown.webp" alt="Quick Input：Organize as 下拉三项" loading="lazy"><figcaption>Quick Input · Organize as 三项（Auto 默认）。设计稿。</figcaption></figure>
+        <p>同构产品里 mymind、Mem、Notion 都是「一个入口丢进去」；Gemini Notebook 统一入口但先选来源类型；Plaud、讯飞、Limitless、钉钉听记是录音专用。8 家里没有一家在整理中途停下来问用户。</p>
+      </section>
+
+      <section class="csec" id="s2">
+        <p class="csec__eyebrow">02 问题与前因</p>
+        <h2>上线前要解决的三件事</h2>
+        <p>Mac 已有「帮助处理」入口，但没有形成文字、图片、音频与桌面文件一致的整理队列；移动端是三个通道（纯文本 / 添加照片 / 上传音频），Mac 收窄为两个。</p>
+        <ol>
+          <li><strong>一个入口承接多种输入</strong>：文字 / 图片同框，音频单独。</li>
+          <li><strong>状态与异常要穷举</strong>：草稿、拖拽、额度不足、失败、无网、处理中、多图。</li>
+          <li><strong>Web 与 Mac 按同一套设计稿实现并保持一致。</strong></li>
+        </ol>
+        <h3>PRD 里的硬规则（设计要逐条接住）</h3>
+        <ul>
+          <li>5000 字符上限，4000 起显示计数器，满额后麦克风不可用。</li>
+          <li>图片最多 10 张，超限提示但不清空；发送成功清空草稿，失败保留原文与分类选择。</li>
+          <li>任务条（彩条）+ 多任务堆叠 + 失败态 Retry；类别 +1 提示；草稿自动保存。</li>
+          <li>拖文件到主窗或 Dock 图标显示整窗深色悬停态「Release to organize with Flowtica」；拖音频进 Quick Input 先询问是否切通道。</li>
+          <li>Finder 带入时有草稿冲突弹窗（Discard / Save draft）；语音取消后 10 秒内可撤销，转写 20 秒无响应判失败、重试不限次；语音积分与 AI 互动量是两套额度。</li>
+        </ul>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="../../assets/img/helpyou/06-counter-three-states.webp" alt="计数器三态表" loading="lazy"><figcaption>计数器三态：4000 起出现、接近上限、满额。</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/helpyou/07-over-limit-toast.webp" alt="超限 Toast 与长文" loading="lazy"><figcaption>粘贴超长：超限 Toast + 长文截断态。</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="csec" id="s3">
+        <p class="csec__eyebrow">03 职责与协作边界</p>
+        <h2>谁定了什么</h2>
+        <div class="table-wrap"><table class="matrix">
+          <tr><th>谁</th><th>定了什么</th></tr>
+          <tr><td>PM</td><td>需求与范围：PRD 08-13 → v6 08-20（通道选择 + 双弹窗架构）；另有组长原版稿（多图与文字 / 单音频态 / Loading / 额度不足）。</td></tr>
+          <tr><td>我</td><td>主链路 + 边缘场景全部画板（85 块 1512×982）；08-11 调研并提出「统一输入框」主案；08-12 入口弹窗；08-23 任务条方案 A → 自己的胶囊组件；08-23 多图网格 B；08-24 三张美化图大图（Finder 右键菜单用 Apple 官方组件）、Todo 图集母组件；08-24/25 拖拽悬停两帧；09-04 Quick Input 图片区方案 E 及 5 处纠正；数值铁律与交付标准化（取整、偶数优先、画板备注去代号）。</td></tr>
+          <tr><td>评审会 8/19</td><td>砍掉 Quick Input 内图片下载与编辑；要求 Memo 详情加标题 / 时间；留给我多图排布待办。</td></tr>
+          <tr><td>开发</td><td>实现时的简化：任务条变小胶囊、多图整宽竖排（按 PRD 原句「铺满内容区宽度」）、徽标到时间消失。</td></tr>
+        </table></div>
+        <p>多图网格 B 是我自己在设计稿里改的，不是被 PM 或开发改掉；所以这个案例不写「被改掉的方案」，写「我提出、我取舍、哪些进了现网」。</p>
+        <figure class="fig"><img src="../../assets/img/helpyou/00-section-overview.webp" alt="帮你理交付区 85 块画板总览" loading="lazy"><figcaption>交付区总览：主链路、音频支线、Quick Input 补充态与边缘态、任务条、结果详情、Finder 与 Dock 直达、美化图。命名审计后 122 帧。</figcaption></figure>
+      </section>
+
+      <section class="csec" id="s4">
+        <p class="csec__eyebrow">04 三个判断</p>
+        <h2>为什么选它、为什么不是别的、代价是什么</h2>
+        <div class="cgrid cgrid--3">
+          <article class="ccard"><p class="k">01 入口</p><h4>统一输入框，而不是先选通道</h4><p>用户要的是「丢进去」，不是「先分类」；mymind / Mem / Notion 都不问。PRD 本期分通道是技术考虑：音频走转写管线，要快上传、快结构化。</p><p><strong>怎么落地</strong>（设计侧判断）：前端一个拖放区 + 按文件类型识别；后端一层路由把文件分到已有的各类型管线（音频转写、图片识别、文本抽取），不是重做管线。真正的风险在视频 / PPT 大文件的上传进度与超时，与入口是否统一无关，要单独设计进度和失败恢复。</p><p><strong>代价</strong>：识别错类型时要有「改通道」的出口；音频进统一框后仍要走隐私告知与额度检测。</p><div class="foot"><span class="tag tag--personal">个人复盘方案</span><span class="tag">现网：通道菜单 + 音频支线</span></div></article>
+          <article class="ccard ccard--blue"><p class="k">02 图片区</p><h4>方案 E，推翻四个 AI 评审一致推荐的网格 A</h4><p>E = 单行横滑 + 渐隐 + 箭头，缩略条不撑高弹窗（弹窗高 380 → 304），输入区始终可见；A 的网格把文字区挤到下面。</p><p><strong>代价</strong>：6 张起要切成 72 / 8 的缩略尺寸，× 的位置、箭头不要底盘等 5 处细节自己纠正了一轮。</p><p><strong>结果</strong>：现网两端的缩略条形态与 E 一致。</p><div class="foot"><span class="tag tag--fact">进了现网</span></div></article>
+          <article class="ccard ccard--orange"><p class="k">03 减法</p><h4>不加动效，不做三项「视觉提升」</h4><p>hover 图片弹起动效：评审会上自己提出不加；「视觉提升」三项全部否决；评审砍掉 Quick Input 内下载 / 编辑后没有补回。</p><p><strong>为什么</strong>：本期的价值在「丢进去就整理好」，不在修饰；每多一个动效两端都要再对齐一次。</p><p><strong>代价</strong>：页面更朴素，视觉分要靠细节一致性拿回来（见 06）。</p><div class="foot"><span class="tag tag--fact">进了现网</span></div></article>
+        </div>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="../../assets/img/helpyou/02-channel-menu.webp" alt="通道菜单" loading="lazy"><figcaption>现状：入口旁弹通道菜单（Quick Input / Upload audio）。</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/helpyou/17-multifile-into-quick-input.webp" alt="多文件带入 Quick Input" loading="lazy"><figcaption>图片区方案 E：单行横滑缩略条，输入区始终可见。</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="csec" id="s5">
+        <p class="csec__eyebrow">05 主链路 · 状态矩阵 · 异常恢复</p>
+        <h2>同一个入口，不同状态各有去处</h2>
+        <div class="steps"><span>左栏 Add</span><i>→</i><span>Quick Input（文字 + 计数 / 图片 / 截图 / Organize as / 话筒）</span><i>→</i><span>发送</span><i>→</i><span>顶部短暂提示</span><i>→</i><span>类别 +1 徽标</span><i>→</i><span>Memo 详情（Original / Content）</span><i>→</i><span>大图查看器</span></div>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="../../assets/img/helpyou/01-home-add-entry.webp" alt="首页 + 号入口" loading="lazy"><figcaption>第 1 步 · 首页（＋号入口）</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/helpyou/03-quick-input-empty.webp" alt="Quick Input 空态" loading="lazy"><figcaption>第 3 步 · Quick Input 空态</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/helpyou/09-taskbar-expanded.webp" alt="任务条展开态" loading="lazy"><figcaption>处理中 · 任务条彩条（缩略图 + 摘要 + Processing），hover 展开</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/helpyou/11-taskbar-done-badge.webp" alt="完成 +1 徽标" loading="lazy"><figcaption>结果 · 类别 +1 徽标累计，进入列表清除</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/helpyou/12-memo-content.webp" alt="Memo Content" loading="lazy"><figcaption>详情 · Memo Content（AI 整理结果）</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/helpyou/14-todo-gallery-viewer.webp" alt="Todo 图集大图 + 缩略条" loading="lazy"><figcaption>大图 · Todo 图集：大图 + 缩略条 + 底部胶囊</figcaption></figure>
+        </div>
+        <h3>状态矩阵：设计稿覆盖 vs 验收时现网</h3>
+        <div class="table-wrap"><table class="matrix">
+          <tr><th>环节</th><th>默认态</th><th>边缘 / 异常（设计稿）</th><th>现网（验收时）</th></tr>
+          <tr><td>入口</td><td>Add</td><td>通道菜单两项悬停 / 激活</td><td>直接进 Quick Input（11-03 后通道菜单回来）</td></tr>
+          <tr><td>输入</td><td>文字 / 图片 / 话筒</td><td>4000 起计数器三态；10 张上限气泡 + Toast；录音中话筒置灰；权限被拒引导</td><td>计数器一打开就显示；超限提示在页顶 3 秒</td></tr>
+          <tr><td>发送</td><td>空态灰 / 有字黑</td><td>额度不足：提示盖弹窗、保留草稿</td><td>Mac 符合；Web 两套形态</td></tr>
+          <tr><td>处理中</td><td>任务条彩条</td><td>堆叠；失败态常驻 + Retry；无网等待</td><td>一闪而过的小胶囊；失败在列表卡</td></tr>
+          <tr><td>结果</td><td>+1 徽标累计</td><td>进入列表清除</td><td>到时间自己消失（Web 4–6 秒 / Mac 25 秒）</td></tr>
+          <tr><td>详情</td><td>Original / Content</td><td>处理中详情三步进度；Meeting 多图</td><td>顶部无标题时间（Web）</td></tr>
+          <tr><td>大图</td><td>缩略条 + 底部胶囊</td><td>删除确认两版；下载 Saved；加载失败</td><td>无删除 / 箭头；Mac 从 Memo 打开无底栏</td></tr>
+          <tr><td>旁路</td><td>草稿自动保存</td><td>拖拽整窗蒙层「Release to organize」；拖入音频询问切换；草稿冲突 Discard / Save draft</td><td>无蒙层；Web 重开拼接</td></tr>
+        </table></div>
+        <h3>异常恢复的三条底线</h3>
+        <ul>
+          <li>同一次提交不重复建任务。</li>
+          <li>失败保留原文与选择，重试不限次。</li>
+          <li>用户总能从任务条或列表找回结果。</li>
+        </ul>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="../../assets/img/helpyou/08-draft-conflict.webp" alt="草稿冲突" loading="lazy"><figcaption>边缘态 · Finder 带入时草稿冲突：Save draft / Discard</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/helpyou/15-drag-release-overlay.webp" alt="拖拽整窗蒙层" loading="lazy"><figcaption>旁路 · 拖拽悬停整窗蒙层「Release to organize」</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/helpyou/10-taskbar-failed-hover.webp" alt="任务条失败态" loading="lazy"><figcaption>异常 · 任务条失败态常驻，hover 可删除 / Retry</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/helpyou/16-finder-open-with.webp" alt="Finder 右键 Open With" loading="lazy"><figcaption>直达 · Finder 右键「用 Flowtica 打开」（Apple 官方组件）</figcaption></figure>
+        </div>
+        <h3>音频支线</h3>
+        <p>音频不进 Quick Input，走单独通道：通道菜单选上传 → 系统文件选择器 → 校验（时长超 5 小时 / 文件不可读 / 单音频限制）→ 隐私告知 → 额度检测 → 转写中彩条。</p>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="../../assets/img/helpyou/18-audio-upload-channel.webp" alt="音频支线第 1 步" loading="lazy"><figcaption>音频 第 1 步 · 通道菜单选上传音频</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/helpyou/19-audio-privacy-notice.webp" alt="隐私告知" loading="lazy"><figcaption>音频 第 5 步 · 隐私告知（未勾选不可继续）</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/helpyou/20-audio-quota-exceeded.webp" alt="额度不足" loading="lazy"><figcaption>音频 第 7 步 · 额度不足：提示盖弹窗、保留文件</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/helpyou/22-audio-dropped-into-quick-input.webp" alt="拖入音频询问切换" loading="lazy"><figcaption>边缘态 · 音频拖进 Quick Input：先询问是否切通道</figcaption></figure>
+        </div>
+        <figure class="fig"><img src="../../assets/img/helpyou/21-meeting-card-states.webp" alt="Meeting 卡片状态板" loading="lazy"><figcaption>Meeting 卡片状态板：处理中 / 完成 / 失败 / 多图。</figcaption></figure>
+        <p class="small muted">未覆盖状态（验收时没触发到）：Web 11 条、Mac 15 条。</p>
+      </section>
+
+      <section class="csec" id="s6">
+        <p class="csec__eyebrow">06 细节检查过程</p>
+        <h2>PRD、设计稿、现网三方逐帧对照</h2>
+        <p>方法：每条写「位置 + 错的属性 + 设计稿参数」，不写「现测 / 通过」；开发拿到就能打勾。</p>
+        <dl class="kv">
+          <dt>Web（10-15）</dt><dd>27 条 UI 差异 · 15 条体验疑点 · 11 条未验状态</dd>
+          <dt>Mac（10-19）</dt><dd>32 条 UI 差异 · 15 条体验疑点 · 15 条未验状态</dd>
+          <dt>两端分叉</dt><dd>至少 6 处（截图按钮、拖拽、拖入音频、额度形态、徽标停留、大图查看器底栏）</dd>
+          <dt>引 PRD 原句</dt><dd>5 条体验疑点有 PRD 支持（徽标清除时机、草稿覆盖、额度提示覆盖弹窗、付费墙时机）：讲成「实现偏离 PRD」而不是「体验建议」</dd>
+          <dt>结果</dt><dd>疑点开发修了；差异与疑点基本认可</dd>
+        </dl>
+      </section>
+
+      <section class="csec" id="s7">
+        <p class="csec__eyebrow">07 结果与限制</p>
+        <h2>已上线；没有使用数据就不写</h2>
+        <ul>
+          <li>Web、Mac 已上线；通道菜单与音频支线 11-03 上线。</li>
+          <li>已知成效：没有可核验的使用数据，不写。</li>
+          <li>限制：验收后 30 条体验疑点的复验没有书面记录；未覆盖状态 11 + 15；多图网格 B、整窗拖拽蒙层、任务条彩条没进现网。</li>
+        </ul>
+      </section>
+
+      <section class="csec" id="s8">
+        <p class="csec__eyebrow">08 个人复盘 · redesign</p>
+        <h2>如果由我定方向，会这样改</h2>
+        <div class="notice"><strong>说明</strong>：以下是上线后的个人复盘方案，不是当时交付；现网以 07 为准。</div>
+        <ol>
+          <li>入口往统一输入框走（见 04 判断 01）。</li>
+          <li>捕获时收起 Organize as、默认 Auto；结果页能改分类，加「重新整理」。</li>
+          <li>超限：计数器 4000 才出现、满额换警示色；满 10 张按钮置灰；粘贴超长时说明截掉多少或转附件。</li>
+          <li>语音：光晕随音量、约 5 秒无声换文案、自动补空格；AI 改写可见可退。</li>
+          <li>结果不走任务条，落在一条按时间自动切卡的时间线上；徽标累计、打开分类才清零。</li>
+          <li>结果可溯源：Content 加 AI 标识、标题 + 时间行，每条结论能点回原话 / 原图。</li>
+          <li>多图复用「Todo 图集 · 大图 + 缩略条」；一个查看器组件 + Original / Enhanced 高亮 + 左右箭头。</li>
+          <li>关闭即自动保存，只修重开覆盖与光标；额度统一成一种弹窗：剩余额度 + 重置日期 + 升级主按钮；整窗蒙层「Release to organize」。</li>
+        </ol>
+        <p class="small muted">扩展中：App 端同一功能（移动端三通道版）、Apple Watch 多端同步（概念，非上线功能）、语音说完即结构化、自动转写与摘要（会议链路）。</p>
+      </section>
+
+      <section class="csec" id="s9">
+        <p class="csec__eyebrow">09 我会怎么再做一次</p>
+        <h2>先把三条底线做成状态表，再画第一屏</h2>
+        <p>「丢进去 → 整理好 → 找得回」先做成状态表；入口不让用户先分类；所有「看起来更好」的加法放到上线之后。</p>
+      </section>
+
+    </div>
+  </div>
+</div></section>
+<section class="more-works"><div class="container">
+  <div class="section-head"><h2>更多作品</h2></div>
+  <div class="cards cards--2">
+    <a class="card" href="../../work/verso/"><img src="../../assets/img/verso/cover.webp" alt="Verso" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>Verso 名片 · iOS 页面流程</h3></div><span class="card__cta">查看作品</span></div></a>
+    <a class="card" href="../../work/deepchat-bi/"><img src="../../assets/img/deepchat/hero.webp" alt="DeepChat BI" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>DeepChat BI · Agent SaaS</h3></div><span class="card__cta">查看作品</span></div></a>
+  </div>
+</div></section>
+
+</main>
+<footer class="footer"><div class="container">
+  <div class="footer__grid">
+    <div class="footer__col"><h4>导航</h4><ul><li><a href="../../">首页</a></li><li><a href="../../#works">作品</a></li><li><a href="../../#about">关于</a></li><li><a href="../../#contact">联系</a></li></ul></div>
+    <div class="footer__col"><h4>作品</h4><ul><li><a href="../../work/helpyou/">帮你理 · AI 整理</a></li><li><a href="../../work/verso/">Verso 名片 · iOS</a></li><li><a href="../../work/deepchat-bi/">DeepChat BI · Agent SaaS</a></li><li><a href="../../work/financial-forms/">I Love Financial Forms</a></li></ul></div>
+    <div class="footer__col footer__col--wide"><h4>联系</h4><ul><li><a href="mailto:yuqiancheng818@gmail.com">yuqiancheng818@gmail.com</a></li><li><span class="muted small">深圳 · 广州 · 杭州 · 上海 · 北京 均可</span></li></ul></div>
+  </div>
+  <div class="footer__name"><h2>程雨芊</h2><div class="row"><span>AI 产品设计师 · UX</span><span>© 2026 · 等你来…</span></div></div>
+</div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

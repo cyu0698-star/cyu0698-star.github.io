@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I Love Financial Forms · 用 AI Agent 重建企业财务表单体验 — 程雨芊作品集</title>
+<meta name="description" content="AI 财务工作台 0→1：乱单据进、你的模板出，实测约 40 秒；双轨输入、可见推理、Edit Form 检查点；设计师直接驱动前后端 MVP。">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="I Love Financial Forms · 用 AI Agent 重建企业财务表单体验 — 程雨芊作品集"><meta property="og:description" content="AI 财务工作台 0→1：乱单据进、你的模板出，实测约 40 秒；双轨输入、可见推理、Edit Form 检查点；设计师直接驱动前后端 MVP。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230c0c0c'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23fff' font-family='Inter,system-ui'%3E雨%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/css/tokens.css">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+<nav class="nav" id="nav"><div class="container nav__in">
+  <a class="nav__brand" href="../../">程雨芊</a>
+  <div class="nav__links">
+    <a href="../../">首页</a>
+    <a href="../../#works" class="is-active">作品</a>
+    <a href="../../#about">关于</a>
+    <a href="../../#contact">联系</a>
+  </div>
+  <div class="nav__lang"><span title="英文版筹备中" style="color:var(--t20)">EN</span><span>｜</span><a class="is-active" href="../../">中文</a></div>
+</div></nav>
+<main>
+<!-- title: I Love Financial Forms · 用 AI Agent 重建企业财务表单体验 — 程雨芊作品集 -->
+<!-- desc: AI 财务工作台 0→1：乱单据进、你的模板出，实测约 40 秒；双轨输入、可见推理、Edit Form 检查点；设计师直接驱动前后端 MVP。 -->
+<!-- nav: work -->
+<div class="case-top">
+  <div class="case-hero"><img src="../../assets/img/financial-forms/hero.webp" alt="I Love Financial Forms" fetchpriority="high"></div>
+</div>
+<section class="case-body"><div class="container">
+  <div class="crumb"><a href="../../#works">作品</a><span>/</span><span>I Love Financial Forms</span></div>
+  <h1 class="case-title">I Love Financial Forms · 用 AI Agent 重建企业财务表单体验<br><span class="muted" style="font-size:var(--fs-h3);font-weight:400">Omnigence AI · 产品经理 兼 设计师 · 2025 · 0→1</span></h1>
+  <p class="case-sub">把混乱的财务单据（PDF、图片、扫描件）智能转换为干净、可编辑的表格。整个交互围绕「信任 AI，但导出前先校验」展开。看着 Agent 思考——最后由你签字放行。</p>
+  <div class="meta">
+    <div><span>角色</span><span>产品经理 兼 设计师：体验全链路 + 参与前后端 MVP 落地</span></div>
+    <div><span>定位</span><span>基于信任、控制与可解释性原则构建的 AI-Native 应用</span></div>
+    <div><span>工具链</span><span>Claude Design / ChatGPT（竞品调研）→ Figma Make（原型）→ Cursor + Gemini（全栈 MVP 交付与设计评审）</span></div>
+    <div><span>效率实测</span><span>人工重录一份单据 5–10 分钟（客户访谈口径）；Agent 实测约 20 秒解析、40 秒出 Excel（2026.07 生产环境）</span></div>
+    <div><span>链接</span><span><a class="link-u" href="https://receiptsys-frontend-en.onrender.com" target="_blank" rel="noopener">功能演示沙盒 ↗</a> · <a class="link-u" href="https://github.com/cyu0698-star/I-Love-Financial-Forms" target="_blank" rel="noopener">GitHub 仓库 ↗</a></span></div>
+  </div>
+
+  <div class="case-layout">
+    <nav class="toc" aria-label="目录"><p>目录</p>
+      <a href="#f0">00 概览</a><a href="#f1">01 问题</a><a href="#f2">02 AI 原生工作流</a><a href="#f3">03 Agent 策略</a><a href="#f4">04 把 AI 局限变成设计机会</a><a href="#f5">05 交付即调试</a><a href="#f6">06 下一步</a>
+    </nav>
+    <div class="case-content">
+
+      <section class="csec csec--first" id="f0">
+        <div class="overview">
+          <p class="label">30 秒速览 · 30-sec overview</p>
+          <p class="big">乱单据进，你的模板出，实测约 40 秒；每一步 Agent 的推理可见，导出前控制权交还给人。</p>
+          <div class="steps"><span>登录</span><i>→</i><span>上传文件</span><i>→</i><span>核对文件明细</span><i>→</i><span>下载文件</span><i>→</i><span>检查结果</span></div>
+          <div class="tag-line"><span class="tag tag--fact">真实部署（客户私有环境）</span><span class="tag">0→1</span><span class="tag">Agent 工作流</span><span class="tag">Vibe coding · Next.js + FastAPI</span></div>
+        </div>
+      </section>
+
+      <section class="csec" id="f1">
+        <p class="csec__eyebrow">01 问题</p>
+        <h2>传统财务的「人工地狱」</h2>
+        <p>正式设计前，先把功课做足：50+ 家企业调研对接、5 家核心客户深度访谈。痛点很快浮出水面：</p>
+        <ul>
+          <li><strong>无 ERP、人力成本高</strong>：中小企业普遍缺少大型 ERP，财务每天要把送货单、对账单、报价单手动录入 Excel 20–50 次。</li>
+          <li><strong>对错误近乎零容忍</strong>：一个数字出错会层层放大，一个笔误可能意味着数小时的人工对账。</li>
+          <li><strong>技术断层</strong>：传统 OCR 输出无逻辑的非结构化文本；通用聊天机器人每轮都会忘记格式，无法形成稳定工作流。</li>
+          <li><strong>真实诉求</strong>：「把这份乱糟糟的 PDF，放进我们公司正在用的那个 Excel 模板里。」——没有现成工具能做到。</li>
+        </ul>
+        <figure class="fig"><img src="../../assets/img/financial-forms/01.webp" alt="上传与识别" loading="lazy"><figcaption>上传单据 → Agent 识别文件类型并推荐处理流程。</figcaption></figure>
+      </section>
+
+      <section class="csec" id="f2">
+        <p class="csec__eyebrow">02 AI 原生个人工作流</p>
+        <h2>我怎么交付这个项目</h2>
+        <p>我放弃了传统「纯手工」设计流水线，用 AI 协作工作流成倍放大研发与设计效率：</p>
+        <ul>
+          <li><strong>竞品调研与内容生成</strong>（ChatGPT / Claude Design）：用大模型拆解传统 OCR 与通用聊天机器人的体验断层，快速生成贴合财务合规场景的真实化数据与文案。</li>
+          <li><strong>原型生成</strong>（Figma Make）：自然语言与组件库耦合，产出多个交互布局方案，大幅缩短 PoC 周期。</li>
+          <li><strong>代码交付与设计评审</strong>（Cursor / Gemini）：以设计师身份直接驱动前端（Next.js）与 Agent 后端（FastAPI）代码，用 Gemini 做代码评审与设计还原度审计。</li>
+        </ul>
+      </section>
+
+      <section class="csec" id="f3">
+        <p class="csec__eyebrow">03 Agent 策略</p>
+        <h2>为什么这是一个强 AI Agent 产品</h2>
+        <p>为满足财务团队「100% 准确」的要求，我把一次性输入输出的 AI 工具重塑为 Agentic Workflow：多层理解、置信度评分与自动回退，回应复杂业务场景下 Agent 设计的四个核心要素。</p>
+        <div class="cgrid cgrid--3">
+          <article class="ccard"><p class="k">1 双轨输入</p><h4>新手「⚡ 智能转换」，专家「自定义模板」</h4><p>新手路径：无需选模板，Agent 自动识别文件类型并推荐流程。专家路径：上传企业表单截图，定义高精度的空间解析规则；一张截图 30 秒内配好模板。</p></article>
+          <article class="ccard ccard--blue"><p class="k">2 可见的推理</p><h4>动态能力标签 + 三层可读性</h4><p>Agent 运行的 30 秒里拒绝冰冷的转圈，用「正在分析表头… 正在提取金额… 正在匹配供应商…」可视化推理；模板确认时用绿色质量卡（置信度）、表格网格预览、按类型分组的字段标签让用户一眼读懂。</p></article>
+          <article class="ccard ccard--orange"><p class="k">3 Human-in-the-loop</p><h4>Edit Form 检查点：导出前把控制权交还给人</h4><p>提取完成后进入按语义分区的三段式编辑页（公司信息、明细数据、汇总），支持手动修正与增删行。这「一秒摩擦」消除了对 AI 自动导出错误数据的恐惧。</p></article>
+        </div>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="../../assets/img/financial-forms/02.webp" alt="智能转换" loading="lazy"><figcaption>智能转换 · 动态能力标签。</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/financial-forms/03.webp" alt="模板确认" loading="lazy"><figcaption>模板确认 · 质量卡 + 网格预览 + 字段分组。</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/financial-forms/04.webp" alt="Edit Form" loading="lazy"><figcaption>Edit Form · 三段式编辑页。</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/financial-forms/05.webp" alt="导出" loading="lazy"><figcaption>导出 · 成功面板与 Excel 下载。</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="csec" id="f4">
+        <p class="csec__eyebrow">04 把 AI 局限变成设计机会</p>
+        <h2>Agent 调优策略</h2>
+        <div class="table-wrap"><table class="matrix">
+          <tr><th>业务痛点 / AI 缺陷</th><th>对策</th><th>原则</th></tr>
+          <tr><td>LLM 幻觉：字段缺失时编造地址、电话</td><td>Temperature 0 + 带自检清单的提示词，强制「不确定就留空」</td><td>宁空勿猜：诚实的空白远比精致的谎言更能赢得财务用户的长期信任</td></tr>
+          <tr><td>单点故障：依赖单一 LLM 供应商</td><td>可插拔后端：一个环境变量在 Claude / OpenAI / 本地 PaddleOCR 间切换</td><td>安全与业务连续性是企业级 Agent 产品的底线</td></tr>
+          <tr><td>安全与隐私：敏感财务数据</td><td>所有 AI 调用经由后端代理端点，前端禁止直连 API</td><td>安全是默认属性，不是营销噱头</td></tr>
+        </table></div>
+        <div class="cgrid cgrid--2">
+          <figure class="fig"><img src="../../assets/img/financial-forms/06.webp" alt="自定义模板" loading="lazy"><figcaption>自定义模板 · 空间解析规则。</figcaption></figure>
+          <figure class="fig"><img src="../../assets/img/financial-forms/07.webp" alt="结果" loading="lazy"><figcaption>结果 · 可编辑表格。</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="csec" id="f5">
+        <p class="csec__eyebrow">05 交付即调试</p>
+        <h2>一次「静默成功」</h2>
+        <p>2026 年 7 月我抓到自己埋的雷：智能转换成功后界面毫无反馈——Excel 下载了，用户却以为失败了。当天补上成功面板。教训：AI 产品里，不说话的成功和失败长得一模一样。</p>
+      </section>
+
+      <section class="csec" id="f6">
+        <p class="csec__eyebrow">06 下一步</p>
+        <h2>Diff 对比与批量模式</h2>
+        <ul>
+          <li><strong>Diff 对比视图</strong>：同一文件二次解析时，高亮 Agent 提取结果的变化，支持字段级一键接受 / 拒绝。</li>
+          <li><strong>多文档批量模式</strong>：并发调度多个 Agent 实例批量处理单据，聚合输出为一张结构化总表。</li>
+        </ul>
+      </section>
+
+    </div>
+  </div>
+</div></section>
+<section class="more-works"><div class="container">
+  <div class="section-head"><h2>更多作品</h2></div>
+  <div class="cards cards--2">
+    <a class="card" href="../../work/deepchat-bi/"><img src="../../assets/img/deepchat/hero.webp" alt="DeepChat BI" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>DeepChat BI · Agent SaaS</h3></div><span class="card__cta">查看作品</span></div></a>
+    <a class="card" href="../../work/helpyou/"><img src="../../assets/img/helpyou/cover.webp" alt="帮你理" loading="lazy"><div class="card__overlay"></div><div class="card__fade"></div><div class="card__text"><div><h3>帮你理 · AI 整理功能</h3></div><span class="card__cta">查看作品</span></div></a>
+  </div>
+</div></section>
+
+</main>
+<footer class="footer"><div class="container">
+  <div class="footer__grid">
+    <div class="footer__col"><h4>导航</h4><ul><li><a href="../../">首页</a></li><li><a href="../../#works">作品</a></li><li><a href="../../#about">关于</a></li><li><a href="../../#contact">联系</a></li></ul></div>
+    <div class="footer__col"><h4>作品</h4><ul><li><a href="../../work/helpyou/">帮你理 · AI 整理</a></li><li><a href="../../work/verso/">Verso 名片 · iOS</a></li><li><a href="../../work/deepchat-bi/">DeepChat BI · Agent SaaS</a></li><li><a href="../../work/financial-forms/">I Love Financial Forms</a></li></ul></div>
+    <div class="footer__col footer__col--wide"><h4>联系</h4><ul><li><a href="mailto:yuqiancheng818@gmail.com">yuqiancheng818@gmail.com</a></li><li><span class="muted small">深圳 · 广州 · 杭州 · 上海 · 北京 均可</span></li></ul></div>
+  </div>
+  <div class="footer__name"><h2>程雨芊</h2><div class="row"><span>AI 产品设计师 · UX</span><span>© 2026 · 等你来…</span></div></div>
+</div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
