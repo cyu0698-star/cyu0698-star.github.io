@@ -1,0 +1,3540 @@
+{
+ "_meta": {
+  "site": "Flowtica Verso 产品页",
+  "pages": [
+   "https://www.flowtica.ai/pages/flowtica-verso"
+  ],
+  "extracted": "2026-11-05",
+  "viewports": [
+   375,
+   1440
+  ],
+  "framework": [
+   "tailwind",
+   "shopify",
+   "shopify-dawn-based",
+   "animate.css",
+   "swiper"
+  ],
+  "root_font_px": 10,
+  "method": "observe（curl 静态 + 浏览器 computed style 两档视口 + 滚动探针）→ cluster（签名聚类）→ normalize（primitive→semantic + 规律）",
+  "note": "值 = 事实（可回查 src / example）；patterns = 规律候选（需人工复核）；origin 标出哪些是框架/主题默认（不值得学）"
+ },
+ "curated": {
+  "note": "Claude 复核后的结论（规律 + 证据 + 判据）；其余字段为 skill 自动归纳的原始令牌，值都带出处",
+  "brand_rules": [
+   {
+    "id": "type-pairing",
+    "rule": "衬线做标题（Marcellus 400 单字重），细无衬线做正文（Inter 300 占 62% 字数；UI 用 400，小标签 600）",
+    "evidence": [
+     "fonts: Marcellus 400 / Inter 300,400,500,600",
+     "--font-heading-family: Marcellus",
+     "--font-body-family: Inter"
+    ],
+    "criterion": "标题只用一个字重、靠字号分层；长段阅读用细体 + 行高 1.5–1.7",
+    "confidence": "事实"
+   },
+   {
+    "id": "fluid-from-1440",
+    "rule": "字号按 1440 设计稿等比缩放：vw = 设计值/1440，clamp(手机下限, vw, 设计值)；卡片内用 calc(100cqw/1250 × 设计值)；手机用 min(100vw,398px) × 系数",
+    "evidence": [
+     ".verso-recording-summary__title clamp(36px, 4.4444vw, 64px)",
+     ".verso-go-anywhere__scene-title clamp(18px, 1.9444vw, 28px)",
+     "verso-capabilities-v2 calc(calc(100cqw / 1250) * 32)",
+     "实测 64→30.8, 28→18"
+    ],
+    "criterion": "桌面稿量到 N px → clamp(手机值, N/14.4 vw, N)；卡片内部排版用容器单位",
+    "confidence": "事实"
+   },
+   {
+    "id": "warm-neutral",
+    "rule": "暖调中性色 + 深浅区块交替，只留一个彩色强调（#5c54b7，深靛 #403a83 做轮播圆点）",
+    "evidence": [
+     "bg #342f2c 31% / #e3dcd0 9% / #f7f1e9 8%",
+     "--verso-page-outer-bg: #d8d2c6",
+     "--verso-page-canvas-shadow: 0 0 42px rgba(17,17,17,.18)"
+    ],
+    "criterion": "大面积不用纯黑纯白；彩色只给「被选中 / 要被注意」的元素",
+    "confidence": "事实"
+   },
+   {
+    "id": "card-by-fill",
+    "rule": "卡片 = 底色差 + 23–24px 大圆角，不描边、几乎不投影；唯一的卡片阴影是暖色 0 12px 20px rgba(89,69,48,.1)",
+    "evidence": [
+     "--verso-card-radius: 24px",
+     "radius 23×16, 24×12",
+     ".verso-reserve__card shadow rgba(89,69,48,.1)"
+    ],
+    "criterion": "分层先用底色深浅再用圆角；真要投影就用品牌色调的低透明阴影",
+    "confidence": "事实"
+   },
+   {
+    "id": "rhythm-vars",
+    "rule": "固定节奏变量：标题→副标 14、副标→内容 36、区块顶 36、卡片内边距 14、区块左右 clamp(20px, 7.3vw, 29px)；每个区块自定内容宽（1160–1304）",
+    "evidence": [
+     "--verso-title-subtitle-space: 14px",
+     "--verso-subtitle-content-space: 36px",
+     "--verso-section-top-space: 36px",
+     "--verso-card-padding: 14px",
+     "--verso-section-inline-space"
+    ],
+    "criterion": "文字组内只用 14 / 36 两档；标题到副标 < 副标到内容",
+    "confidence": "事实（变量）/ 推断（每区块自定宽）"
+   },
+   {
+    "id": "motion",
+    "rule": "方向性入场（28px，左栏从左、右栏从右、其余从下）760ms cubic-bezier(.22,1,.36,1)，同组 75ms 递进；两个满屏 sticky 叙事场景（图层视差 0.37）；hover 只改透明度/亮度/颜色 180–240ms；67 条 prefers-reduced-motion 规则",
+    "evidence": [
+     "WAAPI versoRevealDirectional 760ms translate3d(0,28px,0)/(−28px,0,0)/(28px,0,0)",
+     "delays 75,150,225,300,375,450ms",
+     ".verso-notes-reveal__scene / .verso-ask__scene sticky top 0",
+     "parallax 0.37"
+    ],
+    "criterion": "入场位移 < 30px、0.7–0.8s、expo-out 缓动、同组 75ms；重点功能用吸顶一屏讲；必须支持减少动效",
+    "confidence": "事实"
+   }
+  ],
+  "not_worth_learning": [
+   "Dawn 根字号 62.5%（1rem=10px）——换算惯例，不是设计决定",
+   "Dawn `h2, .h2 { calc(var(--font-heading-scale) * 2rem / 2.4rem) }` 与 750/990 断点",
+   "Dawn `scroll-trigger animate--slide-in`：slideIn 600ms cubic-bezier(0,0,.3,1) 上移 2rem（只在 See Verso in Action 区块）",
+   "Dawn 购物车 / 语言 / 搜索 / 超级菜单 / 页脚等 20 个 component-*/section-*.css",
+   "Tailwind 默认缓动 cubic-bezier(.4,0,.2,1) + duration-300（轮播按钮）",
+   "全局 `letter-spacing: 1px !important` 补丁导致部分 64px 标题字距不一致",
+   "Swiper 默认 #007aff、Animate.css、Judge.me / Klaviyo / Smile 插件样式与浮窗"
+  ],
+  "summary": "暖调中性色 + 衬线大标题 + 细体正文 + 满屏吸顶叙事；品牌规律在 verso-* 区块与 --verso-* 变量里，Shopify Dawn 只是外壳"
+ },
+ "primitive": {
+  "color": {
+   "neutral-900": "#1a1a1a",
+   "neutral-0": "#ffffff",
+   "neutral-100": "#f3f2f1",
+   "neutral-1000": "#000000",
+   "neutral-200": "#c0c0c0",
+   "neutral-900-2": "#1b1917",
+   "neutral-900-3": "#171614",
+   "neutral-800": "#303030",
+   "neutral-600": "#736e68",
+   "neutral-700": "#524e49",
+   "neutral-100-2": "#f5f1ed",
+   "neutral-900-4": "#121212",
+   "neutral-900-5": "#111111",
+   "orange-100": "#f4f0ea",
+   "neutral-500": "#85817c",
+   "orange-100-2": "#efeae1",
+   "neutral-700-2": "#4c4c4c",
+   "orange-500": "#887666",
+   "orange-50": "#fffaf5",
+   "neutral-500-2": "#8a8a8a",
+   "orange-400": "#a89991",
+   "neutral-200-2": "#dad5d1",
+   "orange-600": "#7f6b5a",
+   "orange-100-3": "#e8dfd7",
+   "orange-200": "#d9d1cc",
+   "white-a85": "rgba(255,255,255,0.85)",
+   "orange-800": "#503629",
+   "white-a15": "rgba(255,255,255,0.15)",
+   "orange-400-2": "#a8a098",
+   "black-a28": "rgba(17,17,17,0.28)",
+   "white-a90": "rgba(255,255,255,0.9)",
+   "orange-100-4": "#e2d9d2",
+   "indigo-500": "#5c54b7",
+   "neutral-800-2": "#342f2c",
+   "orange-100-5": "#e3dcd0",
+   "orange-100-6": "#f7f1e9",
+   "neutral-900-6": "#262320",
+   "neutral-0-2": "#fcfaf8",
+   "neutral-800-3": "#423c39",
+   "red-900": "#1b1311",
+   "neutral-800-4": "#373230",
+   "neutral-100-3": "#edeae6",
+   "orange-50-2": "#fbf5ee",
+   "orange-100-7": "#f7f3ec"
+  },
+  "color_declared_not_measured": {
+   "#403a83": {
+    "value": "#403a83",
+    "family": "indigo-600",
+    "class_or_rule_count": 29
+   },
+   "#dedede": {
+    "value": "#dedede",
+    "family": "neutral-100",
+    "class_or_rule_count": 20
+   },
+   "#e3e1da": {
+    "value": "#e3e1da",
+    "family": "neutral-100",
+    "class_or_rule_count": 16
+   },
+   "#2e2e2e": {
+    "value": "#2e2e2e",
+    "family": "neutral-800",
+    "class_or_rule_count": 9
+   },
+   "#838383": {
+    "value": "#838383",
+    "family": "neutral-500",
+    "class_or_rule_count": 7
+   },
+   "#555555": {
+    "value": "#555555",
+    "family": "neutral-700",
+    "class_or_rule_count": 7
+   },
+   "rgba(0,0,0,0.5)": {
+    "value": "rgba(0,0,0,0.5)",
+    "family": "black-a50",
+    "class_or_rule_count": 6
+   },
+   "#ededed": {
+    "value": "#ededed",
+    "family": "neutral-100",
+    "class_or_rule_count": 6
+   },
+   "rgba(46,46,46,0.3)": {
+    "value": "rgba(46,46,46,0.3)",
+    "family": "black-a30",
+    "class_or_rule_count": 6
+   },
+   "#f7f5f2": {
+    "value": "#f7f5f2",
+    "family": "neutral-0",
+    "class_or_rule_count": 5
+   },
+   "#3852d7": {
+    "value": "#3852d7",
+    "family": "blue-500",
+    "class_or_rule_count": 5
+   },
+   "#d678f2": {
+    "value": "#d678f2",
+    "family": "purple-300",
+    "class_or_rule_count": 5
+   },
+   "rgba(3,7,18,0.3)": {
+    "value": "rgba(3,7,18,0.3)",
+    "family": "blue-950-a30",
+    "class_or_rule_count": 4
+   },
+   "rgba(0,0,0,0.3)": {
+    "value": "rgba(0,0,0,0.3)",
+    "family": "black-a30",
+    "class_or_rule_count": 4
+   },
+   "rgba(0,0,0,0.6)": {
+    "value": "rgba(0,0,0,0.6)",
+    "family": "black-a60",
+    "class_or_rule_count": 4
+   },
+   "#e6e6e6": {
+    "value": "#e6e6e6",
+    "family": "neutral-100",
+    "class_or_rule_count": 4
+   },
+   "#e5e7eb": {
+    "value": "#e5e7eb",
+    "family": "neutral-100",
+    "class_or_rule_count": 4
+   },
+   "#364153": {
+    "value": "#364153",
+    "family": "blue-700",
+    "class_or_rule_count": 4
+   },
+   "#e6e5e4": {
+    "value": "#e6e5e4",
+    "family": "neutral-100",
+    "class_or_rule_count": 4
+   },
+   "#e4dfda": {
+    "value": "#e4dfda",
+    "family": "orange-100",
+    "class_or_rule_count": 4
+   },
+   "rgba(0,0,0,0.18)": {
+    "value": "rgba(0,0,0,0.18)",
+    "family": "black-a18",
+    "class_or_rule_count": 3
+   },
+   "rgba(0,0,0,0.05)": {
+    "value": "rgba(0,0,0,0.05)",
+    "family": "black-a05",
+    "class_or_rule_count": 3
+   },
+   "#adadad": {
+    "value": "#adadad",
+    "family": "neutral-300",
+    "class_or_rule_count": 3
+   },
+   "rgba(255,255,255,0.5)": {
+    "value": "rgba(255,255,255,0.5)",
+    "family": "white-a50",
+    "class_or_rule_count": 3
+   },
+   "rgba(17,17,17,0.24)": {
+    "value": "rgba(17,17,17,0.24)",
+    "family": "black-a24",
+    "class_or_rule_count": 2
+   },
+   "rgba(17,17,17,0.1)": {
+    "value": "rgba(17,17,17,0.1)",
+    "family": "black-a10",
+    "class_or_rule_count": 2
+   },
+   "rgba(17,17,17,0.14)": {
+    "value": "rgba(17,17,17,0.14)",
+    "family": "black-a14",
+    "class_or_rule_count": 2
+   },
+   "rgba(92,84,183,0.2)": {
+    "value": "rgba(92,84,183,0.2)",
+    "family": "indigo-500-a20",
+    "class_or_rule_count": 2
+   },
+   "#ddd8d1": {
+    "value": "#ddd8d1",
+    "family": "orange-200",
+    "class_or_rule_count": 2
+   },
+   "#f8f7f5": {
+    "value": "#f8f7f5",
+    "family": "neutral-0",
+    "class_or_rule_count": 2
+   },
+   "rgba(0,0,0,0.1)": {
+    "value": "rgba(0,0,0,0.1)",
+    "family": "black-a10",
+    "class_or_rule_count": 1
+   },
+   "#d9dce2": {
+    "value": "#d9dce2",
+    "family": "neutral-100",
+    "class_or_rule_count": 1
+   },
+   "rgba(92,84,183,0.16)": {
+    "value": "rgba(92,84,183,0.16)",
+    "family": "indigo-500-a16",
+    "class_or_rule_count": 1
+   },
+   "rgba(255,255,255,0.72)": {
+    "value": "rgba(255,255,255,0.72)",
+    "family": "white-a72",
+    "class_or_rule_count": 1
+   },
+   "rgba(0,0,0,0.25)": {
+    "value": "rgba(0,0,0,0.25)",
+    "family": "black-a25",
+    "class_or_rule_count": 1
+   },
+   "#b5b5b5": {
+    "value": "#b5b5b5",
+    "family": "neutral-300",
+    "class_or_rule_count": 1
+   },
+   "rgba(17,17,17,0.16)": {
+    "value": "rgba(17,17,17,0.16)",
+    "family": "black-a16",
+    "class_or_rule_count": 1
+   }
+  },
+  "font": {
+   "family": {
+    "f0": "Inter",
+    "f1": "Marcellus"
+   },
+   "size": {
+    "9.7": "9.7px",
+    "11.3": "11.3px",
+    "11.7": "11.7px",
+    "13": "13px",
+    "14": "14px",
+    "16": "16px",
+    "18": "18px",
+    "20": "20px",
+    "22.6": "22.6px",
+    "24": "24px",
+    "28": "28px",
+    "30": "30px",
+    "30.8": "30.8px",
+    "32": "32px",
+    "36": "36px",
+    "40": "40px",
+    "48": "48px",
+    "64": "64px"
+   },
+   "weight": {
+    "300": 300,
+    "400": 400,
+    "500": 500,
+    "600": 600
+   },
+   "line-height": [
+    "0.94",
+    "1",
+    "1.14",
+    "1.2",
+    "1.25",
+    "1.28",
+    "1.29",
+    "1.38",
+    "1.4",
+    "1.43",
+    "1.44",
+    "1.5",
+    "1.56",
+    "1.7",
+    "1.72",
+    "n"
+   ],
+   "letter-spacing": [
+    "-0.01em",
+    "-0.02em",
+    "-0.03em",
+    "0.016em",
+    "0.021em",
+    "0.033em",
+    "0.038em",
+    "0.03em",
+    "0.042em",
+    "0.077em",
+    "0.0em"
+   ]
+  },
+  "space": {
+   "5": "5px",
+   "6": "6px",
+   "10": "10px",
+   "12": "12px",
+   "16": "16px",
+   "18": "18px",
+   "24": "24px",
+   "27": "27px",
+   "48": "48px",
+   "70": "70px",
+   "96": "96px"
+  },
+  "radius": {
+   "50 (≥半高=胶囊)": "50 (≥半高=胶囊)",
+   "23": "23px",
+   "4": "4px",
+   "12": "12px",
+   "24": "24px",
+   "18": "18px",
+   "12 (≥半高=胶囊)": "12 (≥半高=胶囊)",
+   "6": "6px",
+   "30 (≥半高=胶囊)": "30 (≥半高=胶囊)",
+   "10": "10px"
+  },
+  "stroke": {
+   "1px solid #a89991": 14,
+   "1px solid #dad5d1": 10,
+   "0.5px solid #7f6b5a": 7,
+   "1px solid #e8dfd7": 3,
+   "1px solid #d9d1cc": 3,
+   "1px solid rgba(255,255,255,0.85)": 2,
+   "1px solid #503629": 2,
+   "1px solid #ffffff": 2
+  },
+  "shadow": {
+   "s0": "rgba(17,17,17,0.18) 0px 0px 42px 0px",
+   "s1": "rgba(89,69,48,0.1) 0px 12px 20px 0px",
+   "s2": "#5c54b7 0px 0px 0px 1px inset",
+   "s3": "rgba(0,0,0,0.05) 0px 4px 2px 0px",
+   "s4": "rgba(0,0,0,0.5) 0px 0px 8px 0px",
+   "s5": "rgba(0,0,0,0.05) 0px 0px 25px 0px"
+  },
+  "duration": {
+   "100ms": 18,
+   "200ms": 21,
+   "220ms": 8,
+   "240ms": 12,
+   "300ms": 8,
+   "360ms": 6
+  },
+  "easing": {
+   "ease": 49,
+   "cubic-bezier(0.2, 0, 0, 1)": 8,
+   "cubic-bezier(0.2, 0.8, 0.2, 1),ease": 6,
+   "cubic-bezier(0.4, 0, 0.2, 1)": 4
+  },
+  "breakpoint": {
+   "min-1200": "1200px",
+   "min-768": "768px",
+   "min-750": "750px",
+   "max-749": "749px",
+   "max-989": "989px",
+   "min-990": "990px",
+   "max-575": "575px",
+   "min-1280": "1280px",
+   "min-576": "576px",
+   "min-1024": "1024px",
+   "max-767": "767px",
+   "min-1025.6": "1025.6px",
+   "min-640": "640px",
+   "max-768": "768px",
+   "min-1025": "1025px",
+   "max-1200": "1200px"
+  }
+ },
+ "semantic": {
+  "color": {
+   "bg.page": {
+    "$ref": "{primitive.color.neutral-800-2}",
+    "$value": "#342f2c",
+    "src": "实测：底色面积第一（measure.bg）"
+   },
+   "bg.surface-1": {
+    "$ref": "{primitive.color.orange-100-5}",
+    "$value": "#e3dcd0",
+    "share%": 9.1,
+    "src": "实测：底色面积"
+   },
+   "bg.surface-2": {
+    "$ref": "{primitive.color.orange-100-6}",
+    "$value": "#f7f1e9",
+    "share%": 8.2,
+    "src": "实测：底色面积"
+   },
+   "bg.surface-3": {
+    "$ref": "{primitive.color.neutral-900-6}",
+    "$value": "#262320",
+    "share%": 8,
+    "src": "实测：底色面积"
+   },
+   "bg.surface-4": {
+    "$ref": "{primitive.color.neutral-0-2}",
+    "$value": "#fcfaf8",
+    "share%": 5.8,
+    "src": "实测：底色面积"
+   },
+   "bg.surface-5": {
+    "$ref": "{primitive.color.neutral-800-3}",
+    "$value": "#423c39",
+    "share%": 5.4,
+    "src": "实测：底色面积"
+   },
+   "bg.surface-6": {
+    "$ref": "{primitive.color.red-900}",
+    "$value": "#1b1311",
+    "share%": 5.1,
+    "src": "实测：底色面积"
+   },
+   "text.on-light.primary": {
+    "$ref": "{primitive.color.neutral-900}",
+    "$value": "#1a1a1a",
+    "chars%": 49.3,
+    "contrast": 12.78,
+    "wcag": "AA",
+    "members": [
+     "#1a1a1a（27%）",
+     "#000000（9.6%）",
+     "#1b1917（4.8%）",
+     "#171614（4.8%）",
+     "#121212（1.6%）",
+     "#111111（1.4%）"
+    ],
+    "on": "#e3dcd0"
+   },
+   "text.on-light.secondary": {
+    "$ref": "{primitive.color.neutral-800}",
+    "$value": "#303030",
+    "chars%": 8.9,
+    "contrast": 9.69,
+    "wcag": "AA",
+    "members": [
+     "#303030（4.4%）",
+     "#524e49（3.8%）",
+     "#4c4c4c（0.7%）"
+    ],
+    "on": "#e3dcd0"
+   },
+   "text.on-light.tertiary": {
+    "$ref": "{primitive.color.neutral-600}",
+    "$value": "#736e68",
+    "chars%": 4.6,
+    "contrast": 3.71,
+    "wcag": "AA-large",
+    "members": [
+     "#736e68（4.1%）",
+     "#887666（0.5%）"
+    ],
+    "on": "#e3dcd0"
+   },
+   "text.on-dark.primary": {
+    "$ref": "{primitive.color.neutral-0}",
+    "$value": "#ffffff",
+    "chars%": 30.2,
+    "contrast": 13.22,
+    "wcag": "AA",
+    "members": [
+     "#ffffff（14.9%）",
+     "#f3f2f1（10.9%）",
+     "#f5f1ed（1.9%）",
+     "#f4f0ea（1.3%）",
+     "#efeae1（0.9%）",
+     "#fffaf5（0.4%）"
+    ],
+    "on": "#342f2c"
+   },
+   "text.on-dark.secondary": {
+    "$ref": "{primitive.color.neutral-200}",
+    "$value": "#c0c0c0",
+    "chars%": 5.6,
+    "contrast": 7.26,
+    "wcag": "AA",
+    "members": [
+     "#c0c0c0（5.6%）"
+    ],
+    "on": "#342f2c"
+   },
+   "text.on-dark.muted": {
+    "$ref": "{primitive.color.neutral-500}",
+    "$value": "#85817c",
+    "chars%": 1.3,
+    "contrast": 3.42,
+    "wcag": "AA-large",
+    "members": [
+     "#85817c（0.9%）",
+     "#8a8a8a（0.4%）"
+    ],
+    "on": "#342f2c"
+   },
+   "accent.primary": {
+    "$ref": "{primitive.color.indigo-500}",
+    "$value": "#5c54b7",
+    "contrast": 2.14,
+    "uses": [
+     "border"
+    ]
+   },
+   "border.default": {
+    "$ref": "{primitive.color.orange-400}",
+    "$value": "#a89991",
+    "count": 14
+   },
+   "border.strong": {
+    "$ref": "{primitive.color.neutral-200-2}",
+    "$value": "#dad5d1",
+    "count": 10
+   },
+   "border.strong-2": {
+    "$ref": "{primitive.color.orange-600}",
+    "$value": "#7f6b5a",
+    "count": 7
+   },
+   "border.strong-3": {
+    "$ref": "{primitive.color.orange-100-3}",
+    "$value": "#e8dfd7",
+    "count": 3
+   },
+   "border.strong-4": {
+    "$ref": "{primitive.color.orange-200}",
+    "$value": "#d9d1cc",
+    "count": 3
+   },
+   "border.subtle": {
+    "$ref": "{primitive.color.white-a85}",
+    "$value": "rgba(255,255,255,0.85)",
+    "count": 2
+   },
+   "border.accent-primary": {
+    "$ref": "{primitive.color.indigo-500}",
+    "$value": "#5c54b7",
+    "count": 1
+   }
+  },
+  "type-scale": {
+   "h2-64": {
+    "desktop": "64px",
+    "mobile": "30.8px",
+    "rule": "fluid:  clamp(36px, 4.4444vw, 64px)   .verso-recording-summary__title",
+    "line-height": "1.25/n",
+    "letter-spacing": "0.016em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: One press. On a ca",
+    "origin": "brand（自定义类）"
+   },
+   "h2-64-2": {
+    "desktop": "64px",
+    "mobile": "36px",
+    "rule": "fluid:  clamp(48px, 4.4445vw, 64px)   #tpl__verso",
+    "line-height": "1.56",
+    "letter-spacing": "-0.03em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: What You Need. Rig",
+    "origin": "brand（自定义类）"
+   },
+   "h2-64-3": {
+    "desktop": "64px",
+    "mobile": "64px",
+    "rule": "fluid:  clamp(48px, 5.4vw, 64px)  ✓  #tpl__verso",
+    "line-height": "1.25",
+    "letter-spacing": "-0.01em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Everything, on e-p",
+    "origin": "brand（自定义类）"
+   },
+   "h2-64-4": {
+    "desktop": "64px",
+    "mobile": "40px",
+    "rule": "step:  40px → 48px @≥576 → 64px @≥1024  ✓  #tpl__verso",
+    "line-height": "0.94",
+    "letter-spacing": "0.016em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Evolve the way",
+    "origin": "brand（自定义类）"
+   },
+   "h2-48": {
+    "desktop": "48px",
+    "mobile": "28px",
+    "rule": "step:  calc( 1.0 * 2rem) → calc( 1.0 * 2.4rem) @≥750   h2, .h2",
+    "line-height": "1.25",
+    "letter-spacing": "0.021em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: See Verso in Actio",
+    "origin": "theme-default（Shopify Dawn 基础样式）"
+   },
+   "lead-48": {
+    "desktop": "48px",
+    "mobile": "36px",
+    "rule": "step:  36px → 42px @≥768 → 48px @≥1024  ✓  ↑0 #template--23581414326528__verso_faq .faq",
+    "line-height": "n",
+    "letter-spacing": "0.021em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Frequently Asked Q",
+    "origin": "brand（自定义类）"
+   },
+   "h3-40": {
+    "desktop": "40px",
+    "mobile": "40px",
+    "rule": "fluid:  calc( calc(100cqw / 1250) * 40 )   #tpl__verso",
+    "line-height": "1.25",
+    "letter-spacing": "-0.01em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Record. Transcribe",
+    "origin": "brand（自定义类）"
+   },
+   "h3-32": {
+    "desktop": "32px",
+    "mobile": "22.6px",
+    "rule": "fluid:  calc( calc(100cqw / 1250) * 32 )   #tpl__verso",
+    "line-height": "1.25",
+    "letter-spacing": "-0.01em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Thinks ahead Follo",
+    "origin": "brand（自定义类）"
+   },
+   "h3-30": {
+    "desktop": "30px",
+    "mobile": "30px",
+    "rule": "fluid:  clamp(20px, 2.232vw, 30px)  ✓  #tpl__verso",
+    "line-height": "1",
+    "letter-spacing": "-0.02em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Flowtica Verso | E",
+    "origin": "brand（自定义类）"
+   },
+   "lead-28": {
+    "desktop": "28px",
+    "mobile": "20px",
+    "rule": "fluid:  clamp(16px, 1.9444vw, 28px)   .verso-go-anywhere__durability",
+    "line-height": "1.72",
+    "letter-spacing": "0.021em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Designed for every",
+    "origin": "brand（自定义类）"
+   },
+   "lead-28-2": {
+    "desktop": "28px",
+    "mobile": "18px",
+    "rule": "step:  28px @≥768 → 24px @≥768 → 20px @≥768   #tpl__verso",
+    "line-height": "1.14",
+    "letter-spacing": "-0.01em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: \"Pull up my busine",
+    "origin": "brand（自定义类）"
+   },
+   "lead-28-3": {
+    "desktop": "28px",
+    "mobile": "28px",
+    "rule": "fluid:  clamp(18px, 1.9444vw, 28px)  ✓  .verso-go-anywhere__scene-title",
+    "line-height": "1.2",
+    "letter-spacing": "0.021em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Phone back",
+    "origin": "brand（自定义类）"
+   },
+   "h3-24": {
+    "desktop": "24px",
+    "mobile": "18px",
+    "rule": "changes",
+    "line-height": "1.29",
+    "letter-spacing": "0.0em",
+    "weights": "600",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Reservations open.",
+    "origin": "unknown"
+   },
+   "h3-24-2": {
+    "desktop": "24px",
+    "mobile": "24px",
+    "rule": "fixed（两档实测相同）",
+    "line-height": "n",
+    "letter-spacing": "0.042em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Capture hardware",
+    "origin": "unknown"
+   },
+   "lead-20": {
+    "desktop": "20px",
+    "mobile": "16px",
+    "rule": "fluid:  clamp(16px, 1.3889vw, 20px)  ✓  ↑0 .verso-recording-summary__description",
+    "line-height": "1.7",
+    "letter-spacing": "-0.01em/0.03em",
+    "weights": "300",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Four MEMS mics for",
+    "origin": "brand（自定义类）"
+   },
+   "lead-20-2": {
+    "desktop": "20px",
+    "mobile": "18px",
+    "rule": "step:  18px → 20px @≥1024  ✓  ↑0 #template--23581414326528__verso_faq .faq",
+    "line-height": "1.4",
+    "letter-spacing": "-0.02em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: What is Verso?",
+    "origin": "brand（自定义类）"
+   },
+   "lead-20-3": {
+    "desktop": "20px",
+    "mobile": "20px",
+    "rule": "fluid:  clamp(16px, 1.3889vw, 20px)  ✓  #tpl__verso",
+    "line-height": "1.4",
+    "letter-spacing": "0.0em",
+    "weights": "300",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Verso anticipates ",
+    "origin": "brand（自定义类）"
+   },
+   "lead-20-4": {
+    "desktop": "20px",
+    "mobile": "14px",
+    "rule": "changes",
+    "line-height": "1.4",
+    "letter-spacing": "0.0em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Your MagSafe AI co",
+    "origin": "unknown"
+   },
+   "body-18": {
+    "desktop": "18px",
+    "mobile": "18px",
+    "rule": "step:  16px → 18px @≥576  ✓  #tpl__verso",
+    "line-height": "1.44/1.5",
+    "letter-spacing": "-0.01em/0.033em",
+    "weights": "300/400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: “Unlike traditiona",
+    "origin": "brand（自定义类）"
+   },
+   "body-18-2": {
+    "desktop": "18px",
+    "mobile": "16px",
+    "rule": "fluid:  clamp(14px, 1.339vw, 18px)   #tpl__verso",
+    "line-height": "1.28",
+    "letter-spacing": "0.0em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Lock in your $199 ",
+    "origin": "brand（自定义类）"
+   },
+   "body-16": {
+    "desktop": "16px",
+    "mobile": "16px",
+    "rule": "fixed:  16px  ✓  ↑0 #template--23581414326528__verso_faq .faq",
+    "line-height": "1.5/n",
+    "letter-spacing": "-0.01em/-0.02em",
+    "weights": "300/600",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: A card-sized e-pap",
+    "origin": "brand（自定义类）"
+   },
+   "footer-text-16": {
+    "desktop": "16px",
+    "mobile": "14px",
+    "rule": "fixed:  16px  ✓  ↑0 .text-[16px]",
+    "line-height": "1.5/n",
+    "letter-spacing": "0.038em/0.0em",
+    "weights": "300/400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Flowtica Scribe",
+    "origin": "brand（任意值）"
+   },
+   "body-16-2": {
+    "desktop": "16px",
+    "mobile": "11.3px",
+    "rule": "changes",
+    "line-height": "1.5",
+    "letter-spacing": "0.0em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Phone Calls",
+    "origin": "unknown"
+   },
+   "nav-text-14": {
+    "desktop": "14px",
+    "mobile": "14px",
+    "rule": "fixed（两档实测相同）",
+    "line-height": "1.43",
+    "letter-spacing": "-0.01em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: Product",
+    "origin": "unknown"
+   },
+   "h3-13": {
+    "desktop": "13px",
+    "mobile": "14px",
+    "rule": "changes",
+    "line-height": "1.38",
+    "letter-spacing": "0.077em",
+    "weights": "500",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: This AI Recorder H",
+    "origin": "unknown"
+   },
+   "caption-11.7": {
+    "desktop": "11.7px",
+    "mobile": "9.7px",
+    "rule": "fluid:  calc( calc(100cqw / 1250) * 11.706)   ↑0 #tpl__verso",
+    "line-height": "1.29",
+    "letter-spacing": "0.0em",
+    "weights": "400",
+    "uppercase": "—",
+    "example": "pages/flowtica-verso: 11:00 · Starts in ",
+    "origin": "brand（自定义类）"
+   }
+  },
+  "space": {
+   "base-unit": "2px",
+   "section-y": {
+    "desktop": [],
+    "mobile": []
+   },
+   "container": [
+    {
+     "vp": "desktop",
+     "page": "pages/flowtica-verso",
+     "max|padL|padR": "758px|0|34",
+     "count": 8,
+     "width": 792,
+     "src": "div.faq-design__answer"
+    },
+    {
+     "vp": "desktop",
+     "page": "pages/flowtica-verso",
+     "max|padL|padR": "1248px|0|0",
+     "count": 1,
+     "width": 1248,
+     "src": "div.verso-reserve__inner"
+    },
+    {
+     "vp": "desktop",
+     "page": "pages/flowtica-verso",
+     "max|padL|padR": "1250px|0|0",
+     "count": 1,
+     "width": 1250,
+     "src": "div.verso-capabilities-v2__inner"
+    },
+    {
+     "vp": "desktop",
+     "page": "pages/flowtica-verso",
+     "max|padL|padR": "1160px|0|0",
+     "count": 1,
+     "width": 1160,
+     "src": "div.scribe-creator-reviews__inner"
+    },
+    {
+     "vp": "desktop",
+     "page": "pages/flowtica-verso",
+     "max|padL|padR": "1304px|28|28",
+     "count": 1,
+     "width": 1304,
+     "src": "div.verso-press__layout"
+    },
+    {
+     "vp": "desktop",
+     "page": "pages/flowtica-verso",
+     "max|padL|padR": "1220px|0|0",
+     "count": 1,
+     "width": 1220,
+     "src": "div.verso-personas__layout"
+    },
+    {
+     "vp": "mobile",
+     "page": "pages/flowtica-verso",
+     "max|padL|padR": "758px|0|0",
+     "count": 8,
+     "width": 335,
+     "src": "div.faq-design__answer"
+    },
+    {
+     "vp": "mobile",
+     "page": "pages/flowtica-verso",
+     "max|padL|padR": "648px|0|0",
+     "count": 1,
+     "width": 327,
+     "src": "div.verso-reserve__inner"
+    }
+   ],
+   "container-pad-ladder": [
+    {
+     "min-width": 1024.0,
+     "pad": "12px",
+     "src": "#template--23581414326528__verso_faq .faq-de"
+    }
+   ],
+   "anchor-offset": [
+    {
+     "value": "scroll-margin-top: calc(var(--scribe-nav-height, 52px) + 20px)",
+     "count": 1,
+     "src": [
+      ".scribe-v2__configurator"
+     ]
+    }
+   ]
+  },
+  "radius": {
+   "50 (≥半高=胶囊)": {
+    "count": 22,
+    "example": "pages/flowtica-verso: button.flowtica-search-modal__close flowtica-se [ctl16 box6]"
+   },
+   "23": {
+    "count": 16,
+    "example": "pages/flowtica-verso: div.verso-reserve__card [ctl14 box2]"
+   },
+   "4": {
+    "count": 14,
+    "example": "pages/flowtica-verso: button.verso-ask__card [box10 ctl4]"
+   },
+   "12": {
+    "count": 12,
+    "example": "pages/flowtica-verso: div.flowtica-search-modal__field [box7 ctl5]"
+   },
+   "24": {
+    "count": 12,
+    "example": "pages/flowtica-verso: div.verso-recording-summary__media [box10 ctl2]"
+   },
+   "18": {
+    "count": 6,
+    "example": "pages/flowtica-verso: div.scribe-creator-reviews__media [box6]"
+   },
+   "12 (≥半高=胶囊)": {
+    "count": 5,
+    "example": "pages/flowtica-verso: a.flowtica-search-card [ctl5]"
+   },
+   "6": {
+    "count": 5,
+    "example": "pages/flowtica-verso: span.verso-press__tag [ctl5]"
+   },
+   "30 (≥半高=胶囊)": {
+    "count": 4,
+    "example": "pages/flowtica-verso: span.verso-reserve__badge [ctl3 box1]"
+   },
+   "10": {
+    "count": 4,
+    "example": "pages/flowtica-verso: span.verso-reserve__tile [ctl4]"
+   }
+  },
+  "stroke": {
+   "1px solid #a89991|b": {
+    "count": 14,
+    "example": "pages/flowtica-verso: div.verso-specs__row"
+   },
+   "1px solid #dad5d1|all": {
+    "count": 10,
+    "example": "pages/flowtica-verso: div.flowtica-search-modal__field"
+   },
+   "0.5px solid #7f6b5a|b": {
+    "count": 7,
+    "example": "pages/flowtica-verso: details.faq-design__item"
+   },
+   "1px solid #e8dfd7|all": {
+    "count": 3,
+    "example": "pages/flowtica-verso: div.verso-reserve__count"
+   },
+   "1px solid #d9d1cc|all": {
+    "count": 3,
+    "example": "pages/flowtica-verso: span.verso-reserve__marker"
+   },
+   "1px solid rgba(255,255,255,0.85)|all": {
+    "count": 2,
+    "example": "pages/flowtica-verso: span.mega-menu-product__thumb"
+   },
+   "1px solid #503629|all": {
+    "count": 2,
+    "example": "pages/flowtica-verso: div.verso-reserve__count verso-reserve__coun"
+   },
+   "1px solid #ffffff|all": {
+    "count": 2,
+    "example": "pages/flowtica-verso: div.scribe-creator-reviews__avatar"
+   },
+   "1px solid rgba(255,255,255,0.15)|t": {
+    "count": 2,
+    "example": "pages/flowtica-verso: div.footer__ask-ai page-width"
+   },
+   "1px solid #a8a098|b": {
+    "count": 1,
+    "example": "pages/flowtica-verso: div.mega-menu__content mega-menu__content--f"
+   }
+  },
+  "shadow": {
+   "rgba(17,17,17,0.18) 0px 0px 42px 0px": 3,
+   "rgba(89,69,48,0.1) 0px 12px 20px 0px": 1,
+   "#5c54b7 0px 0px 0px 1px inset": 1,
+   "rgba(0,0,0,0.05) 0px 4px 2px 0px": 1,
+   "rgba(0,0,0,0.5) 0px 0px 8px 0px": 1,
+   "rgba(0,0,0,0.05) 0px 0px 25px 0px": 1
+  },
+  "shadow_declared_not_measured": [],
+  "type-scale-declared_not_measured": [],
+  "motion": {
+   "transitions": [
+    {
+     "prop|dur|ease": "color|200ms|ease",
+     "count": 16,
+     "example": "pages/flowtica-verso: a.footer-nav-link"
+    },
+    {
+     "prop|dur|ease": "transform|220ms|cubic-bezier(0.2, 0, 0, 1)",
+     "count": 8,
+     "example": "pages/flowtica-verso: img.faq-design__icon"
+    },
+    {
+     "prop|dur|ease": "text-decoration|100ms|ease",
+     "count": 7,
+     "example": "pages/flowtica-verso: span.flowtica-header-menu__label"
+    },
+    {
+     "prop|dur|ease": "border-color|100ms|ease",
+     "count": 6,
+     "example": "pages/flowtica-verso: div.flowtica-search-modal__field"
+    },
+    {
+     "prop|dur|ease": "transform,opacity|360,240ms|cubic-bezier(0.2, 0.8, 0.2, 1),ease",
+     "count": 6,
+     "example": "pages/flowtica-verso: div.swiper-slide verso-ask__slide swiper-sli"
+    },
+    {
+     "prop|dur|ease": "filter|240ms|ease",
+     "count": 6,
+     "example": "pages/flowtica-verso: img.verso-ask__card-image"
+    },
+    {
+     "prop|dur|ease": "transform|100ms|ease",
+     "count": 5,
+     "example": "pages/flowtica-verso: span.flowtica-search-card__arrow"
+    },
+    {
+     "prop|dur|ease": "colors|200ms|ease",
+     "count": 5,
+     "example": "pages/flowtica-verso: a.footer__ask-ai-btn footer__ask-ai-btn--c"
+    },
+    {
+     "prop|dur|ease": "colors|300ms|ease",
+     "count": 4,
+     "example": "pages/flowtica-verso: span.verso-reserve__marker"
+    },
+    {
+     "prop|dur|ease": "all|300ms|cubic-bezier(0.4, 0, 0.2, 1)",
+     "count": 4,
+     "example": "pages/flowtica-verso: div.swiper-button-prev w-[36px]! h-[36px]! f"
+    }
+   ]
+  }
+ },
+ "layout": {
+  "grids_desktop": [
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "grid|2col|gap 24/6",
+    "count": 14,
+    "tracks": "2t 147px 427px",
+    "src": "div.verso-specs__row"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "grid|2col|gap 18/0",
+    "count": 4,
+    "tracks": "2t 44px 490px",
+    "src": "li.verso-reserve__stage is-reached"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "grid|4col|gap 10/10",
+    "count": 1,
+    "tracks": "4t 77.5px 77.5px 77.5px 77.5px",
+    "src": "div.verso-reserve__countdown-grid"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "grid|2col|gap 48/48",
+    "count": 1,
+    "tracks": "2t 552px 648px",
+    "src": "div.verso-reserve__body"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "flex-wrap|1col|gap 12/12",
+    "count": 1,
+    "tracks": "",
+    "src": "div.verso-reserve__price-row"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "grid|3col|gap 12/12",
+    "count": 1,
+    "tracks": "3t 408px 503px 315px",
+    "src": "div.verso-capabilities-v2__board"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "grid|2col|gap 24/24",
+    "count": 1,
+    "tracks": "2t 700.211px 700.789px",
+    "src": "div.verso-recording-summary__stage scroll-trigger vers"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "grid|3col|gap 24/24",
+    "count": 1,
+    "tracks": "3t 344px 344px 344px",
+    "src": "div.verso-meeting__timeline"
+   }
+  ],
+  "grids_mobile": [
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "grid|1col|gap 6/6",
+    "count": 14,
+    "tracks": "1t 327px",
+    "src": "div.verso-specs__row"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "grid|2col|gap 14/0",
+    "count": 4,
+    "tracks": "2t 30px 283px",
+    "src": "li.verso-reserve__stage is-reached"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "grid|4col|gap 8/8",
+    "count": 1,
+    "tracks": "4t 75.75px 75.75px 75.75px 75.75px",
+    "src": "div.verso-reserve__countdown-grid"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "grid|1col|gap 28/28",
+    "count": 1,
+    "tracks": "1t 327px",
+    "src": "div.verso-reserve__body"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "flex-wrap|1col|gap 10/10",
+    "count": 1,
+    "tracks": "",
+    "src": "div.verso-reserve__price-row"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "grid|1col|gap 8/8",
+    "count": 1,
+    "tracks": "2t 167.742px 167.742px",
+    "src": "div.verso-capabilities-v2__board"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "grid|1col|gap 48/48",
+    "count": 1,
+    "tracks": "1t 327px",
+    "src": "div.verso-specs__layout scroll-trigger verso-animate v"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "kind": "flex-wrap|5col|gap 10/10",
+    "count": 1,
+    "tracks": "",
+    "src": "ul.footer__ask-ai-list list-unstyled"
+   }
+  ],
+  "fixed_sticky": [
+   {
+    "page": "pages/flowtica-verso",
+    "position": "sticky",
+    "top": "0px",
+    "h": 900,
+    "w": 1425,
+    "z": "auto",
+    "bg": "#f7f1e9",
+    "src": "div.verso-notes-reveal__scene"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "position": "sticky",
+    "top": "0px",
+    "h": 900,
+    "w": 1425,
+    "z": "1",
+    "bg": "#342f2c",
+    "src": "div.verso-ask__scene scroll-trigger verso-an"
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "position": "fixed",
+    "top": "729px",
+    "h": 103,
+    "w": 295,
+    "z": "2147483647",
+    "bg": "-",
+    "src": "iframe."
+   },
+   {
+    "page": "pages/flowtica-verso",
+    "position": "fixed",
+    "top": "820px",
+    "h": 60,
+    "w": 60,
+    "z": "0",
+    "bg": "-",
+    "src": "div."
+   }
+  ],
+  "media_ratios": {
+   "2:3": 9,
+   "4:5": 6,
+   "1:1": 5,
+   "3:2": 5,
+   "r2.19": 5,
+   "2:1": 4,
+   "16:9": 3,
+   "r0.92": 2,
+   "r1.24": 2,
+   "r2.99": 2
+  },
+  "sections": {
+   "pages/flowtica-verso": [
+    {
+     "tag": "a",
+     "y": -1,
+     "h": 47,
+     "pt": 0,
+     "pb": 0,
+     "bg": "#121212",
+     "head": "",
+     "src": "skip-to-content-link button visual"
+    },
+    {
+     "tag": "div",
+     "y": 36,
+     "h": 52,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "Verso",
+     "src": "shopify-section shopify-section-gr"
+    },
+    {
+     "tag": "section",
+     "y": 36,
+     "h": 728,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "Flowtica Verso",
+     "src": "shopify-section section verso-hero"
+    },
+    {
+     "tag": "div",
+     "y": 764,
+     "h": 990,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "Be first. Pay le",
+     "src": "shopify-section section verso-rese"
+    },
+    {
+     "tag": "section",
+     "y": 1754,
+     "h": 60,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "",
+     "src": "shopify-section section scribe-v2-"
+    },
+    {
+     "tag": "section",
+     "y": 1814,
+     "h": 1116,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "Everything, on e",
+     "src": "shopify-section section verso-capa"
+    },
+    {
+     "tag": "section",
+     "y": 2930,
+     "h": 716,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "See Verso in Act",
+     "src": "shopify-section section"
+    },
+    {
+     "tag": "section",
+     "y": 3646,
+     "h": 674,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "In the press.",
+     "src": "shopify-section section verso-pres"
+    },
+    {
+     "tag": "div",
+     "y": 4320,
+     "h": 977,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "One press. On a ",
+     "src": "shopify-section"
+    },
+    {
+     "tag": "section",
+     "y": 5297,
+     "h": 1440,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "Notes on its fac",
+     "src": "shopify-section section verso-note"
+    },
+    {
+     "tag": "section",
+     "y": 6737,
+     "h": 829,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "What You Need. R",
+     "src": "shopify-section section verso-meet"
+    },
+    {
+     "tag": "section",
+     "y": 7566,
+     "h": 3960,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "Press, ask, and ",
+     "src": "shopify-section section verso-ask-"
+    },
+    {
+     "tag": "section",
+     "y": 11526,
+     "h": 1166,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "Evolve the way y",
+     "src": "shopify-section"
+    },
+    {
+     "tag": "div",
+     "y": 12692,
+     "h": 2579,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "Built to work wh",
+     "src": "shopify-section"
+    },
+    {
+     "tag": "section",
+     "y": 15271,
+     "h": 1545,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "Specs",
+     "src": "shopify-section section verso-spec"
+    },
+    {
+     "tag": "section",
+     "y": 16815,
+     "h": 934,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "Frequently Asked",
+     "src": "shopify-section faq-section"
+    },
+    {
+     "tag": "div",
+     "y": 17749,
+     "h": 839,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "Stay in flow",
+     "src": "shopify-section shopify-section-gr"
+    },
+    {
+     "tag": "iframe",
+     "y": 729,
+     "h": 103,
+     "pt": 0,
+     "pb": 0,
+     "bg": "-",
+     "head": "",
+     "src": ""
+    }
+   ]
+  }
+ },
+ "responsive": {
+  "breakpoints": [
+   {
+    "kind": "min",
+    "px": 1200,
+    "rules": 736,
+    "origin": "自定义（数值同 Bootstrap 默认）"
+   },
+   {
+    "kind": "min",
+    "px": 768,
+    "rules": 713,
+    "origin": "Tailwind 默认"
+   },
+   {
+    "kind": "min",
+    "px": 750,
+    "rules": 200,
+    "origin": "Shopify Dawn 默认"
+   },
+   {
+    "kind": "max",
+    "px": 749,
+    "rules": 159,
+    "origin": "Shopify Dawn 默认"
+   },
+   {
+    "kind": "max",
+    "px": 989,
+    "rules": 112,
+    "origin": "Shopify Dawn 默认"
+   },
+   {
+    "kind": "min",
+    "px": 990,
+    "rules": 105,
+    "origin": "Shopify Dawn 默认"
+   },
+   {
+    "kind": "max",
+    "px": 575,
+    "rules": 99,
+    "origin": "自定义"
+   },
+   {
+    "kind": "min",
+    "px": 1280,
+    "rules": 76,
+    "origin": "Tailwind 默认"
+   },
+   {
+    "kind": "min",
+    "px": 576,
+    "rules": 74,
+    "origin": "自定义（数值同 Bootstrap 默认）"
+   },
+   {
+    "kind": "min",
+    "px": 1024,
+    "rules": 66,
+    "origin": "Tailwind 默认"
+   },
+   {
+    "kind": "max",
+    "px": 767,
+    "rules": 62,
+    "origin": "自定义"
+   },
+   {
+    "kind": "min",
+    "px": 1025.6,
+    "rules": 19,
+    "origin": "自定义"
+   },
+   {
+    "kind": "min",
+    "px": 640,
+    "rules": 13,
+    "origin": "Tailwind 默认"
+   },
+   {
+    "kind": "max",
+    "px": 768,
+    "rules": 11,
+    "origin": "Tailwind 默认"
+   },
+   {
+    "kind": "min",
+    "px": 1025,
+    "rules": 8,
+    "origin": "自定义"
+   },
+   {
+    "kind": "max",
+    "px": 1200,
+    "rules": 7,
+    "origin": "自定义（数值同 Bootstrap 默认）"
+   }
+  ],
+  "class_prefix_usage": {
+   "max-md": 18,
+   "md": 7
+  },
+  "rules": [
+   {
+    "rule": "字号：20 档随视口变化，其中 8 档是 clamp/vw 流体；正文 会变",
+    "evidence": "64→30.8（clamp(36px, 4.4444vw, 64px)）; 64→30.8（clamp(36px, 4.4444vw, 64px)）; 64→36（clamp(48px, 4.4445vw, 64px)）; 64→40（40px → 48px @≥576 → 64px @≥1024）; 48→28（calc( 1.0 * 2rem) → calc( 1.0 * 2.4rem) @≥750）; 48→36（36px → 42px @≥768 → 48px @≥1024）; 32→22.6（calc( calc(100cqw / 1250) * 32 )）; 28→20（clamp(16px, 1.9444vw, 28px)）"
+   },
+   {
+    "rule": "容器左右边距按断点换档：12px（≥1024）",
+    "evidence": "#template--23581414326528__verso_faq .faq-de"
+   },
+   {
+    "rule": "[pages/flowtica-verso] 网格列数折叠",
+    "evidence": "div.verso-specs__row: 2col→1col; div.verso-reserve__body: 2col→1col; div.verso-capabilities-v2__board: 3col→1col"
+   }
+  ],
+  "type_pairs": [
+   {
+    "name": "h2-64",
+    "desktop": 64.0,
+    "mobile": 30.8,
+    "rule": "clamp(36px, 4.4444vw, 64px)"
+   },
+   {
+    "name": "h2-64-2",
+    "desktop": 64.0,
+    "mobile": 30.8,
+    "rule": "clamp(36px, 4.4444vw, 64px)"
+   },
+   {
+    "name": "h2-64-3",
+    "desktop": 64.0,
+    "mobile": 36.0,
+    "rule": "clamp(48px, 4.4445vw, 64px)"
+   },
+   {
+    "name": "h2-64-5",
+    "desktop": 64.0,
+    "mobile": 40.0,
+    "rule": "40px → 48px @≥576 → 64px @≥1024"
+   },
+   {
+    "name": "h2-48",
+    "desktop": 48.0,
+    "mobile": 28.0,
+    "rule": "calc( 1.0 * 2rem) → calc( 1.0 * 2.4rem) @≥750"
+   },
+   {
+    "name": "lead-48",
+    "desktop": 48.0,
+    "mobile": 36.0,
+    "rule": "36px → 42px @≥768 → 48px @≥1024"
+   },
+   {
+    "name": "h3-32",
+    "desktop": 32.0,
+    "mobile": 22.6,
+    "rule": "calc( calc(100cqw / 1250) * 32 )"
+   },
+   {
+    "name": "lead-28",
+    "desktop": 28.0,
+    "mobile": 20.0,
+    "rule": "clamp(16px, 1.9444vw, 28px)"
+   },
+   {
+    "name": "lead-28-2",
+    "desktop": 28.0,
+    "mobile": 18.0,
+    "rule": "28px @≥768 → 24px @≥768 → 20px @≥768"
+   },
+   {
+    "name": "h3-24",
+    "desktop": 24.0,
+    "mobile": 18.0,
+    "rule": null
+   },
+   {
+    "name": "h3-24-2",
+    "desktop": 24.0,
+    "mobile": 24.0,
+    "rule": null
+   },
+   {
+    "name": "lead-20",
+    "desktop": 20.0,
+    "mobile": 16.0,
+    "rule": "clamp(16px, 1.3889vw, 20px)"
+   },
+   {
+    "name": "lead-20-2",
+    "desktop": 20.0,
+    "mobile": 18.0,
+    "rule": "18px → 20px @≥1024"
+   },
+   {
+    "name": "lead-20-3",
+    "desktop": 20.0,
+    "mobile": 16.0,
+    "rule": "16px → 20px @≥1024"
+   },
+   {
+    "name": "lead-20-5",
+    "desktop": 20.0,
+    "mobile": 14.0,
+    "rule": null
+   },
+   {
+    "name": "body-18-2",
+    "desktop": 18.0,
+    "mobile": 16.0,
+    "rule": "clamp(14px, 1.339vw, 18px)"
+   },
+   {
+    "name": "body-16",
+    "desktop": 16.0,
+    "mobile": 16.0,
+    "rule": "16px"
+   },
+   {
+    "name": "body-16-2",
+    "desktop": 16.0,
+    "mobile": 16.0,
+    "rule": "16px"
+   },
+   {
+    "name": "footer-text-16",
+    "desktop": 16.0,
+    "mobile": 14.0,
+    "rule": "16px"
+   },
+   {
+    "name": "body-strong-16",
+    "desktop": 16.0,
+    "mobile": 16.0,
+    "rule": null
+   },
+   {
+    "name": "body-16-3",
+    "desktop": 16.0,
+    "mobile": 11.3,
+    "rule": null
+   },
+   {
+    "name": "body-16-4",
+    "desktop": 16.0,
+    "mobile": 14.0,
+    "rule": null
+   },
+   {
+    "name": "h3-13",
+    "desktop": 13.0,
+    "mobile": 14.0,
+    "rule": null
+   },
+   {
+    "name": "caption-11.7",
+    "desktop": 11.7,
+    "mobile": 9.7,
+    "rule": "calc( calc(100cqw / 1250) * 11.706)"
+   }
+  ]
+ },
+ "components": [
+  {
+   "type": "button",
+   "page": "pages/flowtica-verso",
+   "variant": "rect·text",
+   "count": 4,
+   "height": 20,
+   "label": "Feature",
+   "tokens": {
+    "bg": "-",
+    "color": "#8a8a8a",
+    "border": "-",
+    "radius": "0",
+    "padding(y/x)": "0/0",
+    "font": "14px/400 ls-0.01em"
+   },
+   "states": [],
+   "src": "button.scribe-v2-product-nav__link"
+  },
+  {
+   "type": "button",
+   "page": "pages/flowtica-verso",
+   "variant": "r50·text",
+   "count": 4,
+   "height": 36,
+   "label": "",
+   "tokens": {
+    "bg": "-",
+    "color": "#ffffff",
+    "border": "-",
+    "radius": "50",
+    "padding(y/x)": "0/0",
+    "font": "16px/400 ls0.04em"
+   },
+   "states": [
+    [
+     "hover",
+     "opacity:0.8",
+     "(hover: hover)",
+     ".hover\\:opacity-80:hover"
+    ],
+    [
+     "aria-disabled",
+     "background-color:rgb(222, 222, 222)",
+     "",
+     ".aria-disabled\\:bg-\\[\\#DEDEDE\\][aria-disable"
+    ],
+    [
+     "aria-disabled",
+     "background-image:url('//www.flowtica.ai/cdn/shop/t/181/as",
+     "",
+     "#shopify-section-template--23581414326528__v"
+    ]
+   ],
+   "src": "div.swiper-button-prev w-[36px]! h-[36px]! flex items-center jus"
+  },
+  {
+   "type": "button",
+   "page": "pages/flowtica-verso",
+   "variant": "r43·solid",
+   "count": 3,
+   "height": 34,
+   "label": "",
+   "tokens": {
+    "bg": "#f2ebe2",
+    "color": "#111111",
+    "border": "1px #dad5d1",
+    "radius": "43",
+    "padding(y/x)": "6/18",
+    "font": "14px/400 ls-0.01em"
+   },
+   "states": [
+    [
+     "hover",
+     "border-top-color:;border-right-color:;border-bottom-color:;border-left-color:",
+     "",
+     ".flowtica-search-modal__chip:hover, .flowtic"
+    ]
+   ],
+   "src": "a.flowtica-search-modal__chip"
+  },
+  {
+   "type": "button",
+   "page": "pages/flowtica-verso",
+   "variant": "rect·text",
+   "count": 3,
+   "height": 45,
+   "label": "\"What’s on my agen",
+   "tokens": {
+    "bg": "-",
+    "color": "#85817c",
+    "border": "-",
+    "radius": "0",
+    "padding(y/x)": "4/25",
+    "font": "28px/400 ls-0.01em"
+   },
+   "states": [
+    [
+     "hover",
+     "color:#efeae1",
+     "",
+     "#shopify-section-template--23581414326528__v"
+    ],
+    [
+     "focus-visible",
+     "outline-color:;outline-style:;outline-width:;outline-offset:4px",
+     "",
+     "#shopify-section-template--23581414326528__v"
+    ]
+   ],
+   "src": "button.verso-ask__prompt"
+  },
+  {
+   "type": "button",
+   "page": "pages/flowtica-verso",
+   "variant": "rect·text",
+   "count": 2,
+   "height": 44,
+   "label": "",
+   "tokens": {
+    "bg": "-",
+    "color": "#ffffff",
+    "border": "-",
+    "radius": "0",
+    "padding(y/x)": "0/0",
+    "font": "16px/500 ls0.04em"
+   },
+   "states": [],
+   "src": "summary.header__icon header__icon--search header__icon--summary link"
+  },
+  {
+   "type": "button",
+   "page": "pages/flowtica-verso",
+   "variant": "r9.6·solid",
+   "count": 2,
+   "height": 36,
+   "label": "",
+   "tokens": {
+    "bg": "#e3e1da",
+    "color": "#303030",
+    "border": "-",
+    "radius": "9.6",
+    "padding(y/x)": "0/0",
+    "font": "16px/400 ls0.04em"
+   },
+   "states": [],
+   "src": "button.verso-personas__expand"
+  },
+  {
+   "type": "chip/tag",
+   "page": "pages/flowtica-verso",
+   "variant": "r4.2",
+   "count": 4,
+   "height": 27,
+   "label": "Prepare brief",
+   "tokens": {
+    "bg": "#ffffff",
+    "color": "#000000",
+    "border": "-",
+    "radius": "4.2",
+    "padding(y/x)": "7/7",
+    "font": "9.2px/500"
+   },
+   "states": [],
+   "src": "span.verso-capabilities-v2__meeting-action"
+  },
+  {
+   "type": "chip/tag",
+   "page": "pages/flowtica-verso",
+   "variant": "r6",
+   "count": 4,
+   "height": 26,
+   "label": "Android Author",
+   "tokens": {
+    "bg": "#696157",
+    "color": "#ffffff",
+    "border": "-",
+    "radius": "6",
+    "padding(y/x)": "6/12",
+    "font": "13.5px/400"
+   },
+   "states": [],
+   "src": "span.verso-press__tag"
+  },
+  {
+   "type": "chip/tag",
+   "page": "pages/flowtica-verso",
+   "variant": "r30",
+   "count": 1,
+   "height": 36,
+   "label": "SAVE $100",
+   "tokens": {
+    "bg": "#f5e8e0",
+    "color": "#503629",
+    "border": "-",
+    "radius": "30",
+    "padding(y/x)": "6/12",
+    "font": "14px/600"
+   },
+   "states": [],
+   "src": "span.verso-reserve__badge"
+  },
+  {
+   "type": "chip/tag",
+   "page": "pages/flowtica-verso",
+   "variant": "r6",
+   "count": 1,
+   "height": 26,
+   "label": "HOLD TO ASK",
+   "tokens": {
+    "bg": "#f7f5f1",
+    "color": "#1b1917",
+    "border": "-",
+    "radius": "6",
+    "padding(y/x)": "6/10",
+    "font": "12px/600"
+   },
+   "states": [],
+   "src": "span.verso-ask__ask-label"
+  },
+  {
+   "type": "card/surface",
+   "page": "pages/flowtica-verso",
+   "variant": "bg - · border - · r24",
+   "count": 8,
+   "size": "589x536",
+   "tokens": {
+    "bg": "-",
+    "border": "-",
+    "radius": "24",
+    "padding(y/x)": "0/0",
+    "shadow": "-"
+   },
+   "states": [],
+   "src": "div.verso-go-anywhere__media-frame"
+  },
+  {
+   "type": "card/surface",
+   "page": "pages/flowtica-verso",
+   "variant": "bg - · border - · r4",
+   "count": 6,
+   "size": "262x391",
+   "tokens": {
+    "bg": "-",
+    "border": "-",
+    "radius": "4",
+    "padding(y/x)": "0/0",
+    "shadow": "-"
+   },
+   "states": [
+    [
+     "focus-visible",
+     "outline-color:;outline-style:;outline-width:;outline-offset:4px",
+     "",
+     "#shopify-section-template--23581414326528__v"
+    ],
+    [
+     "transition",
+     "filter|240ms|ease",
+     "",
+     ""
+    ]
+   ],
+   "src": "button.verso-ask__card"
+  },
+  {
+   "type": "card/surface",
+   "page": "pages/flowtica-verso",
+   "variant": "bg #f4f0ea · border - · r23",
+   "count": 4,
+   "size": "503x311",
+   "tokens": {
+    "bg": "#f4f0ea",
+    "border": "-",
+    "radius": "23",
+    "padding(y/x)": "0/0",
+    "shadow": "-"
+   },
+   "states": [],
+   "src": "article.verso-capabilities-v2__card verso-capabilities-v2_"
+  },
+  {
+   "type": "card/surface",
+   "page": "pages/flowtica-verso",
+   "variant": "bg #f4ebe0 · border - · r23",
+   "count": 4,
+   "size": "365x290",
+   "tokens": {
+    "bg": "#f4ebe0",
+    "border": "-",
+    "radius": "23",
+    "padding(y/x)": "27/27",
+    "shadow": "-"
+   },
+   "states": [],
+   "src": "article.verso-press__card"
+  },
+  {
+   "type": "card/surface",
+   "page": "pages/flowtica-verso",
+   "variant": "bg - · border - · r18",
+   "count": 4,
+   "size": "150x100",
+   "tokens": {
+    "bg": "-",
+    "border": "-",
+    "radius": "18",
+    "padding(y/x)": "0/0",
+    "shadow": "-"
+   },
+   "states": [],
+   "src": "div.verso-press__logo"
+  },
+  {
+   "type": "card/surface",
+   "page": "pages/flowtica-verso",
+   "variant": "bg #262320 · border - · r23",
+   "count": 3,
+   "size": "344x433",
+   "tokens": {
+    "bg": "#262320",
+    "border": "-",
+    "radius": "23",
+    "padding(y/x)": "0/0",
+    "shadow": "-"
+   },
+   "states": [],
+   "src": "article.verso-meeting-card verso-meeting-card--before scro"
+  },
+  {
+   "type": "card/surface",
+   "page": "pages/flowtica-verso",
+   "variant": "bg #373230 · border - · r23",
+   "count": 2,
+   "size": "408x568",
+   "tokens": {
+    "bg": "#373230",
+    "border": "-",
+    "radius": "23",
+    "padding(y/x)": "0/0",
+    "shadow": "-"
+   },
+   "states": [],
+   "src": "article.verso-capabilities-v2__card verso-capabilities-v2_"
+  },
+  {
+   "type": "card/surface",
+   "page": "pages/flowtica-verso",
+   "variant": "bg #000000 · border - · r12",
+   "count": 2,
+   "size": "225x154",
+   "tokens": {
+    "bg": "#000000",
+    "border": "-",
+    "radius": "12",
+    "padding(y/x)": "30/12",
+    "shadow": "-"
+   },
+   "states": [],
+   "src": "div.verso-capabilities-v2__meeting verso-capabilities-"
+  },
+  {
+   "type": "repeated",
+   "page": "pages/flowtica-verso",
+   "variant": "div.verso-specs__row",
+   "count": 14,
+   "cols": 1,
+   "size": "598x55",
+   "anatomy": "(p+p)",
+   "states": [],
+   "src": "div.verso-specs__groups"
+  },
+  {
+   "type": "repeated",
+   "page": "pages/flowtica-verso",
+   "variant": "section.shopify-section.section",
+   "count": 9,
+   "cols": 1,
+   "size": "1425x728",
+   "anatomy": "",
+   "states": [],
+   "src": "main.content-for-layout focus-none"
+  },
+  {
+   "type": "repeated",
+   "page": "pages/flowtica-verso",
+   "variant": "details.faq-design__item",
+   "count": 8,
+   "cols": 1,
+   "size": "880x167",
+   "anatomy": "((txt+img)+p)",
+   "states": [],
+   "src": "div.faq-design__list scroll-trigge"
+  },
+  {
+   "type": "repeated",
+   "page": "pages/flowtica-verso",
+   "variant": "div.swiper-slide.verso-ask__slide",
+   "count": 6,
+   "cols": 6,
+   "size": "262x391",
+   "anatomy": "btn(img)",
+   "states": [
+    [
+     "transition",
+     "transform,opacity|360,240ms|cubic-bezier(0.2, 0.8, 0.2, 1),ease",
+     "",
+     ""
+    ]
+   ],
+   "src": "div.swiper-wrapper"
+  },
+  {
+   "type": "repeated",
+   "page": "pages/flowtica-verso",
+   "variant": "div.verso-specs__group-heading",
+   "count": 5,
+   "cols": 1,
+   "size": "598x36",
+   "anatomy": "(img+h3)",
+   "states": [],
+   "src": "div.verso-specs__groups"
+  },
+  {
+   "type": "repeated",
+   "page": "pages/flowtica-verso",
+   "variant": "li.verso-reserve__benefit",
+   "count": 4,
+   "cols": 1,
+   "size": "590x36",
+   "anatomy": "(p+p)",
+   "states": [],
+   "src": "ul.verso-reserve__benefit-list"
+  },
+  {
+   "type": "repeated",
+   "page": "pages/flowtica-verso",
+   "variant": "li.verso-reserve__stage",
+   "count": 4,
+   "cols": 1,
+   "size": "552x160",
+   "anatomy": "(txt+txt+(p+h3(txt)+p))",
+   "states": [],
+   "src": "ol.verso-reserve__stages"
+  },
+  {
+   "type": "repeated",
+   "page": "pages/flowtica-verso",
+   "variant": "div.swiper-slide.verso-press__slide",
+   "count": 4,
+   "cols": 4,
+   "size": "365x290",
+   "anatomy": "(txt+img+txt)",
+   "states": [],
+   "src": "div.swiper-wrapper"
+  },
+  {
+   "type": "nav",
+   "page": "pages/flowtica-verso",
+   "pos": "relative",
+   "h": 52,
+   "bg": "rgba(255,255,255,0.05)",
+   "blur": "blur(7.5px)",
+   "links": 18,
+   "menuBtn": true,
+   "link": "14px 400 ls-0.01em #ffffff",
+   "states": []
+  },
+  {
+   "type": "footer",
+   "page": "pages/flowtica-verso",
+   "h": 839,
+   "bg": "-",
+   "maxFs": 22,
+   "pt": 64,
+   "pb": 24
+  },
+  {
+   "type": "content-link",
+   "page": "pages/flowtica-verso",
+   "states": [
+    [
+     "hover",
+     "filter:brightness(0.92)",
+     "",
+     ".verso-hero__button:hover"
+    ],
+    [
+     "focus-visible",
+     "outline-color:currentcolor;outline-style:solid;outline-width:2px;outline-offset:3px",
+     "",
+     ".verso-hero__button:focus-visible"
+    ]
+   ]
+  }
+ ],
+ "component_naming_blocks": [
+  [
+   "country-group",
+   142
+  ],
+  [
+   "verso-personas",
+   133
+  ],
+  [
+   "verso-reserve",
+   113
+  ],
+  [
+   "verso-capabilities-v2",
+   106
+  ],
+  [
+   "mega-menu-product",
+   100
+  ],
+  [
+   "flowtica-mobile-menu",
+   97
+  ],
+  [
+   "disclosure",
+   70
+  ],
+  [
+   "verso-specs",
+   64
+  ],
+  [
+   "flowtica-search-card",
+   60
+  ],
+  [
+   "verso-ask",
+   45
+  ],
+  [
+   "verso-go-anywhere",
+   45
+  ],
+  [
+   "faq-design",
+   44
+  ],
+  [
+   "verso-press",
+   40
+  ],
+  [
+   "localization-form",
+   34
+  ],
+  [
+   "flowtica-search-modal",
+   33
+  ],
+  [
+   "header",
+   30
+  ],
+  [
+   "footer",
+   29
+  ],
+  [
+   "verso-reserve-dialog",
+   28
+  ],
+  [
+   "scribe-creator-reviews",
+   27
+  ],
+  [
+   "verso-hero",
+   19
+  ],
+  [
+   "link",
+   15
+  ],
+  [
+   "country-selector",
+   14
+  ],
+  [
+   "flowtica-header-menu",
+   14
+  ],
+  [
+   "flowtica-header",
+   12
+  ],
+  [
+   "verso-recording-summary",
+   12
+  ]
+ ],
+ "states": {
+  "css_rules_by_state": {
+   "hover": 160,
+   "focus-visible": 65,
+   "focus-within": 1,
+   "focus": 34,
+   "active": 17,
+   "disabled": 32,
+   "expanded": 64,
+   "selected": 45,
+   "checked": 18,
+   "invalid": 1,
+   "placeholder": 17
+  },
+  "class_prefix_usage": {
+   "hover": 10,
+   "aria-disabled": 10
+  },
+  "class_state_values": {
+   "hover → effect.opacity": [
+    [
+     "0.8",
+     10
+    ]
+   ],
+   "aria-disabled → color.bg": [
+    [
+     "#dedede",
+     10
+    ]
+   ]
+  },
+  "examples": {
+   "hover": [
+    {
+     "sel": ".product-sticky-bar__button:not(:disabled):hover",
+     "decl": "opacity: .9",
+     "file_kind": "custom"
+    },
+    {
+     "sel": ".scribe-v2__nav-link:hover,.scribe-v2__nav-link:focus-visible",
+     "decl": "color: #858585",
+     "file_kind": "custom"
+    },
+    {
+     "sel": ".scribe-v2__nav-cta:hover,.scribe-v2__nav-cta:focus-visible",
+     "decl": "background: color-mix(in srgb,var(--scribe-accent, #",
+     "file_kind": "custom"
+    }
+   ],
+   "focus-visible": [
+    {
+     "sel": ".scribe-v2__nav-link:hover,.scribe-v2__nav-link:focus-visible",
+     "decl": "color: #858585",
+     "file_kind": "custom"
+    },
+    {
+     "sel": ".scribe-v2__nav-cta:hover,.scribe-v2__nav-cta:focus-visible",
+     "decl": "background: color-mix(in srgb,var(--scribe-accent, #",
+     "file_kind": "custom"
+    },
+    {
+     "sel": ".scribe-v2__choice input:focus-visible+label,.scribe-v2__color-choice input:focus-visible+",
+     "decl": "outline: 2px solid #111; outline-offset: 3px",
+     "file_kind": "custom"
+    }
+   ],
+   "focus-within": [
+    {
+     "sel": ".flowtica-search-modal__field:focus-within",
+     "decl": "border-color: var(--search-modal-text)",
+     "file_kind": "theme-default"
+    }
+   ],
+   "focus": [
+    {
+     "sel": ".verso-subscription-success:focus",
+     "decl": "outline: none",
+     "file_kind": "custom"
+    },
+    {
+     "sel": ".skip-to-content-link:focus",
+     "decl": "z-index: 9999; position: inherit; clip: auto; width: auto",
+     "file_kind": "utility"
+    },
+    {
+     "sel": ":focus",
+     "decl": "box-shadow: none; outline: 0",
+     "file_kind": "utility"
+    }
+   ],
+   "active": [
+    {
+     "sel": ".group-active\\:bg-\\[\\#5C54B7\\]:is(:where(.group):active *)",
+     "decl": "background-color: #5c54b7",
+     "file_kind": "utility"
+    },
+    {
+     "sel": ".group-active\\:text-\\[\\#EDEDED\\]:is(:where(.group):active *)",
+     "decl": "color: #ededed",
+     "file_kind": "utility"
+    },
+    {
+     "sel": ".active\\:scale-\\[0\\.98\\]:active",
+     "decl": "scale: .98",
+     "file_kind": "utility"
+    }
+   ],
+   "disabled": [
+    {
+     "sel": ".product-sticky-bar__button:disabled",
+     "decl": "opacity: .6; cursor: not-allowed",
+     "file_kind": "custom"
+    },
+    {
+     "sel": ".product-sticky-bar__button:not(:disabled):hover",
+     "decl": "opacity: .9",
+     "file_kind": "custom"
+    },
+    {
+     "sel": ".scribe-v2__choice input:disabled+label",
+     "decl": "opacity: .45; cursor: not-allowed",
+     "file_kind": "custom"
+    }
+   ],
+   "expanded": [
+    {
+     "sel": "body:has(.scribe-v2__plans-dialog[open])",
+     "decl": "overflow: hidden",
+     "file_kind": "custom"
+    },
+    {
+     "sel": ".scribe-roi__details-toggle[aria-expanded=true] svg",
+     "decl": "transform: none",
+     "file_kind": "custom"
+    },
+    {
+     "sel": ".scribe-roi__details.is-open .scribe-roi__details-panel",
+     "decl": "opacity: 1; transform: translateY(0)",
+     "file_kind": "custom"
+    }
+   ],
+   "selected": [
+    {
+     "sel": ".scribe-v2__nav-link.is-active",
+     "decl": "color: var(--scribe-accent, #5c54b7)",
+     "file_kind": "custom"
+    },
+    {
+     "sel": ".scribe-v2__thumbnail.is-active",
+     "decl": "border: 2px solid var(--scribe-accent, #5c54b7)",
+     "file_kind": "custom"
+    },
+    {
+     "sel": ".scribe-v2__accessory.is-selected",
+     "decl": "border: 2px solid var(--scribe-accent, #5c54b7); padding: 11px 15px; background: #faf8f3",
+     "file_kind": "custom"
+    }
+   ],
+   "checked": [
+    {
+     "sel": ".scribe-v2__choice input:checked+label",
+     "decl": "border: 2px solid var(--scribe-accent, #5c54b7); padding: 11px 15px; background: #faf8f3",
+     "file_kind": "custom"
+    },
+    {
+     "sel": ".scribe-v2__color-choice input:checked+label",
+     "decl": "border-color: #fff; box-shadow: 0 0 0 2px var(--scribe-accent, #5c54b7)",
+     "file_kind": "custom"
+    },
+    {
+     "sel": ".scribe-v2__accessory-main>input:checked+.scribe-v2__checkbox",
+     "decl": "border-color: var(--scribe-accent, #5c54b7); color: var(--scribe-accent, #5c54b7)",
+     "file_kind": "custom"
+    }
+   ],
+   "invalid": [
+    {
+     "sel": "#shopify-section-template--23581414326528__verso_reservation .verso-reserve-dialog__input[",
+     "decl": "border-color: #c4473a",
+     "file_kind": "inline"
+    }
+   ],
+   "placeholder": [
+    {
+     "sel": "::placeholder",
+     "decl": "opacity: 1",
+     "file_kind": "utility"
+    },
+    {
+     "sel": "::placeholder",
+     "decl": "color: currentColor",
+     "file_kind": "utility"
+    },
+    {
+     "sel": "::placeholder",
+     "decl": "color: color-mix(in oklab,currentcolor 50%,tran",
+     "file_kind": "utility"
+    }
+   ]
+  }
+ },
+ "interaction": {
+  "durations_ms": {
+   "100": 18,
+   "200": 21,
+   "220": 8,
+   "240": 12,
+   "300": 8,
+   "360": 6
+  },
+  "easings": {
+   "ease": 49,
+   "cubic-bezier(0.2, 0, 0, 1)": 8,
+   "cubic-bezier(0.2, 0.8, 0.2, 1),ease": 6,
+   "cubic-bezier(0.4, 0, 0.2, 1)": 4
+  },
+  "css_keyframes_used": [
+   {
+    "name": "animateMenuOpen",
+    "used_rules": 6,
+    "props": [
+     "opacity",
+     "transform"
+    ],
+    "stops": [
+     [
+      "0%",
+      {
+       "opacity": "0",
+       "transform": "translateY(-1.5rem)"
+      }
+     ],
+     [
+      "to",
+      {
+       "opacity": "1",
+       "transform": "translateY(0)"
+      }
+     ]
+    ],
+    "file_kind": "utility"
+   },
+   {
+    "name": "translateAnnouncementSlideIn",
+    "used_rules": 2,
+    "props": [
+     "opacity",
+     "transform"
+    ],
+    "stops": [
+     [
+      "0%",
+      {
+       "opacity": "0",
+       "transform": "translate(var(--announcement-translate-from))"
+      }
+     ],
+     [
+      "to",
+      {
+       "opacity": "1",
+       "transform": "translate(0)"
+      }
+     ]
+    ],
+    "file_kind": "utility"
+   },
+   {
+    "name": "translateAnnouncementSlideOut",
+    "used_rules": 2,
+    "props": [
+     "opacity",
+     "transform"
+    ],
+    "stops": [
+     [
+      "0%",
+      {
+       "opacity": "1",
+       "transform": "translate(0)"
+      }
+     ],
+     [
+      "to",
+      {
+       "opacity": "0",
+       "transform": "translate(var(--announcement-translate-to))"
+      }
+     ]
+    ],
+    "file_kind": "utility"
+   },
+   {
+    "name": "swiper-preloader-spin",
+    "used_rules": 2,
+    "props": [
+     "transform"
+    ],
+    "stops": [
+     [
+      "0%",
+      {
+       "transform": "rotate(0)"
+      }
+     ],
+     [
+      "to",
+      {
+       "transform": "rotate(1turn)"
+      }
+     ]
+    ],
+    "file_kind": "utility"
+   },
+   {
+    "name": "animateLocalization",
+    "used_rules": 2,
+    "props": [
+     "opacity",
+     "transform"
+    ],
+    "stops": [
+     [
+      "0%",
+      {
+       "opacity": "0",
+       "transform": "translateY(0)"
+      }
+     ],
+     [
+      "to",
+      {
+       "opacity": "1",
+       "transform": "translateY(-1rem)"
+      }
+     ]
+    ],
+    "file_kind": "theme-default"
+   },
+   {
+    "name": "logoScroll",
+    "used_rules": 1,
+    "props": [
+     "transform"
+    ],
+    "stops": [
+     [
+      "0%",
+      {
+       "transform": "translate(0)"
+      }
+     ],
+     [
+      "to",
+      {
+       "transform": "translate(var(--track-width, -50%))"
+      }
+     ]
+    ],
+    "file_kind": "custom"
+   },
+   {
+    "name": "scribePlansLoading",
+    "used_rules": 1,
+    "props": [
+     "transform"
+    ],
+    "stops": [
+     [
+      "to",
+      {
+       "transform": "rotate(360deg)"
+      }
+     ]
+    ],
+    "file_kind": "custom"
+   },
+   {
+    "name": "scribe-workflow-hotspot-core",
+    "used_rules": 1,
+    "props": [
+     "opacity",
+     "transform"
+    ],
+    "stops": [
+     [
+      "0%,to",
+      {
+       "opacity": ".78",
+       "transform": "translate(-50%,-50%) scale(.88)"
+      }
+     ],
+     [
+      "50%",
+      {
+       "opacity": "1",
+       "transform": "translate(-50%,-50%) scale(1.08)"
+      }
+     ]
+    ],
+    "file_kind": "custom"
+   },
+   {
+    "name": "scribe-workflow-hotspot-ring",
+    "used_rules": 1,
+    "props": [
+     "opacity",
+     "transform"
+    ],
+    "stops": [
+     [
+      "0%",
+      {
+       "opacity": "0",
+       "transform": "scale(.72)"
+      }
+     ],
+     [
+      "18%",
+      {
+       "opacity": ".72"
+      }
+     ],
+     [
+      "78%,to",
+      {
+       "opacity": "0",
+       "transform": "scale(3.35)"
+      }
+     ]
+    ],
+    "file_kind": "custom"
+   },
+   {
+    "name": "scribe-workflow-dialog-fade-in",
+    "used_rules": 1,
+    "props": [
+     "opacity"
+    ],
+    "stops": [
+     [
+      "0%",
+      {
+       "opacity": "0"
+      }
+     ],
+     [
+      "to",
+      {
+       "opacity": "1"
+      }
+     ]
+    ],
+    "file_kind": "custom"
+   },
+   {
+    "name": "scribe-workflow-dialog-card-fade-in",
+    "used_rules": 1,
+    "props": [
+     "opacity",
+     "transform"
+    ],
+    "stops": [
+     [
+      "0%",
+      {
+       "opacity": "0",
+       "transform": "translateY(8px) scale(.98)"
+      }
+     ],
+     [
+      "to",
+      {
+       "opacity": "1",
+       "transform": "translateY(0) scale(1)"
+      }
+     ]
+    ],
+    "file_kind": "custom"
+   },
+   {
+    "name": "scribeV2PlansLoading",
+    "used_rules": 1,
+    "props": [
+     "transform"
+    ],
+    "stops": [
+     [
+      "to",
+      {
+       "transform": "rotate(360deg)"
+      }
+     ]
+    ],
+    "file_kind": "custom"
+   }
+  ],
+  "css_transition_durations_declared": [
+   [
+    200,
+    52
+   ],
+   [
+    300,
+    31
+   ],
+   [
+    100,
+    30
+   ],
+   [
+    500,
+    21
+   ],
+   [
+    150,
+    19
+   ],
+   [
+    180,
+    17
+   ],
+   [
+    0,
+    9
+   ],
+   [
+    160,
+    7
+   ],
+   [
+    240,
+    7
+   ],
+   [
+    400,
+    6
+   ],
+   [
+    280,
+    5
+   ],
+   [
+    800,
+    4
+   ]
+  ],
+  "js_motion": {
+   "motion_objects": {},
+   "durations": [
+    [
+     "25",
+     1
+    ],
+    [
+     "300",
+     1
+    ],
+    [
+     "220",
+     1
+    ]
+   ],
+   "eases": [],
+   "delays": [
+    [
+     "i*1e3",
+     5
+    ],
+    [
+     "4e3",
+     1
+    ]
+   ],
+   "stagger": [],
+   "io": {
+    "count": 11,
+    "threshold": [
+     [
+      ".5",
+      1
+     ],
+     [
+      ".1",
+      1
+     ],
+     [
+      ".2",
+      1
+     ],
+     [
+      "[0, 0.6] ",
+      1
+     ],
+     [
+      "0,",
+      1
+     ]
+    ],
+    "rootMargin": [
+     [
+      "0px 0px 400px 0px",
+      1
+     ],
+     [
+      "0px 0px -50px 0px",
+      1
+     ],
+     [
+      "0px",
+      1
+     ]
+    ],
+    "margin": []
+   },
+   "swiper": [
+    {
+     "speed": "500",
+     "spaceBetween": "20",
+     "slidesPerView": "1",
+     "centeredSlides": "false",
+     "grabCursor": "true",
+     "breakpoints": [
+      "768"
+     ]
+    },
+    {
+     "speed": "500",
+     "spaceBetween": "16",
+     "slidesPerView": "auto",
+     "centeredSlides": "false",
+     "grabCursor": "true",
+     "breakpoints": [
+      "768"
+     ]
+    },
+    {
+     "speed": "0",
+     "spaceBetween": "0",
+     "slidesPerView": "1",
+     "centeredSlides": "false",
+     "grabCursor": "true",
+     "breakpoints": [
+      "768"
+     ]
+    },
+    {
+     "speed": "500",
+     "spaceBetween": "24",
+     "slidesPerView": "auto",
+     "centeredSlides": "false",
+     "grabCursor": "true",
+     "breakpoints": [
+      "768"
+     ]
+    },
+    {
+     "speed": "500",
+     "spaceBetween": "0",
+     "slidesPerView": "1",
+     "centeredSlides": "false",
+     "grabCursor": "true",
+     "breakpoints": [
+      "768"
+     ]
+    }
+   ],
+   "gsap": {
+    "calls": 0,
+    "scrollTrigger": 0,
+    "scrub": []
+   },
+   "scroll_thresholds": [],
+   "class_toggles": [
+    [
+     "hidden",
+     11
+    ],
+    [
+     "active",
+     8
+    ],
+    [
+     "is-active",
+     5
+    ],
+    [
+     "is-empty",
+     5
+    ],
+    [
+     "menu-opening",
+     3
+    ],
+    [
+     "overflow-hidden",
+     3
+    ],
+    [
+     "scrolled-past-header",
+     3
+    ],
+    [
+     "is-visible",
+     3
+    ],
+    [
+     "is-expanded",
+     3
+    ],
+    [
+     "is-open",
+     3
+    ],
+    [
+     "disabled",
+     2
+    ],
+    [
+     "menu-open",
+     2
+    ],
+    [
+     "shopify-section-header-sticky",
+     2
+    ],
+    [
+     "is-floating",
+     2
+    ],
+    [
+     "animate",
+     2
+    ]
+   ]
+  },
+  "scroll_probe": {
+   "reveal": [
+    [
+     "o0 → o1 | anim versoRevealDirectional 0.76s cubic-bezier(0.22, 1, 0.36 0.075s | ~250–650ms",
+     8,
+     "div.verso-reserve__journey scroll-trigger ve"
+    ],
+    [
+     "o0 → o1 | anim versoRevealDirectional 0.76s cubic-bezier(0.22, 1, 0.36 0s | ~250–650ms",
+     3,
+     "div.verso-reserve__offer scroll-trigger vers"
+    ],
+    [
+     "o0 → o1 | anim versoRevealDirectional 0.76s cubic-bezier(0.22, 1, 0.36 0.15s | ~250–650ms",
+     3,
+     "article.verso-capabilities-v2__card verso-capabi"
+    ],
+    [
+     "o0 → o1 | anim fadeIn 0.76s cubic-bezier(0.22, 1, 0.36 0s | ~250–650ms",
+     2,
+     "h2.verso-press__heading scroll-trigger vers"
+    ],
+    [
+     "o0 → o1 | anim versoRevealDirectional 0.76s cubic-bezier(0.22, 1, 0.36 0.225s | ~250–650ms",
+     1,
+     "article.verso-capabilities-v2__card verso-capabi"
+    ],
+    [
+     "o0 → o1 | anim versoRevealDirectional 0.76s cubic-bezier(0.22, 1, 0.36 0.3s | ~>650ms",
+     1,
+     "article.verso-capabilities-v2__card verso-capabi"
+    ],
+    [
+     "o0 → o1 | anim versoRevealDirectional 0.76s cubic-bezier(0.22, 1, 0.36 0.375s | ~>650ms",
+     1,
+     "article.verso-capabilities-v2__card verso-capabi"
+    ],
+    [
+     "o0 → o1 | anim versoRevealDirectional 0.76s cubic-bezier(0.22, 1, 0.36 0.45s | ~>650ms",
+     1,
+     "article.verso-capabilities-v2__card verso-capabi"
+    ],
+    [
+     "o0.01 y20 → o1 | anim slideIn 0.6s cubic-bezier(0, 0, 0.3, 1) 0s | ~250–650ms",
+     1,
+     "div.scribe-creator-reviews__heading-wrap scr"
+    ],
+    [
+     "o0 y72 → o1 | trans 0.08s, 0.08s linear, linear delay 0s, 0s | ~60–250ms",
+     1,
+     "picture.verso-notes-reveal__product"
+    ]
+   ],
+   "waapi": [
+    [
+     "CSSAnimation|versoRevealDirectional|760ms|linear|1|opacity:0→1 transform:translate3d(0px, 28px, 0px) →translateZ(0px) scale(1)",
+     130,
+     "75,150,225,300",
+     "div.verso-reserve__offer scroll-trigger "
+    ],
+    [
+     "CSSAnimation|versoRevealDirectional|760ms|linear|1|opacity:0→1 transform:translate3d(-28px, 0px, 0px)→translateZ(0px) scale(1)",
+     114,
+     "75,375",
+     "h2.verso-reserve__title scroll-trigger "
+    ],
+    [
+     "CSSAnimation|fadeIn|760ms|linear|1|opacity:0→1",
+     106,
+     "",
+     "header.scroll-trigger verso-animate verso-a"
+    ],
+    [
+     "CSSAnimation|versoRevealDirectional|760ms|linear|1|opacity:0→1 transform:translate3d(28px, 0px, 0px) →translateZ(0px) scale(1)",
+     101,
+     "75,150,225,450",
+     "div.verso-reserve__countdown scroll-trig"
+    ],
+    [
+     "CSSAnimation|versoRevealDirectional|760ms|linear|1|opacity:0→1 transform:translate3d(0px, 0px, 0px) s→translateZ(0px) scale(1)",
+     52,
+     "75,150",
+     "article.verso-capabilities-v2__card verso-ca"
+    ],
+    [
+     "CSSAnimation|slideIn|600ms|linear|1|opacity:0.01→1 transform:translateY(20px)→translateY(0px)",
+     43,
+     "75",
+     "div.scribe-creator-reviews__heading-wrap"
+    ],
+    [
+     "CSSAnimation|smileLiteFadeInOut|200ms|linear|1|opacity:0→1 transform:scale(0.8)→scale(1)",
+     24,
+     "150",
+     "div."
+    ],
+    [
+     "CSSTransition|color|180ms|ease|1|",
+     4,
+     "",
+     "button.verso-ask__prompt"
+    ],
+    [
+     "CSSTransition|background-color|180ms|ease|1|",
+     4,
+     "",
+     "button.verso-ask__prompt"
+    ],
+    [
+     "CSSTransition|opacity|80ms|linear|1|opacity:0→0.153",
+     2,
+     "",
+     "header.verso-notes-reveal__header"
+    ]
+   ],
+   "header": {
+    "atTop": {
+     "bg": "rgba(255,255,255,0.05)",
+     "h": 52,
+     "top": 36,
+     "op": 1,
+     "tf": "",
+     "sh": "",
+     "blur": "blur(7.5px)",
+     "bd": ""
+    },
+    "scrolledDown": {
+     "bg": "rgba(255,255,255,0.05)",
+     "h": 52,
+     "top": -17652,
+     "op": 1,
+     "tf": "",
+     "sh": "",
+     "blur": "blur(7.5px)",
+     "bd": ""
+    },
+    "scrolledUp": {
+     "bg": "rgba(255,255,255,0.05)",
+     "h": 52,
+     "top": -17112,
+     "op": 1,
+     "tf": "",
+     "sh": "",
+     "blur": "blur(7.5px)",
+     "bd": ""
+    }
+   },
+   "headerBehavior": [
+    "not-sticky (scrolls away)"
+   ],
+   "parallax": [
+    [
+     0.37,
+     "picture.verso-notes-reveal__product"
+    ],
+    [
+     0.37,
+     "img.verso-notes-reveal__layer-imag"
+    ],
+    [
+     0.37,
+     "picture.verso-notes-reveal__callouts"
+    ],
+    [
+     0.37,
+     "img.verso-notes-reveal__layer-imag"
+    ],
+    [
+     -0.06,
+     "img.verso-ask__card-image"
+    ],
+    [
+     0.01,
+     "img.verso-ask__card-image"
+    ]
+   ],
+   "swipers": [
+    {
+     "speed": 500,
+     "spv": 2,
+     "gap": 24,
+     "loop": false,
+     "effect": "slide",
+     "bps": "768",
+     "ex": "swiper scribe-creator-reviews__swiper sw"
+    },
+    {
+     "speed": 500,
+     "spv": "auto",
+     "gap": 24,
+     "loop": false,
+     "effect": "slide",
+     "bps": "768",
+     "ex": "swiper verso-press__swiper swiper-initia"
+    },
+    {
+     "speed": 0,
+     "spv": 1,
+     "gap": 0,
+     "loop": false,
+     "effect": "slide",
+     "bps": "768",
+     "ex": "swiper verso-ask__swiper swiper-initiali"
+    },
+    {
+     "speed": 500,
+     "spv": "auto",
+     "gap": 36,
+     "loop": false,
+     "effect": "slide",
+     "bps": "768",
+     "ex": "swiper verso-personas__swiper swiper-ini"
+    },
+    {
+     "speed": 500,
+     "spv": 1,
+     "gap": 0,
+     "loop": false,
+     "effect": "slide",
+     "bps": "768",
+     "ex": "swiper verso-personas__modal-swiper swip"
+    }
+   ],
+   "classToggles": [
+    [
+     "swiper-slide-prev",
+     6
+    ],
+    [
+     "swiper-slide-active",
+     3
+    ],
+    [
+     "swiper-slide-next",
+     3
+    ],
+    [
+     "is-active",
+     3
+    ],
+    [
+     "is-floating",
+     1
+    ],
+    [
+     "is-visible",
+     1
+    ]
+   ]
+  },
+  "reduced_motion": {
+   "css_rules": 67,
+   "js_matchMedia": true
+  },
+  "scroll_css": {
+   "will-change": [
+    ".home-logo-list__wrapper {will-change: transform}",
+    ".scribe-a-plus-hero__copy {will-change: opacity,transform}",
+    ".will-change-transform {will-change: transform}",
+    ".will-change-transform {will-change: transform}",
+    ".will-change-transform {will-change: transform}"
+   ],
+   "backdrop-filter": [
+    ".pdp-paper-voice__icon {backdrop-filter: blur(12px) brightness(1.4)}",
+    ".product-sticky-bar__content {backdrop-filter: blur(20px)}",
+    ".scribe-v2__nav {backdrop-filter: blur(16px)}",
+    ".scribe-v2__plans-dialog::backdrop {backdrop-filter: blur(4px)}",
+    ".scribe-pen-workflow__dialog {backdrop-filter: blur(1px)}"
+   ],
+   "scroll-margin-top": [
+    ".scribe-v2__configurator {scroll-margin-top: calc(var(--scribe-nav-height, 52px) + 20px)}"
+   ],
+   "mix-blend-mode": [
+    ".scribe-v2__media-image {mix-blend-mode: multiply}",
+    ".scribe-v2__thumbnail-image {mix-blend-mode: multiply}",
+    ".main-product-scribe-v2 .scribe-v2__thumbnail-imag {mix-blend-mode: normal}",
+    ".animate--hover-3d-lift .card-wrapper:hover .card- {mix-blend-mode: color-dodge}",
+    ".animate--hover-3d-lift .card-wrapper .card--card: {mix-blend-mode: overlay}"
+   ],
+   "scroll-snap-type": [
+    ".scribe-v2__thumbnails {scroll-snap-type: x proximity}",
+    ".main-product-scribe-v2 .scribe-v2__gallery .scrib {scroll-snap-type: inline proximity}",
+    ".swiper-css-mode.swiper-horizontal>.swiper-wrapper {scroll-snap-type: x mandatory}",
+    ".swiper-css-mode.swiper-vertical>.swiper-wrapper {scroll-snap-type: y mandatory}",
+    ".swiper-css-mode.swiper-free-mode>.swiper-wrapper {scroll-snap-type: none}"
+   ],
+   "scroll-snap-align": [
+    ".scribe-v2__thumbnail {scroll-snap-align: start}",
+    ".main-product-scribe-v2 .scribe-v2__thumbnail {scroll-snap-align: start}",
+    ".swiper-css-mode>.swiper-wrapper>.swiper-slide {scroll-snap-align: start start}",
+    ".swiper-css-mode.swiper-free-mode>.swiper-wrapper> {scroll-snap-align: none}",
+    ".swiper-css-mode.swiper-centered>.swiper-wrapper>. {scroll-snap-align: center center}"
+   ],
+   "overscroll-behavior": [
+    ".scribe-v2__plans-dialog-content {overscroll-behavior: contain}",
+    ".main-product-scribe-v2 .scribe-v2__plans-dialog-c {overscroll-behavior: contain}",
+    ".main-product-scribe-v2 .scribe-v2__plans-dialog . {overscroll-behavior: contain}",
+    ".cart-drawer cart-drawer-items {overscroll-behavior: contain}",
+    ".flowtica-mobile-menu__scroll {overscroll-behavior: contain}"
+   ],
+   "scroll-behavior": [
+    ".main-product-scribe-v2 .scribe-v2__gallery .scrib {scroll-behavior: smooth}",
+    ".announcement-bar .slider--everywhere {scroll-behavior: auto}"
+   ],
+   "scroll-padding": [
+    ".disclosure__list {scroll-padding: .5rem 0}"
+   ]
+  },
+  "sticky_css": [
+   ".scribe-v2__media-column (top: 80px)",
+   ".main-product-scribe-v2 .product__media-wrapper (top: 24px)",
+   ".sticky (top: None)",
+   ".shopify-section-header-sticky (top: 0)",
+   ".sticky (top: None)",
+   ".sticky (top: None)"
+  ]
+ },
+ "patterns": [
+  {
+   "rule": "字重很省：300/400 覆盖 94% 的字",
+   "evidence": "300: 62%, 400: 32%, 600: 4%, 500: 2%",
+   "criterion": "层级先用字号和颜色（透明度）拉开，粗体只留给强调；新增样式别引入第三种字重",
+   "confidence": "事实"
+  },
+  {
+   "rule": "文字层级用 8 个实色灰阶（不是透明度）：#1a1a1a / #ffffff / #f3f2f1 / #000000 / #c0c0c0 / #1b1917",
+   "evidence": "按字数：#1a1a1a 27%, #ffffff 15%, #f3f2f1 11%, #000000 10%, #c0c0c0 6%, #1b1917 5%",
+   "criterion": "新文字先归到 primary/secondary/tertiary/muted 某一档再取色；同一档不要再造相近的灰",
+   "confidence": "事实"
+  },
+  {
+   "rule": "强调色 #5c54b7 用量克制（约占文字 0.0%），只出现在 少数组件",
+   "evidence": "accent 候选：['#5c54b7']",
+   "criterion": "强调色只给可点的 / 需要被看见的（按钮、链接、阶段标签），不给大面积底色",
+   "confidence": "推断"
+  },
+  {
+   "rule": "间距没有统一基准：4 的倍数只占 44%，8 的倍数 25%（按组件各自调 / 按比例缩放）",
+   "evidence": "常用值：[5, 6, 10, 12, 16, 18, 24, 27, 48, 70, 96]",
+   "criterion": "学它时不要抄间距数值；只学「同类组件同一组间距」和「大区块之间的留白比例」",
+   "confidence": "推断"
+  },
+  {
+   "rule": "圆角按组件类型分配：50 (≥半高=胶囊)×22，23×16，4×14，12×12，24×12",
+   "evidence": "50 (≥半高=胶囊): pages/flowtica-verso: button.flowtica-search-modal__close flowtica-se [ctl16 box6]; 23: pages/flowtica-verso: div.verso-reserve__card [ctl14 box2]; 4: pages/flowtica-verso: button.verso-ask__card [box10 ctl4]; 12: pages/flowtica-verso: div.flowtica-search-modal__field [box7 ctl5]",
+   "criterion": "同一类组件同一个圆角；不要在一个页面里混 3 种以上的圆角",
+   "confidence": "推断"
+  },
+  {
+   "rule": "描边按语境分（最多的一种只占 28%）",
+   "evidence": "1px solid #a89991|b×14（pages/flowtica-verso: div.verso-specs__row）; 1px solid #dad5d1|all×10（pages/flowtica-verso: div.flowtica-search-modal__field）; 0.5px solid #7f6b5a|b×7（pages/flowtica-verso: details.faq-design__item）; 1px solid #e8dfd7|all×3（pages/flowtica-verso: div.verso-reserve__count）; 1px solid #d9d1cc|all×3（pages/flowtica-verso: span.verso-reserve__marker）",
+   "criterion": "新加描边先找同类组件用的那条线；同一语境（列表分隔 / 输入框 / 卡片）只用一种",
+   "confidence": "推断"
+  },
+  {
+   "rule": "过渡时长按属性分档：颜色 200/100ms；位移/缩放 220/360ms；滤镜 240ms；all 300ms",
+   "evidence": "color|200ms|ease×16（pages/flowtica-verso: a.footer-nav-link）; transform|220ms|cubic-bezier(0.2, 0, 0, 1)×8（pages/flowtica-verso: img.faq-design__icon）; text-decoration|100ms|ease×7（pages/flowtica-verso: span.flowtica-header-menu__label）; border-color|100ms|ease×6（pages/flowtica-verso: div.flowtica-search-modal__field）; transform,opacity|360,240ms|cubic-bezier(0.2, 0.8, 0.2, 1),ease×6（pages/flowtica-verso: div.swiper-slide verso-ask__slide swiper-sli）; filter|240ms|ease×6（pages/flowtica-verso: img.verso-ask__card-image）",
+   "criterion": "新交互按「改的是什么」取时长：颜色 200/100ms；位移/缩放 220/360ms；滤镜 240ms；all 300ms；缓动优先用 ease",
+   "confidence": "推断"
+  },
+  {
+   "rule": "入场动效：元素进入视口时淡入 + 位移 20/28/72px，同组依次延迟",
+   "evidence": "reveal: o0 → o1 | anim versoRevealDirectional 0.76s cubic-bezier(0.22, 1, 0.36 0.075s | ~250–650ms；WAAPI: CSSAnimation|versoRevealDirectional|760ms|linear|1|opacity:0→1 transform:translate3d(0px, 28px, 0px) →translateZ(0px) scale(1)；延迟 [75, 150, 225, 300, 375, 450]ms",
+   "criterion": "位移 20/28/72px、时长 80/200/600ms、缓动 cubic-bezier(0.22, 1, 0.36, 1)、同组间隔 75ms；只在第一次进入视口时播",
+   "confidence": "事实"
+  },
+  {
+   "rule": "导航滚动行为：not-sticky (scrolls away)",
+   "evidence": "{\"atTop\": {\"bg\": \"rgba(255,255,255,0.05)\", \"h\": 52, \"top\": 36, \"op\": 1, \"tf\": \"\", \"sh\": \"\", \"blur\": \"blur(7.5px)\", \"bd\": \"\"}, \"scrolledDown\": {\"bg\": \"rgba(255,255,255,0.05)\", \"h\": 52, \"top\": -17652, \"op\": 1, \"tf\": \"\", \"s",
+   "criterion": "导航不跟随，首屏之后让位给内容；需要导航时回到顶部",
+   "confidence": "事实"
+  },
+  {
+   "rule": "视差：6 处元素移动速度 ≠ 滚动速度（系数 [-0.06, 0.01, 0.37]）",
+   "evidence": "0.37 picture.verso-notes-reveal__product; 0.37 img.verso-notes-reveal__layer-imag; 0.37 picture.verso-notes-reveal__callouts; 0.37 img.verso-notes-reveal__layer-imag",
+   "criterion": "视差只给装饰性的大图 / 产品图层，文字不做视差",
+   "confidence": "事实"
+  },
+  {
+   "rule": "滚动叙事：2 个满屏 sticky 场景（滚动时画面钉住、内容在里面换）",
+   "evidence": "div.verso-notes-reveal__scene; div.verso-ask__scene scroll-trigger verso-an",
+   "criterion": "重点功能用「钉住一屏 + 滚动驱动内容变化」讲，而不是一段段往下排",
+   "confidence": "事实"
+  }
+ ],
+ "not_worth_learning": [
+  "断点 min-width 1200px（自定义（数值同 Bootstrap 默认），736 条规则）",
+  "断点 min-width 768px（Tailwind 默认，713 条规则）",
+  "断点 min-width 750px（Shopify Dawn 默认，200 条规则）",
+  "断点 max-width 749px（Shopify Dawn 默认，159 条规则）",
+  "断点 max-width 989px（Shopify Dawn 默认，112 条规则）",
+  "断点 min-width 990px（Shopify Dawn 默认，105 条规则）",
+  "断点 min-width 1280px（Tailwind 默认，76 条规则）",
+  "断点 min-width 576px（自定义（数值同 Bootstrap 默认），74 条规则）",
+  "断点 min-width 1024px（Tailwind 默认，66 条规则）",
+  "断点 min-width 640px（Tailwind 默认，13 条规则）",
+  "断点 max-width 768px（Tailwind 默认，11 条规则）",
+  "断点 max-width 1200px（自定义（数值同 Bootstrap 默认），7 条规则）",
+  "缓动 cubic-bezier(0.4, 0, 0.2, 1) = Tailwind 默认（4 处），说明作者没有专门设计缓动",
+  "Shopify Dawn 主题自带：.page-width 容器、scroll-trigger/animate--slide-in 入场、购物车/语言选择/搜索等组件 → 主题默认"
+ ],
+ "contrast_note": "对比度按文字色叠在 bg.page 上计算（WCAG 2.x）",
+ "color_ladders": {
+  "#ffffff": [
+   1.0,
+   0.9,
+   0.85,
+   0.15
+  ]
+ },
+ "js_color_maps": []
+}

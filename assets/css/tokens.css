@@ -1,8 +1,9 @@
-/* 旧站实测令牌 → CSS 变量（来源 design-tokens.json；改这里不改组件） */
+/* 旧站实测令牌 → CSS 变量（来源 design-tokens.json；改这里不改组件）
+   11-05 按源码校正 5 处：导航滚动底 .92→.9、chips 圆角 6→8、分区副标题 / 项目卡标题 / 奖项标题 3 条 clamp（依据：工作流脚本/skills/extract-design-system/校准_旧站对照.md） */
 :root {
   --bg: #0c0c0c; --surface: #141414; --surface-2: #111111; --surface-3: #1a1a1a;
   --glass: rgba(255,255,255,.04); --glass-weak: rgba(255,255,255,.03); --overlay: rgba(0,0,0,.2);
-  --nav-scrolled: rgba(12,12,12,.92);
+  --nav-scrolled: rgba(12,12,12,.9);
   --t100: #fff; --t90: rgba(255,255,255,.9); --t85: rgba(255,255,255,.85); --t80: rgba(255,255,255,.8);
   --t75: rgba(255,255,255,.75); --t70: rgba(255,255,255,.7); --t65: rgba(255,255,255,.65); --t60: rgba(255,255,255,.6);
   --t55: rgba(255,255,255,.55); --t50: rgba(255,255,255,.5); --t45: rgba(255,255,255,.45); --t40: rgba(255,255,255,.4);
@@ -14,12 +15,12 @@
   --shadow-card: 0 4px 12px rgba(0,0,0,.08);
   --font: Inter, -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
   --fs-display: clamp(4rem, 12vw, 10rem); --fs-h1: clamp(2.5rem, 7vw, 5.5rem); --fs-works: clamp(3rem, 6vw, 5rem);
-  --fs-h2: clamp(2rem, 4vw, 3rem); --fs-h2-sub: clamp(1.2rem, 2.5vw, 2.25rem); --fs-h2-case: clamp(1.6rem, 3.4vw, 2rem);
-  --fs-h2-small: clamp(1.5rem, 2.5vw, 1.8rem); --fs-h3-card: clamp(1.3rem, 2.2vw, 2rem); --fs-lead: clamp(1.25rem, 2.2vw, 1.5rem);
+  --fs-h2: clamp(2rem, 4vw, 3rem); --fs-h2-sub: clamp(1.2rem, 2.5vw, 2.5rem); --fs-h2-case: clamp(1.6rem, 3.4vw, 2rem);
+  --fs-h2-small: clamp(1.3rem, 2.5vw, 1.8rem); --fs-h3-card: clamp(1.3rem, 2.5vw, 2rem); --fs-lead: clamp(1.25rem, 2.2vw, 1.5rem);
   --fs-h3: 18px; --fs-body: 15px; --fs-small: 13px; --fs-tiny: 11px;
   --container: 1400px; --pad-x: 24px; --case-max: 1052px; --case-toc: 180px; --text-max: 640px;
   --sec-y: 160px; --about-y: 128px; --case-y: 80px; --hero-pb: 64px; --grid-gap: 16px; --overlay-pad: 32px; --case-pt: 56px; --card-pad: 24px;
-  --r-card: 14px; --r-chip: 6px; --r-md: 8px;
+  --r-card: 14px; --r-chip: 8px; --r-md: 8px;
   --ease: 300ms; --ease-nav: 500ms; --ease-img: 700ms;
 }
 @media (min-width: 768px) { :root { --pad-x: 48px; --about-y: 192px; --hero-pb: 96px; --grid-gap: 32px; --overlay-pad: 48px; --case-pt: 80px; --card-pad: 32px; } }

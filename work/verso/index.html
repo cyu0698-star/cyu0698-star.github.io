@@ -11,17 +11,8 @@
 <link rel="alternate" hreflang="de" href="https://cyu0698-star.github.io/de/work/verso/">
 <meta property="og:title" content="Verso 名片 · iOS 页面流程（Flowtica，墨水屏 NFC 名片）— 程雨芊作品集"><meta property="og:description" content="墨水屏 NFC 名片设备的 iOS 配置链路：PRD 拆解、交互图鉴、竞品图鉴、47 帧交付版；页面层级与 UI 美观度 redesign 施工中。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230c0c0c'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23fff' font-family='Inter,system-ui'%3E雨%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="../../assets/css/tokens.css">
-<link rel="stylesheet" href="../../assets/css/site.css">
-<style>
-@media (max-width: 767px) {
-  .nav__in { flex-wrap: wrap; column-gap: 16px; row-gap: 4px; }
-  .nav__brand, .nav__lang { white-space: nowrap; }
-  .nav__links { order: 3; width: 100%; flex-wrap: wrap; column-gap: 12px; row-gap: 4px; }
-  .nav__links a { letter-spacing: .1em; white-space: nowrap; }
-}
-.case-content { min-width: 0; }
-</style>
+<link rel="stylesheet" href="../../assets/css/tokens.css?v=a904e3cc">
+<link rel="stylesheet" href="../../assets/css/site.css?v=8a37a320">
 </head>
 <body>
 <nav class="nav" id="nav"><div class="container nav__in">
@@ -42,21 +33,34 @@
   <div class="case-hero case-hero--contain"><img src="../../assets/img/verso/cover.webp" alt="Verso 名片 iOS 页面" fetchpriority="high"></div>
 </div>
 <section class="case-body"><div class="container">
-  <div class="crumb"><a href="../../#works">作品</a><span>/</span><span>Verso 名片</span></div>
-  <h1 class="case-title">Verso 名片 · iOS 页面流程<br><span class="muted" style="font-size:var(--fs-h3);font-weight:400">Flowtica · iOS · 2026.09 – 2026.10</span></h1>
-  <p class="case-sub">Verso 是一块 NFC 墨水屏名片设备：用户在 iOS App 里配置名片，对方碰一碰或扫码就能看网页、开链接或存联系人。我负责从 PRD 到 iOS 页面流程交付版的全部设计产物。</p>
-  <div class="meta">
-    <div><span>角色</span><span>UI 执行设计师 · PRD 拆解 · 交互与竞品图鉴 · 页面流程交付版</span></div>
-    <div><span>团队</span><span>PM 定需求（电子名片 PRD V2.0、照片名片创建 PRD、名片 Logo 与模板 PRD）· iOS 开发</span></div>
-    <div><span>产物</span><span>名片交互图鉴（09-23）· 竞品图鉴（09-26）· 回传与留资图解（09-27）· 交付版 47 帧（10-10）</span></div>
-    <div><span>状态</span><span>交付版已给开发；本页 redesign 部分施工中</span></div>
+  <div class="crumb"><a href="../../#works">作品</a><span>/</span><span>Verso 名片 · iOS 页面流程</span></div>
+  <div class="case-head">
+    <div>
+      <p class="case-eyebrow">概述</p>
+      <h1 class="case-title">Verso 名片 · iOS 页面流程</h1>
+      <p class="case-sub">Verso 是一块 NFC 墨水屏名片设备：用户在 iOS App 里配置名片，对方碰一碰或扫码就能看网页、开链接或存联系人。我负责从 PRD 到 iOS 页面流程交付版的全部设计产物。</p>
+    </div>
+    <div>
+      <p class="case-eyebrow">详情</p>
+      <div class="details">
+        <div class="details__row"><span class="details__k">服务内容：</span><span class="details__v">PRD 拆解、交互设计、UI 设计</span></div>
+        <div class="details__row"><span class="details__k">项目类型：</span><span class="details__v">iOS App 功能</span></div>
+        <div class="details__row"><span class="details__k">领域：</span><span class="details__v">AI 硬件、墨水屏</span></div>
+        <div class="details__row"><span class="details__k">年份：</span><span class="details__v">2026</span></div>
+        <div class="details__row details__row--long"><span class="details__k">2026.09 – 2026.10</span><span class="details__v details__v--muted">从 PRD 到 47 帧 iOS 页面流程交付版。</span></div>
+        <div class="details__row details__row--chips"><span class="details__k">Location:</span><span class="details__chips"><span class="chip-o">深圳 · AI 硬件科技公司</span></span></div>
+        <div class="details__row details__row--long"><span class="details__k">关键决策 01</span><span class="details__v details__v--soft">帧级链路清单：每帧对应 PRD 条号，空白点列疑点清单给 PM</span></div>
+        <div class="details__row details__row--long"><span class="details__k">关键决策 02</span><span class="details__v details__v--soft">两份实拍图鉴先把决策点摆出来，再画稿</span></div>
+        <div class="details__row details__row--long"><span class="details__k">关键决策 03</span><span class="details__v details__v--soft">Update 做成更新中 / 成功 / 失败三态，离线可编辑不可发布</span></div>
+      </div>
+    </div>
   </div>
 
   <div class="case-layout">
     <nav class="toc" aria-label="目录"><p>目录</p>
       <a href="#v0">00 速览</a><a href="#v1">01 产品是什么</a><a href="#v2">02 我做了什么</a><a href="#v3">03 页面流程与状态</a><a href="#v4">04 硬件约束与疑点</a><a href="#v5">05 下一步 redesign</a>
     </nav>
-    <div class="case-content">
+    <div class="case-content theme-verso">
 
       <section class="csec csec--first" id="v0">
         <div class="overview">
@@ -149,12 +153,12 @@
 </main>
 <footer class="footer"><div class="container">
   <div class="footer__grid">
-    <div class="footer__col"><h4>导航</h4><ul><li><a href="../../">首页</a></li><li><a href="../../#works">作品</a></li><li><a href="../../#about">关于</a></li><li><a href="../../#contact">联系</a></li></ul></div>
-    <div class="footer__col"><h4>作品</h4><ul><li><a href="../../work/deepchat-bi/">DeepChat BI · Agent SaaS</a></li><li><a href="../../work/helpyou/">帮你理 · AI 整理</a></li><li><a href="../../work/financial-forms/">I Love Financial Forms</a></li><li><a href="../../work/verso/">Verso 名片 · iOS</a></li></ul></div>
-    <div class="footer__col footer__col--wide"><h4>联系</h4><ul><li><a href="mailto:yuqiancheng818@gmail.com">yuqiancheng818@gmail.com</a></li><li><span class="muted small">深圳 · 广州 · 杭州 · 上海 · 北京 均可</span></li></ul></div>
+    <div class="footer__col footer__star"><svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M24 0L24.8 19.2L48 24L24.8 28.8L24 48L23.2 28.8L0 24L23.2 19.2L24 0Z" fill="currentColor"/></svg></div>
+    <div class="footer__col"><h4>导航</h4><ul class="footer__list"><li><a href="../../">首页</a></li><li><a href="../../#works">作品</a></li><li><a href="../../#about">关于</a></li><li><a href="../../#contact">联系</a></li></ul></div>
+    <div class="footer__col"><h4>联系</h4><ul class="footer__list footer__list--ruled"><li><a href="mailto:yuqiancheng818@gmail.com" title="yuqiancheng818@gmail.com">电子邮箱</a></li></ul></div>
   </div>
-  <div class="footer__name"><h2>程雨芊</h2><div class="row"><span>AI 产品设计师</span><span>© 2026 · 等你来…</span></div></div>
+  <div class="footer__name"><h2>程雨芊</h2><div class="row"><span>AI 产品设计师</span><span>等你来…</span></div></div>
 </div></footer>
-<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/site.js?v=56c8127a"></script>
 </body>
 </html>

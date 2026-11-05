@@ -3,7 +3,7 @@
 中文片段在 src/（站根），英文在 src/en/（→ en/），德文在 src/de/（→ de/）。
 片段头部用注释声明：<!-- title: … --> <!-- desc: … --> <!-- nav: home|work --> <!-- noindex: yes|no -->
 运行：python3 build.py"""
-import re, pathlib, datetime
+import re, pathlib, datetime, hashlib
 ROOT = pathlib.Path(__file__).resolve().parent
 SRC = ROOT / "src"
 EMAIL = "yuqiancheng818@gmail.com"
@@ -12,18 +12,17 @@ NOINDEX_DEFAULT = True   # 她过目拍板前不让搜索引擎收录；改 Fals
 
 LANGS = {
     "zh": dict(prefix="", html="zh-CN", name="中文",
-               nav=("首页", "作品", "关于", "联系"), foot=("导航", "作品", "联系"),
-               works=("DeepChat BI · Agent SaaS", "帮你理 · AI 整理", "I Love Financial Forms", "Verso 名片 · iOS"),
-               cities="深圳 · 广州 · 杭州 · 上海 · 北京 均可", role="AI 产品设计师", tail="© 2026 · 等你来…"),
+               nav=("首页", "作品", "关于", "联系"), foot=("导航", "联系"), mail="电子邮箱",
+               fname="程雨芊", role="AI 产品设计师", tail="等你来…"),
     "en": dict(prefix="en/", html="en", name="EN",
-               nav=("Home", "Work", "About", "Contact"), foot=("Navigation", "Work", "Contact"),
-               works=("DeepChat BI · Agent SaaS", "Help-You-Organize · AI organizing", "I Love Financial Forms", "Verso card · iOS"),
-               cities="Open to Shenzhen · Guangzhou · Hangzhou · Shanghai · Beijing", role="AI Product Designer", tail="© 2026 · see you soon…"),
+               nav=("Home", "Work", "About", "Contact"), foot=("Navigation", "Contact"), mail="Email",
+               fname="Yuqian<br>Cheng", role="AI Product Designer", tail="Waiting for you…"),
     "de": dict(prefix="de/", html="de", name="DE",
-               nav=("Start", "Arbeiten", "Über mich", "Kontakt"), foot=("Navigation", "Arbeiten", "Kontakt"),
-               works=("DeepChat BI · Agent-SaaS", "Help-You-Organize · KI-Ordnung", "I Love Financial Forms", "Verso-Karte · iOS"),
-               cities="Offen für Shenzhen · Guangzhou · Hangzhou · Shanghai · Peking", role="AI-Produktdesignerin", tail="© 2026 · bis bald…"),
+               nav=("Start", "Arbeiten", "Über mich", "Kontakt"), foot=("Navigation", "Kontakt"), mail="E-Mail",
+               fname="Yuqian<br>Cheng", role="AI-Produktdesignerin", tail="Bis bald…"),
 }
+# 页脚左侧四角星（旧站同款路径，48×48）
+STAR = '<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M24 0L24.8 19.2L48 24L24.8 28.8L24 48L23.2 28.8L0 24L23.2 19.2L24 0Z" fill="currentColor"/></svg>'
 # 页面键 → （输出相对路径，片段相对路径）；各语言相同
 PAGES = {
     "home": ("index.html", "index.html"),
@@ -33,18 +32,9 @@ PAGES = {
     "verso": ("work/verso/index.html", "work/verso.html"),
 }
 
-# 布局级样式补丁：英 / 德文比中文长，暴露了 site.css 的两处溢出（assets/ 暂不改，确认后可整段迁入 site.css）
-# ① 手机端导航：语言切换被挤出屏幕（EN/DE 点不到）→ 两行：品牌 + 语言一行，四个导航链接一行
-# ② 案例页栅格列默认 min-width:auto，表格 / 长单词把整页撑宽 → 列宽归零，表格在 .table-wrap 内横滑
-OVERRIDE_CSS = """<style>
-@media (max-width: 767px) {
-  .nav__in { flex-wrap: wrap; column-gap: 16px; row-gap: 4px; }
-  .nav__brand, .nav__lang { white-space: nowrap; }
-  .nav__links { order: 3; width: 100%; flex-wrap: wrap; column-gap: 12px; row-gap: 4px; }
-  .nav__links a { letter-spacing: .1em; white-space: nowrap; }
-}
-.case-content { min-width: 0; }
-</style>"""
+def ver(rel):
+    """静态资源加内容指纹 ?v=xxxx：CSS / JS 改了，回访者的浏览器不会拿旧缓存配新 HTML"""
+    return rel + "?v=" + hashlib.md5((ROOT / rel).read_bytes()).hexdigest()[:8]
 
 def meta(frag, key, default=""):
     m = re.search(r"<!--\s*%s:\s*(.*?)\s*-->" % key, frag)
@@ -60,7 +50,7 @@ def layout(body, *, lang, page, title, desc, root, nav, noindex):
     switch = "<span>｜</span>".join(
         f'<a href="{root}{LANGS[l]["prefix"]}{rel}"{is_active if l == lang else ""}>{LANGS[l]["name"]}</a>' for l in LANGS)
     home = root + L["prefix"]
-    n1, n2, n3, n4 = L["nav"]; f1, f2, f3 = L["foot"]; w1, w2, w3, w4 = L["works"]
+    n1, n2, n3, n4 = L["nav"]; f1, f2 = L["foot"]
     return f"""<!DOCTYPE html>
 <html lang="{L['html']}">
 <head>
@@ -72,9 +62,8 @@ def layout(body, *, lang, page, title, desc, root, nav, noindex):
 {alts}
 <meta property="og:title" content="{title}"><meta property="og:description" content="{desc}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230c0c0c'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23fff' font-family='Inter,system-ui'%3E雨%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="{root}assets/css/tokens.css">
-<link rel="stylesheet" href="{root}assets/css/site.css">
-{OVERRIDE_CSS}
+<link rel="stylesheet" href="{root}{ver('assets/css/tokens.css')}">
+<link rel="stylesheet" href="{root}{ver('assets/css/site.css')}">
 </head>
 <body>
 <nav class="nav" id="nav"><div class="container nav__in">
@@ -92,13 +81,13 @@ def layout(body, *, lang, page, title, desc, root, nav, noindex):
 </main>
 <footer class="footer"><div class="container">
   <div class="footer__grid">
-    <div class="footer__col"><h4>{f1}</h4><ul><li><a href="{home}">{n1}</a></li><li><a href="{home}#works">{n2}</a></li><li><a href="{home}#about">{n3}</a></li><li><a href="{home}#contact">{n4}</a></li></ul></div>
-    <div class="footer__col"><h4>{f2}</h4><ul><li><a href="{home}work/deepchat-bi/">{w1}</a></li><li><a href="{home}work/helpyou/">{w2}</a></li><li><a href="{home}work/financial-forms/">{w3}</a></li><li><a href="{home}work/verso/">{w4}</a></li></ul></div>
-    <div class="footer__col footer__col--wide"><h4>{f3}</h4><ul><li><a href="mailto:{EMAIL}">{EMAIL}</a></li><li><span class="muted small">{L['cities']}</span></li></ul></div>
+    <div class="footer__col footer__star">{STAR}</div>
+    <div class="footer__col"><h4>{f1}</h4><ul class="footer__list"><li><a href="{home}">{n1}</a></li><li><a href="{home}#works">{n2}</a></li><li><a href="{home}#about">{n3}</a></li><li><a href="{home}#contact">{n4}</a></li></ul></div>
+    <div class="footer__col"><h4>{f2}</h4><ul class="footer__list footer__list--ruled"><li><a href="mailto:{EMAIL}" title="{EMAIL}">{L['mail']}</a></li></ul></div>
   </div>
-  <div class="footer__name"><h2>程雨芊</h2><div class="row"><span>{L['role']}</span><span>{L['tail']}</span></div></div>
+  <div class="footer__name"><h2>{L['fname']}</h2><div class="row"><span>{L['role']}</span><span>{L['tail']}</span></div></div>
 </div></footer>
-<script src="{root}assets/js/site.js"></script>
+<script src="{root}{ver('assets/js/site.js')}"></script>
 </body>
 </html>
 """
