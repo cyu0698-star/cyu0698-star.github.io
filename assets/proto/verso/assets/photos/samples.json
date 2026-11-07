@@ -1,0 +1,57 @@
+[
+  {
+    "file": "assets/photos/sample_01.jpg",
+    "thumb": "assets/photos/thumb_01.jpg",
+    "name": "Daniel Reyes",
+    "title": "Principal Architect",
+    "company": "Harbor & Vale Architects",
+    "email": "daniel@harborvale.com",
+    "phone": "+1 (206) 555-0148",
+    "website": "harborvale.com",
+    "scene": "hand-held, dark interior background"
+  },
+  {
+    "file": "assets/photos/sample_02.jpg",
+    "thumb": "assets/photos/thumb_02.jpg",
+    "name": "Dr. Priya Nair",
+    "title": "Dentist",
+    "company": "Lumen Dental Studio",
+    "email": "hello@lumendental.co",
+    "phone": "+1 (312) 555-0190",
+    "website": "",
+    "scene": "card stack on light wood desk, flower leaf at edge"
+  },
+  {
+    "file": "assets/photos/sample_03.jpg",
+    "thumb": "assets/photos/thumb_03.jpg",
+    "name": "Marcus Bell",
+    "title": "Founder",
+    "company": "Oakline Coffee Roasters",
+    "email": "marcus@oakline.coffee",
+    "phone": "",
+    "website": "oakline.coffee",
+    "scene": "card stack on wood desk, top-down"
+  },
+  {
+    "file": "assets/photos/sample_04.jpg",
+    "thumb": "assets/photos/thumb_04.jpg",
+    "name": "Hannah Cole",
+    "title": "Attorney at Law",
+    "company": "Northstar Legal",
+    "email": "hcole@northstarlegal.com",
+    "phone": "+1 (646) 555-0177",
+    "website": "",
+    "scene": "held toward camera by a woman, bright room"
+  },
+  {
+    "file": "assets/photos/sample_05.jpg",
+    "thumb": "assets/photos/thumb_05.jpg",
+    "name": "Leo Tanaka",
+    "title": "Product Designer",
+    "company": "Pixelforge Studio",
+    "email": "leo@pixelforge.io",
+    "phone": "",
+    "website": "pixelforge.io",
+    "scene": "vertical card front + back on woven fabric"
+  }
+]

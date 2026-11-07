@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#edeae6">
+<title>Verso · iOS prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Inter:wght@300;400;500;600&family=Marcellus&display=swap">
+<link rel="stylesheet" href="proto.css">
+</head>
+<body>
+
+<!-- Icon sprite · 16/20 grid, 1.5 stroke, round caps; shapes follow the SF Symbol of the same name -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="chevron.left" viewBox="0 0 10 18"><path d="M8.5 1.5 1.5 9l7 7.5"/></symbol>
+  <symbol id="chevron.right" viewBox="0 0 8 14"><path d="M1.5 1.5 6.5 7l-5 5.5"/></symbol>
+  <symbol id="qrcode" viewBox="0 0 16 16"><rect x="1.75" y="1.75" width="5" height="5" rx="1"/><rect x="9.25" y="1.75" width="5" height="5" rx="1"/><rect x="1.75" y="9.25" width="5" height="5" rx="1"/><path d="M9.5 9.5h1.5M13.5 9.5v1.5M9.5 13.5h4M11.75 11.75v0"/></symbol>
+  <symbol id="pencil" viewBox="0 0 16 16"><path d="M10.6 2.4a1.5 1.5 0 0 1 2.1 0l.9.9a1.5 1.5 0 0 1 0 2.1L6 13l-3.5.9.9-3.5z"/><path d="m9.5 3.5 3 3"/></symbol>
+  <symbol id="doc.on.doc" viewBox="0 0 16 16"><rect x="5.25" y="5.25" width="9" height="9" rx="2"/><path d="M10.75 5.25V3.75a2 2 0 0 0-2-2h-5a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h1.5"/></symbol>
+  <symbol id="square.and.arrow.up" viewBox="0 0 16 16"><path d="M8 10V1.5M5.25 4.25 8 1.5l2.75 2.75"/><path d="M5.5 6.5H4.25a1.75 1.75 0 0 0-1.75 1.75v4.5a1.75 1.75 0 0 0 1.75 1.75h7.5a1.75 1.75 0 0 0 1.75-1.75v-4.5a1.75 1.75 0 0 0-1.75-1.75H10.5"/></symbol>
+  <symbol id="wallet.pass" viewBox="0 0 20 20"><rect x="2.5" y="4.5" width="15" height="11" rx="2"/><path d="M2.5 8h15M2.5 11h15"/></symbol>
+  <symbol id="checkmark" viewBox="0 0 16 16"><path d="m3 8.5 3.2 3.2L13 4.5"/></symbol>
+  <symbol id="exclamationmark.circle" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5"/><path d="M8 4.75v4M8 11.25v0"/></symbol>
+  <symbol id="xmark" viewBox="0 0 16 16"><path d="m3.5 3.5 9 9M12.5 3.5l-9 9"/></symbol>
+  <symbol id="ellipsis" viewBox="0 0 16 16"><circle cx="3" cy="8" r=".75"/><circle cx="8" cy="8" r=".75"/><circle cx="13" cy="8" r=".75"/></symbol>
+  <symbol id="plus" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></symbol>
+  <symbol id="camera" viewBox="0 0 16 16"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h1.75L6.5 2.5h3L10.75 4h1.75A1.5 1.5 0 0 1 14 5.5v6a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 11.5z"/><circle cx="8" cy="8.5" r="2.5"/></symbol>
+  <symbol id="sparkles" viewBox="0 0 16 16"><path d="M7 2.5 8.2 6 11.5 7.2 8.2 8.4 7 12 5.8 8.4 2.5 7.2 5.8 6zM12.5 10.5l.5 1.5 1.5.5-1.5.5-.5 1.5-.5-1.5-1.5-.5 1.5-.5z"/></symbol>
+  <symbol id="chevron.up.chevron.down" viewBox="0 0 16 16"><path d="m5 6 3-3 3 3M5 10l3 3 3-3"/></symbol>
+  <symbol id="message" viewBox="0 0 20 20"><path d="M10 3.5c4.1 0 7 2.6 7 5.8s-2.9 5.8-7 5.8c-.9 0-1.7-.1-2.5-.4L4 16l.9-3C3.7 11.9 3 10.7 3 9.3 3 6.1 5.9 3.5 10 3.5z"/></symbol>
+  <symbol id="phone.bubble" viewBox="0 0 20 20"><path d="M10 2.75a7.25 7.25 0 1 1-3.6 13.55L3 17.25l1-3.3A7.25 7.25 0 0 1 10 2.75z"/><path d="M7.6 7.2c.3-.5.9-.5 1.1 0l.4.9c.1.3 0 .6-.2.8l-.3.3c.4.9 1.1 1.6 2 2l.3-.3c.2-.2.5-.3.8-.2l.9.4c.5.2.5.8 0 1.1-.5.4-1.2.5-1.8.3a6 6 0 0 1-3.5-3.5c-.2-.6-.1-1.3.3-1.8z"/></symbol>
+  <symbol id="globe" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.25"/><path d="M2.75 10h14.5M10 2.75c2 2 3 4.4 3 7.25s-1 5.25-3 7.25c-2-2-3-4.4-3-7.25s1-5.25 3-7.25z"/></symbol>
+  <symbol id="calendar" viewBox="0 0 20 20"><rect x="3" y="4.5" width="14" height="12.5" rx="2.5"/><path d="M3 8.5h14M7 2.75v3.5M13 2.75v3.5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 20 20"><path d="M5.2 3.2c.5-.5 1.3-.4 1.7.2l1.4 2.2c.3.5.2 1.1-.2 1.5l-.9.9a9.6 9.6 0 0 0 4.8 4.8l.9-.9c.4-.4 1-.5 1.5-.2l2.2 1.4c.6.4.7 1.2.2 1.7l-1.1 1.1c-.8.8-2 1.1-3 .7A14.5 14.5 0 0 1 3.4 7.3c-.4-1-.1-2.2.7-3z"/></symbol>
+  <symbol id="envelope" viewBox="0 0 20 20"><rect x="2.75" y="4.75" width="14.5" height="10.5" rx="2"/><path d="m3.5 5.75 6.5 5 6.5-5"/></symbol>
+  <symbol id="link" viewBox="0 0 20 20"><path d="M8.5 11.5a3.2 3.2 0 0 0 4.5 0l2.5-2.5a3.2 3.2 0 0 0-4.5-4.5l-1 1M11.5 8.5a3.2 3.2 0 0 0-4.5 0L4.5 11a3.2 3.2 0 0 0 4.5 4.5l1-1"/></symbol>
+  <symbol id="safari" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.25"/><path d="m12.8 7.2-1.6 4-4 1.6 1.6-4z"/></symbol>
+  <symbol id="nfc.arcs" viewBox="0 0 24 24"><path d="M8 9.2a4 4 0 0 1 0 5.6M11.5 6.5a8 8 0 0 1 0 11M15 3.8a12 12 0 0 1 0 16.4"/></symbol>
+  <symbol id="circle.fill" viewBox="0 0 16 16"><circle cx="8" cy="8" r="4" fill="currentColor"/></symbol>
+  <!-- system sheet glyphs -->
+  <symbol id="sys.airdrop" viewBox="0 0 24 24"><path d="M7.5 17.5a7 7 0 1 1 9 0"/><path d="M9.6 14.6a3.5 3.5 0 1 1 4.8 0"/><path d="m12 15-3 6h6z" fill="currentColor"/></symbol>
+  <symbol id="sys.message" viewBox="0 0 24 24"><path d="M12 4c5 0 8.5 3.1 8.5 7s-3.5 7-8.5 7c-1 0-2-.1-2.9-.4L5 20l1-3.5C4.4 15.2 3.5 13.2 3.5 11 3.5 7.1 7 4 12 4z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="sys.mail" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" fill="currentColor" stroke="none"/><path d="m3.5 7 8.5 6 8.5-6" stroke="#2f7cf6"/></symbol>
+  <symbol id="sys.copy" viewBox="0 0 24 24"><rect x="8" y="7" width="11" height="14" rx="2"/><path d="M15.5 7V5a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2H8"/></symbol>
+  <symbol id="sys.star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z"/></symbol>
+  <symbol id="sys.person" viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c.8-3.5 3.6-5.5 7-5.5s6.2 2 7 5.5"/></symbol>
+  <symbol id="sys.folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="sys.glasses" viewBox="0 0 24 24"><circle cx="6.5" cy="13" r="3.5"/><circle cx="17.5" cy="13" r="3.5"/><path d="M10 13h4M3 13h0M21 13h0"/></symbol>
+  <symbol id="sys.book" viewBox="0 0 24 24"><path d="M3 5.5c3-1 6-1 9 1 3-2 6-2 9-1v13c-3-1-6-1-9 1-3-2-6-2-9-1zM12 6.5v13"/></symbol>
+  <symbol id="sys.plus.square" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></symbol>
+</svg>
+
+<!-- Tour bar (hidden with ?demo=1) -->
+<div class="tour" id="tour" role="toolbar" aria-label="Prototype tour">
+  <span class="tour__id" id="tourId">00</span>
+  <span class="tour__title" id="tourTitle">设备页</span>
+  <select id="tourJump" aria-label="Jump to frame"></select>
+  <span class="seg" role="group" aria-label="设备页分享入口">
+    <span style="padding:4px 6px 4px 8px">设备页</span><button type="button" data-variant="00" aria-pressed="true">乙</button><button type="button" data-variant="00c" aria-pressed="false">丙</button>
+  </span>
+  <label><input type="checkbox" id="optRM"> Reduce motion</label>
+  <label><input type="checkbox" id="optHot"> 显示热区</label>
+  <button type="button" class="tour__btn" data-demo="1">演示 1 递名片</button>
+  <button type="button" class="tour__btn" data-demo="2">演示 2 更新名片</button>
+  <button type="button" class="tour__btn" id="tourReset">重置</button>
+</div>
+
+<div class="stage">
+<div class="rig-size" id="rigSize"><div class="rig" id="scaler">
+
+<!-- ═════════ Verso device simulator (spec §10 / §10.3 / §11.3) ═════════ -->
+<div class="verso-panel">
+  <div class="verso" id="verso" aria-label="Verso e-ink device simulator">
+    <img class="verso__body" src="assets/device-white@2x.png" alt="White Verso">
+    <div class="verso__screen eink">
+      <div class="eink__canvas" id="eink">
+        <div class="eink__layer eink__ghost"></div>
+        <div class="eink__layer eink__cur"></div>
+        <div class="eink__layer eink__next"></div>
+        <div class="eink__fx"></div>
+      </div>
+    </div>
+    <button class="verso__key" type="button" data-dev="key" aria-label="Side key: switch Card / QR"></button>
+  </div>
+</div>
+<div class="phone" id="phone">
+
+  <!-- system chrome -->
+  <svg class="sys-status" viewBox="0 0 402 54" aria-hidden="true">
+    <text x="74" y="38" text-anchor="middle" font-family="-apple-system, 'SF Pro Text', system-ui, sans-serif" font-weight="600" font-size="17" fill="currentColor">9:41</text>
+    <g fill="currentColor"><rect x="288.5" y="33" width="3" height="5" rx="1"/><rect x="294" y="31" width="3" height="7" rx="1"/><rect x="299.5" y="28.5" width="3" height="9.5" rx="1"/><rect x="305" y="26" width="3" height="12" rx="1"/></g>
+    <g transform="translate(2.5 4.5)"><path d="M314 25.5a10 10 0 0 1 14 0M316.6 28.4a6.2 6.2 0 0 1 8.8 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="m321 34-2.4-2.6a3.4 3.4 0 0 1 4.8 0z" fill="currentColor"/></g>
+    <g transform="translate(0 3.5)"><rect x="339.5" y="22.5" width="24" height="12" rx="3.6" fill="none" stroke="currentColor" stroke-opacity=".4"/><rect x="341.5" y="24.5" width="20" height="8" rx="2" fill="currentColor"/><path d="M365 26.5v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2z" fill="currentColor" fill-opacity=".45"/></g>
+  </svg>
+  <div class="sys-home" aria-hidden="true"></div>
+  <div class="scrim" id="scrim"></div>
+  <div class="loader" id="loader" aria-hidden="true"><div class="loader__card" role="status"><svg class="loader__spin" viewBox="0 0 24 24"><circle class="loader__tail" cx="12" cy="12" r="9"/><circle class="loader__arc" cx="12" cy="12" r="9"/></svg><span>Loading…</span></div></div>
+  <div class="c-toast" id="toast" role="status" aria-live="polite"><svg class="i"><use href="#checkmark"/></svg><span></span></div>
+
+  <!-- ═════════ 00 设备页 (states: 00 乙 / 00c 丙 / 00d 未连接) ═════════ -->
+  <section class="screen" data-id="00" data-state="00" data-states="00 00c 00d"
+    data-title="设备页 · 已连接 · 分享入口乙"
+    data-title-00c="设备页 · 已连接 · 分享入口丙"
+    data-title-00d="设备页 · 未连接">
+    <div class="ambient" aria-hidden="true"></div>
+    <header class="c-nav">
+      <button class="c-nav__back" type="button" data-act="noop" aria-label="Back"><svg class="i"><use href="#chevron.left"/></svg></button>
+      <h1 class="c-nav__title">Flowtica Verso</h1>
+      <button class="c-nav__trailing" type="button" data-when="00c" data-go="02" aria-label="Share card"><svg class="i" viewBox="0 0 16 16"><use href="#square.and.arrow.up"/></svg></button>
+    </header>
+    <div class="content" style="--top:120px; gap:24px">
+      <div class="stack" data-reveal style="gap:12px">
+        <div class="c-device-hero" style="--w:200"><img class="c-device-hero__img" src="assets/device-white@2x.png" alt="White Verso"><div class="c-device-hero__screen eink"><div class="c-card-face"></div></div></div>
+        <div class="stack" style="gap:4px">
+          <div class="device-status" data-when="00 00c"><span class="status-dot"></span>Connected</div>
+          <div class="device-status is-off" data-when="00d"><span class="status-dot is-hollow"></span>Not Connected</div>
+          <div class="hint" data-when="00d">Connect your Verso to update the card</div>
+        </div>
+      </div>
+      <div class="row-actions" data-reveal data-when="00 00d">
+        <button class="c-pill" type="button" data-go="02"><svg class="i"><use href="#qrcode"/></svg>Share card</button>
+      </div>
+      <div class="stack" data-reveal style="gap:24px">
+        <div class="c-list">
+          <button class="c-list__row" type="button"><span class="c-list__title">Device Name</span><span class="c-list__value">Demo Verso</span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></button>
+          <div class="c-list__row"><span class="c-list__title">Serial Number</span><span class="c-list__value">DEMO0001</span></div>
+          <button class="c-list__row" type="button"><span class="c-list__title">Firmware Version</span><span class="c-list__value">V1.2.3</span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></button>
+        </div>
+        <div class="c-list">
+          <button class="c-list__row is-link" type="button" data-go="01"><span class="c-list__title">Contact Card</span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></button>
+          <button class="c-list__row" type="button"><span class="c-list__title">Custom Wallpaper</span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></button>
+        </div>
+      </div>
+    </div>
+    <div class="bottom" style="top:832px; text-align:center"><button type="button" style="font:var(--t-body-15); color:var(--danger)">Unbind Device</button></div>
+  </section>
+
+  <!-- ═════════ 01 名片首页 (states: 01 / 01b / 01c / 01d / 01e / 01f) ═════════ -->
+  <section class="screen" data-id="01" data-state="01b" data-states="01 01b 01c 01d 01e 01f 01g 01i"
+    data-title-01i="名片首页 · Logo 模板缺 Logo"
+    data-title-01g="名片首页 · 首次使用提示"
+    data-title="名片首页 · 已连接 · 无待同步修改"
+    data-title-01b="名片首页 · 有待同步修改"
+    data-title-01c="名片首页 · Updating…"
+    data-title-01d="名片首页 · Updated"
+    data-title-01e="名片首页 · 更新失败"
+    data-title-01f="名片首页 · 已绑定未连接">
+    <div class="ambient" aria-hidden="true"></div>
+    <div class="coach" data-when="01g" role="dialog" aria-label="Tips">
+      <svg class="coach__art" viewBox="0 0 402 874" aria-hidden="true">
+        <path pathLength="1" d="M72 548c-6 14-4 27 3 37 5 7 11 12 20 17"/><path pathLength="1" d="M86 596l10 7-11 4"/>
+        <path pathLength="1" d="M262 722c10 10 13 22 9 33-2 6-6 11-12 15"/><path pathLength="1" d="M265 761l-7 10 12 0"/>
+      </svg>
+      <div class="coach__label" style="left:40px; top:516px">Share from your phone</div>
+      <div class="coach__label" style="left:212px; top:694px">Keep Verso in sync</div>
+    </div>
+    <header class="c-nav">
+      <button class="c-nav__back" type="button" data-back aria-label="Back"><svg class="i"><use href="#chevron.left"/></svg></button>
+      <h1 class="c-nav__title">Contact Card</h1>
+    </header>
+    <div class="content content-01" style="--top:152px">
+      <div class="stack r-hero" data-reveal style="gap:8px">
+        <div class="c-device-hero" style="--w:284" data-act="fullview" role="button" aria-label="View card full screen"><img class="c-device-hero__img" src="assets/device-white@2x.png" alt="White Verso"><div class="c-device-hero__screen eink"><div class="c-card-face"></div><div class="c-device-hero__scrim" data-when="01f">Not connected</div></div></div>
+        <div class="c-eyebrow">Preview on your Verso</div>
+        <div class="hint hint-under-toast" data-when="01b 01c 01e 01g">Changes not yet on Verso</div>
+        <div class="hint hint-under-toast" data-when="01i" style="color:var(--danger)">Add a logo to use this template</div>
+      </div>
+      <div class="row-actions r-actions" data-reveal>
+        <button class="c-pill" type="button" data-go="02"><svg class="i"><use href="#qrcode"/></svg>Share card</button>
+        <button class="c-pill" type="button" data-go="03"><svg class="i"><use href="#pencil"/></svg>Edit card</button>
+      </div>
+      <div class="stack r-settings" data-reveal style="gap:8px; align-items:stretch">
+        <div class="c-list">
+          <button class="c-list__row is-link" type="button" data-go="06"><span class="c-list__title">NFC Destination</span><span class="c-list__value" data-bind="opensLabel">Bio Page</span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></button>
+        </div>
+        <div class="hint hint-under-toast" style="padding-left:16px">The QR code and NFC open the same link</div>
+      </div>
+    </div>
+    <div class="bottom">
+      <button class="c-btn-primary" type="button" aria-disabled="true" data-when="01 01d 01i">Update on Verso</button>
+      <button class="c-btn-primary" type="button" data-when="01b 01e 01g" data-act="update">Update on Verso</button>
+      <button class="c-btn-primary" type="button" data-when="01c" aria-busy="true"><span class="spinner"></span>Updating…</button>
+      <button class="c-btn-primary" type="button" data-when="01f" data-act="connect">Connect Verso</button>
+    </div>
+  </section>
+
+  <!-- ═════════ 02 Share card (states: 02 Bio Page / 02b Contact / 02c Custom Link) ═════════ -->
+  <section class="screen" data-id="02" data-state="02" data-states="02 02b 02c"
+    data-title="Share card · Opens = Bio Page"
+    data-title-02b="Share card · Opens = Contact"
+    data-title-02c="Share card · Opens = Custom Link">
+    <div class="ambient" aria-hidden="true"></div>
+    <header class="c-nav">
+      <button class="c-nav__back" type="button" data-back aria-label="Back"><svg class="i"><use href="#chevron.left"/></svg></button>
+      <h1 class="c-nav__title">Share card</h1>
+    </header>
+    <div class="content" style="--top:128px; gap:24px">
+      <div class="stack" data-reveal style="gap:8px">
+        <button class="share-card" type="button" data-go="08" aria-label="Open the page others see">
+          <span class="share-card__qr" data-qr="200" data-seed="7"></span>
+          <span class="share-card__id">
+            <span class="share-card__name" data-fit="322">Sarah Mitchell</span>
+            <span class="share-card__job" data-fit="322">Account Director · Northwind Partners</span>
+          </span>
+          <span class="share-card__div"></span>
+          <span class="share-card__opens"><span class="share-card__opens-label">Opens</span><span class="share-card__opens-value" data-bind="opensLabel">Bio Page</span></span>
+          <span class="share-card__link" data-bind="opensLink">verso.flowtica.ai/c/sarah-mitchell</span>
+        </button>
+        <div class="c-eyebrow">Works without your Verso</div>
+      </div>
+      <div class="row-actions" data-reveal>
+        <button class="c-pill" type="button" data-act="copy"><svg class="i"><use href="#doc.on.doc"/></svg>Copy link</button>
+        <button class="c-pill" type="button" data-sheet="02e"><svg class="i"><use href="#square.and.arrow.up"/></svg>Share…</button>
+      </div>
+      <div class="hint" data-reveal data-when="02 02c" style="text-align:center">The QR code and NFC open the same link</div>
+      <div class="stack" data-reveal data-when="02b" style="gap:8px; align-items:stretch">
+        <div class="c-list">
+          <button class="c-list__row" type="button"><span class="c-list__title">Save Contact</span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></button>
+        </div>
+        <div class="hint" style="padding-left:16px">The QR code and NFC open the same link</div>
+      </div>
+    </div>
+    <div class="bottom">
+      <button class="c-btn-primary" type="button" data-sheet="02d" data-wallet="add"><svg class="i" viewBox="0 0 20 20"><use href="#wallet.pass"/></svg>Add to Apple Wallet</button>
+      <div style="text-align:center; padding-top:10px" data-wallet="view" hidden><button class="c-pill c-pill--auto" type="button" data-sheet="02d"><svg class="i" viewBox="0 0 20 20"><use href="#wallet.pass"/></svg>View in Wallet</button></div>
+    </div>
+  </section>
+
+  <!-- ═════════ 02d Wallet 通行证 · 添加面板（PKAddPassesViewController 近似件） ═════════ -->
+  <section class="screen is-sheet" data-id="02d" data-title="Wallet 通行证 · 添加面板（近似件）">
+    <div class="wallet-sheet" data-sheet-panel data-mode="add" role="dialog" aria-label="Add pass (system UI)">
+      <div class="wallet-sheet__bar">
+        <button type="button" class="wallet-sheet__btn" data-back data-when-mode="add">Cancel</button>
+        <span class="wallet-sheet__title">Verso</span>
+        <button type="button" class="wallet-sheet__btn is-strong" data-act="wallet-add" data-when-mode="add">Add</button>
+        <button type="button" class="wallet-sheet__btn is-strong" data-back data-when-mode="view">Done</button>
+      </div>
+      <div class="pass">
+        <div class="pass__head"><span class="pass__logo">Verso</span><span class="pass__eyebrow">Business card</span></div>
+        <div class="pass__name">Sarah Mitchell</div>
+        <div class="pass__job">Account Director · Northwind Partners</div>
+        <div class="pass__code"><span data-qr="160" data-seed="7"></span><span class="pass__caption">Opens · <span data-bind="opensLabel">Bio Page</span></span></div>
+      </div>
+      <div class="wallet-sheet__foot">Pass updates when your card link changes</div>
+    </div>
+    <div class="sys-tag wallet-tag" data-sheet-panel>System sheet · stand-in (PKAddPassesViewController)</div>
+  </section>
+
+  <!-- ═════════ 02e 系统分享面板 · iOS 风格近似（系统面板） ═════════ -->
+  <section class="screen is-sheet" data-id="02e" data-title="系统分享面板 · iOS 风格近似（系统面板）">
+    <div class="sys-tag" data-sheet-panel>System sheet · iOS-style stand-in</div>
+    <div class="sys-sheet" data-sheet-panel role="dialog" aria-label="Share sheet (system UI)">
+      <div class="sys-sheet__grab"></div>
+      <div class="sys-sheet__head">
+        <div class="sys-sheet__thumb"><div class="c-card-face"></div></div>
+        <div><div class="sys-sheet__t1">Sarah Mitchell · Verso card</div><div class="sys-sheet__t2" data-bind="opensLink">verso.flowtica.ai/c/sarah-mitchell</div></div>
+      </div>
+      <button class="sys-sheet__close" type="button" data-back aria-label="Close"><svg class="i"><use href="#xmark"/></svg></button>
+      <div class="sys-sheet__sep" style="top:114px"></div>
+      <div class="sys-sheet__row" style="top:130px; left:28px; gap:22px">
+        <div class="sys-cell"><div class="sys-cell__people" style="background:linear-gradient(#b9a58c,#7f6a55)">HA</div>Herland<br>Antezana</div>
+        <div class="sys-cell"><div class="sys-cell__people" style="background:linear-gradient(#8f9a8a,#5d6a5b)">RR</div>Rigo<br>Rangel</div>
+        <div class="sys-cell"><div class="sys-cell__people" style="background:linear-gradient(#c7c7cc,#9a9aa0)">MA</div>Magico and…<br><small>2 People</small></div>
+        <div class="sys-cell"><div class="sys-cell__people" style="background:linear-gradient(#b49a8f,#7d625a)">JC</div>Jenny<br>Court</div>
+      </div>
+      <div class="sys-sheet__sep" style="top:250px"></div>
+      <div class="sys-sheet__row" style="top:270px; left:30px; gap:26px">
+        <div class="sys-cell"><div class="sys-cell__app" style="background:linear-gradient(#5aa7ff,#1f6ff2)"><svg class="i" viewBox="0 0 24 24"><use href="#sys.airdrop"/></svg></div>AirDrop</div>
+        <div class="sys-cell"><div class="sys-cell__app" style="background:linear-gradient(#6ee27a,#2fc24a)"><svg class="i" viewBox="0 0 24 24"><use href="#sys.message"/></svg></div>Messages</div>
+        <div class="sys-cell"><div class="sys-cell__app" style="background:linear-gradient(#4fa3ff,#2f7cf6)"><svg class="i" viewBox="0 0 24 24"><use href="#sys.mail"/></svg></div>Mail</div>
+        <div class="sys-cell"><div class="sys-cell__app" style="background:linear-gradient(#ffd84d 0 22%,#fafafa 22%); box-shadow: inset 0 0 0 1px #e5e5ea"></div>Notes</div>
+      </div>
+      <div class="sys-sheet__sep" style="top:378px"></div>
+      <div class="sys-sheet__row" style="top:394px; left:30px; gap:26px">
+        <button class="sys-cell" type="button" data-act="copy"><div class="sys-cell__act"><svg class="i" viewBox="0 0 24 24"><use href="#sys.copy"/></svg></div>Copy</button>
+        <div class="sys-cell"><div class="sys-cell__act"><svg class="i" viewBox="0 0 24 24"><use href="#sys.star"/></svg></div>Add to Wallet</div>
+        <div class="sys-cell"><div class="sys-cell__act"><svg class="i" viewBox="0 0 24 24"><use href="#sys.person"/></svg></div>Add to Conta…</div>
+        <div class="sys-cell"><div class="sys-cell__act"><svg class="i" viewBox="0 0 24 24"><use href="#sys.folder"/></svg></div>Save to Files</div>
+      </div>
+      <div class="sys-list">
+        <div class="sys-list__row"><svg class="i" viewBox="0 0 24 24"><use href="#sys.glasses"/></svg>Add to Reading List</div>
+        <div class="sys-list__row"><svg class="i" viewBox="0 0 24 24"><use href="#sys.book"/></svg>Add Bookmark</div>
+        <div class="sys-list__row"><svg class="i" viewBox="0 0 24 24"><use href="#sys.star"/></svg>Add to Favorites</div>
+        <div class="sys-list__row"><svg class="i" viewBox="0 0 24 24"><use href="#sys.plus.square"/></svg>Add to Home Screen</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ 03 编辑页 (one DOM; states 03 / 03b / 03c / 03d / 03e / 03f / 03g / 05c / 05f are rendered from the edit model) ═════════ -->
+  <section class="screen" data-id="03" data-state="03" data-states="03 03b 03c 03d 03e 03f 03g 03h 05c 05f"
+    data-title-03h="编辑页 · Logo 上传失败" data-ctrl="edit" data-toast-top="776"
+    data-title="编辑页 · 默认"
+    data-title-03b="编辑页 · 滑到横版模板"
+    data-title-03c="编辑页 · Logo 空态 + ✦ Find my logo"
+    data-title-03d="编辑页 · Logo 已上传"
+    data-title-03e="编辑页 · Name 为空"
+    data-title-03f="编辑页 · Slogan 超 20 字 + ✦ Fit to 20"
+    data-title-03g="编辑页 · 字段聚焦（键盘）"
+    data-title-05c="识别结果 · 已回填 + Undo"
+    data-title-05f="已有 4 张 · Toast">
+    <header class="c-nav c-nav--scroll">
+      <button class="c-nav__back" type="button" data-back aria-label="Back"><svg class="i"><use href="#chevron.left"/></svg></button>
+      <h1 class="c-nav__title">Edit Card</h1>
+    </header>
+    <div class="scroller">
+      <div class="edit">
+        <div class="carousel" data-reveal>
+          <div class="carousel__stage">
+            <div class="carousel__track"></div>
+            <img class="carousel__device" src="assets/device-white@2x.png" alt="">
+          </div>
+          <div class="c-dots" aria-hidden="true"></div>
+          <div class="carousel__caption" aria-live="polite"></div>
+        </div>
+        <div class="edit__row" data-reveal>
+          <button class="c-pill c-pill--auto" type="button" data-act="photo" style="width:196px; padding:0; white-space:nowrap"><svg class="i" style="width:22px"><use href="#camera"/></svg>Create from Photo</button>
+        </div>
+        <div class="edit__logo" data-reveal>
+          <div class="c-list logo-list"><button class="c-pill c-pill--sm logo-retry" type="button" data-act="logo-retry" hidden>Retry</button><button class="c-list__row is-link" type="button" data-act="logo-row"><span class="c-list__title">Logo</span><span class="logo-value"><svg class="i logo-plus"><use href="#plus"/></svg><span class="logo-ring"></span></span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></button></div>
+          <div class="edit__chip-row"><button class="c-chip" type="button" data-act="find-logo"><svg class="i"><use href="#sparkles"/></svg>Find my logo</button></div>
+        </div>
+        <div class="edit__details" data-reveal>
+          <div class="ai-banner"><svg class="i"><use href="#sparkles"/></svg><span class="ai-banner__text"><span>Details filled from your photo</span><span class="ai-banner__note" hidden>Demo card · fields verified</span></span><button class="c-pill c-pill--sm" type="button" data-act="undo">Undo</button></div>
+          <label class="c-field" data-key="name"><span class="c-field__label">Name</span><span class="c-field__box"><input class="c-field__input" type="text" maxlength="20" placeholder="Your name" autocomplete="off" spellcheck="false"><span class="c-field__count"></span></span><span class="c-field__error">Enter a name to continue</span></label>
+          <label class="c-field" data-key="title"><span class="c-field__label">Job Title</span><span class="c-field__box"><input class="c-field__input" type="text" maxlength="20" autocomplete="off" spellcheck="false"><span class="c-field__count"></span></span></label>
+          <label class="c-field" data-key="company"><span class="c-field__label">Company</span><span class="c-field__box"><input class="c-field__input" type="text" maxlength="20" autocomplete="off" spellcheck="false"><span class="c-field__count"></span></span></label>
+          <div class="c-field-group" data-key-group="slogan">
+            <label class="c-field" data-key="slogan"><span class="c-field__label">Slogan</span><span class="c-field__box"><input class="c-field__input" type="text" maxlength="60" autocomplete="off" spellcheck="false"><span class="c-field__count"></span></span><span class="c-field__error">Keep it under 20 characters</span></label>
+            <button class="c-chip" type="button" data-act="fit20"><svg class="i"><use href="#sparkles"/></svg>Fit to 20</button>
+          </div>
+          <label class="c-field" data-key="bio"><span class="c-field__label">Bio</span><span class="c-field__box c-field__box--area"><textarea class="c-field__input" rows="3" maxlength="160" spellcheck="false"></textarea></span></label>
+        </div>
+      </div>
+    </div>
+    <div class="kbd" aria-hidden="true"><div class="sys-tag sys-tag--in">System keyboard · stand-in</div><div class="kbd__keys"></div></div>
+  </section>
+
+  <!-- ═════════ 04 Logo 预览 · 黑底 · ⋯ ═════════ -->
+  <section class="screen screen--dark" data-id="04" data-dark="1" data-title="Logo 预览 · 黑底 · ⋯ 菜单">
+    <header class="c-nav">
+      <button class="c-nav__back" type="button" data-back aria-label="Back"><svg class="i"><use href="#chevron.left"/></svg></button>
+      <h1 class="c-nav__title">Logo</h1>
+      <button class="c-nav__trailing" type="button" data-act="logo-menu" aria-label="More"><svg class="i"><use href="#ellipsis"/></svg></button>
+    </header>
+    <div class="logo-canvas" data-reveal><span class="logo-ring logo-ring--xl"></span></div>
+  </section>
+
+  <!-- ═════════ 04b ✦ Find my logo 结果 (sheet) ═════════ -->
+  <section class="screen is-sheet" data-id="04b" data-title="✦ Find my logo 结果">
+    <div class="logo-sheet" data-sheet-panel>
+      <div class="logo-sheet__grab"></div>
+      <div class="logo-sheet__title"><svg class="i ai-spark"><use href="#sparkles"/></svg>Logos we found for Northwind Partners</div>
+      <div class="skel logo-skel" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="logo-sheet__list">
+        <button class="logo-cand is-selected" type="button" data-cand="0"><span class="logo-tile"><span class="logo-ring logo-ring--color"></span></span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span><span class="logo-tile"><span class="logo-ring"></span></span><span class="logo-cand__label">Primary mark</span></button>
+        <button class="logo-cand" type="button" data-cand="1"><span class="logo-tile"><span class="logo-ring logo-ring--color"></span></span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span><span class="logo-tile"><span class="logo-ring"></span></span><span class="logo-cand__label">Wordmark</span></button>
+        <button class="logo-cand" type="button" data-cand="2"><span class="logo-tile"><span class="logo-ring logo-ring--color"></span></span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span><span class="logo-tile"><span class="logo-ring"></span></span><span class="logo-cand__label">Favicon</span></button>
+      </div>
+      <button class="c-btn-primary" type="button" data-act="use-logo">Use this logo</button>
+      <div class="edit__row"><button class="c-pill c-pill--auto" type="button" data-act="upload-logo">Upload my own</button></div>
+    </div>
+  </section>
+
+  <!-- ═════════ 05 从照片创建 (states: 05 选图 / 05b Processing / 05e 处理失败) ═════════ -->
+  <section class="screen" data-id="05" data-state="05" data-states="05 05b 05e" data-ctrl="photo" data-dark-states="05b 05e"
+    data-title="从照片创建 · 选图"
+    data-title-05b="从照片创建 · Processing"
+    data-title-05e="从照片创建 · 处理失败">
+    <header class="c-nav">
+      <button class="c-nav__back" type="button" data-back aria-label="Back"><svg class="i"><use href="#chevron.left"/></svg></button>
+      <h1 class="c-nav__title">Create from Photo</h1>
+    </header>
+    <div class="picker" data-when="05" data-reveal>
+      <div class="sys-tag sys-tag--in">System photo picker · stand-in (PHPicker)</div>
+      <div class="picker__tabs" role="tablist"><button type="button" role="tab" data-tab="camera">Camera</button><button type="button" role="tab" data-tab="library" class="is-on">Photo Library</button></div>
+      <div class="picker__lib">
+        <label class="c-pill c-pill--auto picker__choose"><svg class="i"><use href="#plus"/></svg>Choose a photo…<input type="file" accept="image/*" data-file="lib" hidden></label>
+        <div class="picker__samples-wrap" hidden><div class="c-eyebrow c-eyebrow--left">Or try a sample card</div><div class="picker__samples"></div></div>
+      </div>
+      <div class="picker__cam" hidden>
+        <video class="picker__video" playsinline muted autoplay></video>
+        <div class="picker__cam-msg" hidden>Live preview isn’t available here.<label class="c-pill c-pill--auto"><svg class="i"><use href="#camera"/></svg>Open camera<input type="file" accept="image/*" capture="environment" data-file="cam" hidden></label></div>
+        <button class="c-pill c-pill--auto" type="button" data-act="snap"><svg class="i"><use href="#camera"/></svg>Take photo</button>
+      </div>
+      <div class="picker__foot">Photos stay on your device</div>
+    </div>
+    <div class="scan" data-when="05b 05e">
+      <div class="scan__photo"><img src="assets/cards/bc1.jpg" alt="Photo of a paper business card"><span class="scan__edge"></span></div>
+      <div class="scan__band" data-when="05b"><i></i></div>
+      <div class="scan__status">
+        <span class="c-chip c-chip--inverse is-processing" data-when="05b"><svg class="i"><use href="#sparkles"/></svg>Reading your card…</span>
+        <span class="c-chip c-chip--inverse" data-when="05e"><svg class="i"><use href="#exclamationmark.circle"/></svg>We couldn’t read this card</span>
+        <div class="scan__caption" data-when="05b">Finding name, company and contacts</div>
+        <div class="scan__caption" data-when="05e">Try a flatter angle and better light</div>
+      </div>
+    </div>
+    <div class="bottom" data-when="05b" style="top:788px; text-align:center"><button class="c-pill c-pill--auto" type="button" data-back>Cancel</button></div>
+    <div class="bottom" data-when="05e" style="top:722px">
+      <div style="text-align:center; margin-bottom:24px"><button class="c-pill c-pill--auto" type="button" data-act="pick-again">Choose Another Photo</button></div>
+      <button class="c-btn-primary c-btn-primary--inverse" type="button" data-act="retry">Try Again</button>
+    </div>
+  </section>
+
+  <!-- ═════════ 05d 照片卡预览 · 黑底 · ⋯ ═════════ -->
+  <section class="screen screen--dark" data-id="05d" data-state="05d" data-states="05d 05g" data-dark="1" data-toast-top="776" data-title="照片卡预览 · 黑底 · ⋯" data-title-05g="照片卡 · 删除失败">
+    <header class="c-nav">
+      <button class="c-nav__back" type="button" data-back aria-label="Back"><svg class="i"><use href="#chevron.left"/></svg></button>
+      <h1 class="c-nav__title">Card</h1>
+      <button class="c-nav__trailing" type="button" data-act="photo-menu" aria-label="More"><svg class="i"><use href="#ellipsis"/></svg></button>
+    </header>
+    <div class="content" style="--top:176px; align-items:center" data-reveal>
+      <div class="c-device-hero" style="--w:284"><img class="c-device-hero__img" src="assets/device-white@2x.png" alt="White Verso"><div class="c-device-hero__screen eink"><div class="c-card-face" data-fixed-face="photo"></div></div></div>
+    </div>
+  </section>
+
+  <!-- ═════════ 06 NFC 设置页 (states: 06 Bio Page / 06b Contact / 06c Custom Link 有效 / 06d 无效) ═════════ -->
+  <section class="screen" data-id="06" data-state="06" data-states="06 06b 06c 06d"
+    data-title="NFC 设置页 · Opens = Bio Page"
+    data-title-06b="NFC 设置页 · Opens = Contact"
+    data-title-06c="NFC 设置页 · Opens = Custom Link · 有效"
+    data-title-06d="NFC 设置页 · Custom Link 无效">
+    <header class="c-nav">
+      <button class="c-nav__back" type="button" data-back aria-label="Back"><svg class="i"><use href="#chevron.left"/></svg></button>
+      <h1 class="c-nav__title">NFC Destination</h1>
+    </header>
+    <div class="content" style="--top:128px; gap:24px">
+      <div class="stack" data-reveal style="gap:8px; align-items:stretch">
+        <div class="c-eyebrow c-eyebrow--left">NFC tap</div>
+        <div class="c-list">
+          <button class="c-list__row is-link" type="button" data-sheet="06e"><span class="c-list__title">Opens</span><span class="c-list__value" data-bind="opensLabel">Bio Page</span><span class="c-list__chev"><svg class="i" viewBox="0 0 16 16" style="width:16px;height:16px"><use href="#chevron.up.chevron.down"/></svg></span></button>
+          <button class="c-list__row is-link" type="button" data-go="07"><span class="c-list__title">Edit Info &amp; Links</span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></button>
+        </div>
+        <div class="hint" style="padding-left:16px">The QR code and NFC open the same link</div>
+      </div>
+      <label class="c-field" data-when="06c 06d" data-reveal id="nfcUrl"><span class="c-field__label">URL</span><span class="c-field__box"><input class="c-field__input" type="url" inputmode="url" autocomplete="off" spellcheck="false" autocapitalize="off" value="https://northwind.co" style="padding-right:16px"></span><span class="c-field__error">Link must start with https://</span></label>
+    </div>
+    <div class="bottom">
+      <button class="c-btn-primary" type="button" data-go="02" data-when="06 06b 06c"><span data-bind="previewLabel">Preview Bio Page</span></button>
+      <button class="c-btn-primary" type="button" aria-disabled="true" data-when="06d">Preview Custom Link</button>
+    </div>
+  </section>
+
+  <!-- ═════════ 06e Opens 菜单展开 (UIMenu stand-in) ═════════ -->
+  <section class="screen is-sheet" data-id="06e" data-title="NFC 设置页 · Opens 菜单展开">
+    <div class="menu" data-sheet-panel data-anim="pop" role="menu" aria-label="Opens">
+      <button type="button" role="menuitemradio" data-opens="bio"><span class="menu__check"><svg class="i"><use href="#checkmark"/></svg></span>Bio Page</button>
+      <button type="button" role="menuitemradio" data-opens="contact"><span class="menu__check"><svg class="i"><use href="#checkmark"/></svg></span>Contact</button>
+      <button type="button" role="menuitemradio" data-opens="custom"><span class="menu__check"><svg class="i"><use href="#checkmark"/></svg></span>Custom Link</button>
+    </div>
+    <div class="sys-tag menu__tag" data-sheet-panel data-anim="pop">System menu · stand-in (UIMenu)</div>
+  </section>
+
+  <!-- ═════════ 07 Edit Info & Links (states: 07 / 07b 空态) ═════════ -->
+  <section class="screen" data-id="07" data-state="07" data-states="07 07b" data-title="Edit Info &amp; Links · Display / Add More" data-title-07b="Edit Info &amp; Links · 空态">
+    <header class="c-nav">
+      <button class="c-nav__back" type="button" data-back aria-label="Back"><svg class="i"><use href="#chevron.left"/></svg></button>
+      <h1 class="c-nav__title">Edit Info &amp; Links</h1>
+    </header>
+    <div class="content" style="--top:128px; gap:32px">
+      <div class="stack" data-reveal style="gap:8px; align-items:stretch">
+        <div class="c-eyebrow c-eyebrow--left">Display</div>
+        <div class="c-list" id="displayList"></div>
+        <div class="info-empty" id="displayEmpty"><svg viewBox="0 0 56 40" aria-hidden="true"><rect x="10" y="4" width="36" height="24" rx="4"/><path d="M16 12h14M16 18h22"/><path d="M22 34c3-3 9-3 12 0M28 28v3"/><circle cx="42" cy="8" r="1"/></svg><span>Nothing shown yet · Add an email or link below</span></div>
+      </div>
+      <div class="stack" data-reveal style="gap:8px; align-items:stretch">
+        <div class="c-eyebrow c-eyebrow--left">Add more</div>
+        <div class="c-list c-list--icons">
+          <button class="c-list__row is-link" type="button" data-add="sms"><svg class="i row-icon" viewBox="0 0 20 20"><use href="#message"/></svg><span class="c-list__title">SMS</span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></button>
+          <button class="c-list__row is-link" type="button" data-add="whatsapp"><svg class="i row-icon" viewBox="0 0 20 20"><use href="#phone.bubble"/></svg><span class="c-list__title">WhatsApp</span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></button>
+          <button class="c-list__row is-link" type="button" data-add="website"><svg class="i row-icon" viewBox="0 0 20 20"><use href="#globe"/></svg><span class="c-list__title">Website</span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></button>
+          <button class="c-list__row is-link" type="button" data-add="calendly"><svg class="i row-icon" viewBox="0 0 20 20"><use href="#calendar"/></svg><span class="c-list__title">Calendly</span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></button>
+        </div>
+      </div>
+    </div>
+    <div class="bottom"><button class="c-btn-primary" type="button" data-go="02"><span data-bind="previewLabel">Preview Bio Page</span></button></div>
+  </section>
+
+  <!-- ═════════ 07c / 07d Add item (pushed page: 07c single value e.g. Email · 07d Custom Link label + URL) ═════════ -->
+  <section class="screen" data-id="07c" data-state="07c" data-states="07c 07d 07e" data-form="single" data-title="Add · Email · 留空提示" data-title-07d="Add · Custom Link · 错误" data-title-07e="Edit Info & Links · 编辑已有条目">
+    <header class="c-nav">
+      <button class="c-nav__back" type="button" data-back aria-label="Back"><svg class="i"><use href="#chevron.left"/></svg></button>
+      <h1 class="c-nav__title" id="addTitle">Email</h1>
+    </header>
+    <div class="content" style="--top:128px; gap:24px" data-reveal>
+      <div data-form-single>
+        <label class="c-field" id="addValue"><span class="c-field__label">Email address</span><span class="c-field__box"><input class="c-field__input" type="email" autocomplete="off" spellcheck="false" autocapitalize="off" placeholder="name@company.com" style="padding-right:16px"></span><span class="c-field__error">Enter a valid email</span></label>
+        <div class="hint" style="margin-top:8px">If blank, it won’t appear on your Bio Page</div>
+      </div>
+      <label class="c-field" data-form-link id="addLabel"><span class="c-field__label">Label</span><span class="c-field__box"><input class="c-field__input" type="text" maxlength="20" autocomplete="off" placeholder="Your Label" style="padding-right:16px"></span><span class="c-field__error">Add a label</span></label>
+      <label class="c-field" data-form-link id="addUrl"><span class="c-field__label">URL</span><span class="c-field__box"><input class="c-field__input" type="url" inputmode="url" autocomplete="off" spellcheck="false" autocapitalize="off" placeholder="https://" style="padding-right:16px"></span><span class="c-field__error">Enter a valid URL</span></label>
+    </div>
+    <div class="bottom"><button class="c-btn-primary" type="button" data-act="add-save" aria-disabled="true">Done</button></div>
+  </section>
+
+  <!-- ═════════ 08 Bio Page · 对方视角 · 手机网页 ═════════ -->
+  <section class="screen" data-id="08" data-state="08" data-states="08 08b" data-title="Bio Page · 对方视角 · 手机网页" data-title-08b="Bio Page · 旧链接失效" data-toast-top="730">
+    <div class="ambient" aria-hidden="true"></div>
+    <button class="safari-back" type="button" data-back aria-label="Back to Verso"><svg class="i" viewBox="0 0 10 18"><use href="#chevron.left"/></svg>Verso</button>
+    <div class="safari-bar"><span>verso.flowtica.ai</span></div>
+    <div class="sys-tag safari-tag">Browser UI · stand-in</div>
+    <div class="skel bio-skel" aria-hidden="true"><i class="s-photo"></i><i class="s-name"></i><i class="s-job"></i><i class="s-acts"></i><i class="s-btn"></i><i class="s-list"></i></div>
+    <div class="bio-invalid" data-when="08b">
+      <svg class="bio-invalid__icon" viewBox="0 0 28 28" aria-hidden="true"><path transform="translate(3 2)" d="M11.0303 17.0303C11.3232 16.7374 11.3232 16.2626 11.0303 15.9697C10.7374 15.6768 10.2626 15.6768 9.96967 15.9697L10.5 16.5L11.0303 17.0303ZM1.5 19.5L2.17082 19.1646C2.13477 19.0925 2.08733 19.0267 2.03033 18.9697L1.5 19.5ZM5.03033 10.0303C5.32322 9.73744 5.32322 9.26256 5.03033 8.96967C4.73744 8.67678 4.26256 8.67678 3.96967 8.96967L4.5 9.5L5.03033 10.0303ZM13.9697 9.96967C13.6768 10.2626 13.6768 10.7374 13.9697 11.0303C14.2626 11.3232 14.7374 11.3232 15.0303 11.0303L14.5 10.5L13.9697 9.96967ZM17.5 1.5L16.9697 2.03033C17.0267 2.08733 17.0925 2.13477 17.1646 2.17082L17.5 1.5ZM6.96967 3.96967C6.67678 4.26256 6.67678 4.73744 6.96967 5.03033C7.26256 5.32322 7.73744 5.32322 8.03033 5.03033L7.5 4.5L6.96967 3.96967ZM4.96967 7.03033C5.26256 7.32322 5.73744 7.32322 6.03033 7.03033C6.32322 6.73744 6.32322 6.26256 6.03033 5.96967L5.5 6.5L4.96967 7.03033ZM3.03033 2.96967C2.73744 2.67678 2.26256 2.67678 1.96967 2.96967C1.67678 3.26256 1.67678 3.73744 1.96967 4.03033L2.5 3.5L3.03033 2.96967ZM20.0303 19.9697C19.7374 19.6768 19.2626 19.6768 18.9697 19.9697C18.6768 20.2626 18.6768 20.7374 18.9697 21.0303L19.5 20.5L20.0303 19.9697ZM21.9697 24.0303C22.2626 24.3232 22.7374 24.3232 23.0303 24.0303C23.3232 23.7374 23.3232 23.2626 23.0303 22.9697L22.5 23.5L21.9697 24.0303ZM10.5 16.5L9.96967 15.9697L6.96967 18.9697L7.5 19.5L8.03033 20.0303L11.0303 17.0303L10.5 16.5ZM7.5 19.5L6.96967 18.9697C6.09828 19.8411 5.03468 20.25 4.125 20.25C3.2237 20.25 2.51885 19.8606 2.17082 19.1646L1.5 19.5L0.82918 19.8354C1.48115 21.1394 2.7763 21.75 4.125 21.75C5.46532 21.75 6.90172 21.1589 8.03033 20.0303L7.5 19.5ZM1.5 19.5L2.03033 18.9697C0.323223 17.2626 0.323223 14.7374 2.03033 13.0303L1.5 12.5L0.96967 11.9697C-1.32322 14.2626 -1.32322 17.7374 0.96967 20.0303L1.5 19.5ZM1.5 12.5L2.03033 13.0303L5.03033 10.0303L4.5 9.5L3.96967 8.96967L0.96967 11.9697L1.5 12.5ZM14.5 10.5L15.0303 11.0303L18.0303 8.03033L17.5 7.5L16.9697 6.96967L13.9697 9.96967L14.5 10.5ZM17.5 7.5L18.0303 8.03033C19.1589 6.90172 19.75 5.46532 19.75 4.125C19.75 2.7763 19.1394 1.48115 17.8354 0.82918L17.5 1.5L17.1646 2.17082C17.8606 2.51885 18.25 3.2237 18.25 4.125C18.25 5.03468 17.8411 6.09828 16.9697 6.96967L17.5 7.5ZM17.5 1.5L18.0303 0.96967C15.7374 -1.32322 12.2626 -1.32322 9.96967 0.96967L10.5 1.5L11.0303 2.03033C12.7374 0.323223 15.2626 0.323223 16.9697 2.03033L17.5 1.5ZM10.5 1.5L9.96967 0.96967L6.96967 3.96967L7.5 4.5L8.03033 5.03033L11.0303 2.03033L10.5 1.5ZM5.5 6.5L6.03033 5.96967L3.03033 2.96967L2.5 3.5L1.96967 4.03033L4.96967 7.03033L5.5 6.5ZM19.5 20.5L18.9697 21.0303L21.9697 24.0303L22.5 23.5L23.0303 22.9697L20.0303 19.9697L19.5 20.5Z"/></svg>
+      <div class="bio-invalid__title">This link is no longer valid</div>
+      <div class="bio-invalid__sub">Ask for the latest card</div>
+    </div>
+    <div class="bio" data-reveal data-when="08">
+      <img class="bio__photo" src="assets/persona_a_color.jpg" alt="Sarah Mitchell">
+      <div class="bio__name">Sarah Mitchell</div>
+      <div class="bio__job">Account Director · Northwind Partners</div>
+      <div class="bio__slogan">Ideas into reality.</div>
+      <div class="bio__actions">
+        <a class="bio__act" href="tel:+14155550132"><span><svg class="i" viewBox="0 0 20 20"><use href="#i-phone"/></svg></span>Call</a>
+        <a class="bio__act" href="mailto:sarah@northwind.co"><span><svg class="i" viewBox="0 0 20 20"><use href="#envelope"/></svg></span>Email</a>
+        <a class="bio__act" href="https://www.linkedin.com/" target="_blank" rel="noopener"><span><svg class="i" viewBox="0 0 20 20"><use href="#link"/></svg></span>LinkedIn</a>
+        <a class="bio__act" href="https://northwind.co" target="_blank" rel="noopener"><span><svg class="i" viewBox="0 0 20 20"><use href="#safari"/></svg></span>Website</a>
+      </div>
+      <button class="c-btn-primary" type="button" data-act="save-contact">Save Contact</button>
+      <div class="c-list">
+        <a class="c-list__row is-link" href="mailto:sarah@northwind.co"><span class="c-list__title">Email</span><span class="c-list__value">sarah@northwind.co</span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></a>
+        <a class="c-list__row is-link" href="tel:+14155550132"><span class="c-list__title">Phone</span><span class="c-list__value">+1 (415) 555-0132</span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></a>
+        <a class="c-list__row is-link" href="https://www.linkedin.com/" target="_blank" rel="noopener"><span class="c-list__title">LinkedIn</span><span class="c-list__value">linkedin.com/in/sarahmitchell</span><span class="c-list__chev"><svg class="i"><use href="#chevron.right"/></svg></span></a>
+      </div>
+    </div>
+    <div class="bio__foot">Made with Flowtica</div>
+  </section>
+
+  <!-- ═════════ 01h 黑底全屏预览 ═════════ -->
+  <section class="screen is-sheet" data-id="01h" data-title="名片首页 · 黑底全屏预览">
+    <div class="fullview" data-sheet-panel data-anim="pop" data-back role="dialog" aria-label="Card full screen (tap to close)">
+      <h1 class="fullview__title">Card</h1>
+      <span class="fullview__close" aria-hidden="true"><svg class="i" viewBox="0 0 16 16"><use href="#xmark"/></svg></span>
+      <div class="fullview__card eink"><div class="c-card-face"></div></div>
+      <div class="fullview__hint">Tap anywhere to close</div>
+    </div>
+  </section>
+
+  <!-- system action sheet stand-in (04 ⋯ / 05d ⋯) — not a frame of its own -->
+  <div class="asheet" id="asheet" role="dialog" aria-label="Action sheet (system UI)">
+    <div class="sys-tag sys-tag--in">System action sheet · stand-in</div>
+    <div class="asheet__group"></div>
+    <button class="asheet__cancel" type="button" data-act="asheet-cancel">Cancel</button>
+  </div>
+
+  <!-- Batch 3 screens are generated as titled placeholders by proto.js (FRAMES table).
+       When a real <section class="screen" data-id="…"> is added above, the placeholder is skipped. -->
+
+</div>
+<div class="demo-row" id="demoRow">
+  <button type="button" class="demo-btn" data-demo="1">▶ Demo 1 · Hand over the card</button>
+  <button type="button" class="demo-btn" data-demo="2">▶ Demo 2 · Update the card</button>
+  <span class="demo-sep"></span>
+  <button type="button" class="demo-btn is-ghost" data-dev="key">Side key</button>
+  <button type="button" class="demo-btn is-ghost" data-dev="nfc">Tap a phone to Verso</button>
+  <span class="demo-cap" id="demoCap" aria-live="polite"></span>
+</div>
+</div>
+</div>
+</div>
+
+
+<script src="proto.js"></script>
+</body>
+</html>
