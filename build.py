@@ -8,7 +8,7 @@ ROOT = pathlib.Path(__file__).resolve().parent
 SRC = ROOT / "src"
 EMAIL = "yuqiancheng818@gmail.com"
 SITE = "https://cyu0698-star.github.io/"
-NOINDEX_DEFAULT = True   # 她过目拍板前不让搜索引擎收录；改 False 后重跑
+NOINDEX_DEFAULT = True   # 她 11-10 定：等所有作品集项目都做完才开搜索引擎收录（届时改 False 并重跑）；在那之前一律保持 True
 
 LANGS = {
     "zh": dict(prefix="", html="zh-CN", name="中文",
